@@ -6,6 +6,8 @@
     <packaging>jar</packaging>
     <version>1.0</version>
     <name>almost-functional</name>
+    <description>Almost Functional is very low impact functional classes inspired by guava, jdk 1.8 and various others.</description>
+    <url>https://github.com/nwillc/almost-functional</url>
 
     <properties>
         <fest.version>2.0M10</fest.version>
@@ -18,7 +20,6 @@
     </properties>
 
     <dependencies>
-        <!-- testing -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -68,4 +69,25 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <scm>
+        <url>https://github.com/nwillc/almost-functional</url>
+        <connection>https://github.com/nwillc/almost-functional.git</connection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Nicholas Christopher</name>
+            <email>nwillc@gmail.com</email>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>ISC</name>
+            <url>http://www.isc.org/downloads/software-support-policy/isc-license/</url>
+            <comments>a permissive free software license</comments>
+        </license>
+    </licenses>
+
 </project>
