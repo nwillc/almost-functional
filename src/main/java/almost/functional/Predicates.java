@@ -22,6 +22,8 @@ import almost.functional.utils.Iterables;
  * Utility operations on predicates.
  */
 public class Predicates {
+	private Predicates(){}
+
 	/**
 	 * Returns a predicate that tests if two arguments are equal according to Objects.equals(Object, Object).
 	 * @param targetRef the object reference with which to compare for equality, which may be null
