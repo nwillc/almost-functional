@@ -20,7 +20,8 @@ import java.util.NoSuchElementException;
 import static almost.functional.utils.Preconditions.checkNotNull;
 
 /**
- * An Optional implementation. Will be deprecated by 1.8
+ * A container object which may or may not contain a non-null value. If a value is present,
+ * isPresent() will return true and get() will return the value.
  */
 public final class Optional<T> {
     private static final Optional EMPTY = new Optional();
@@ -43,15 +44,31 @@ public final class Optional<T> {
         optional = null;
     }
 
+	/**
+	 * Returns an empty Optional instance. No value is present for this Optional.
+	 * @param <T> Type of the non-existent value
+	 * @return an empty Optional
+	 */
     @SuppressWarnings("unchecked")
     public static <T> Optional<T> empty() {
-        return EMPTY;
+        return  (Optional<T>) EMPTY;
     }
 
+	/**
+	 * Returns an Optional with the specified present non-null value.
+	 * @param value the value to be present, which must be non-null
+	 * @param <T> the class of the value
+	 * @return an Optional with the value present
+	 */
     public static <T> Optional<T> of(T value) {
         return new Optional<T>(value);
     }
 
+	/**
+	 * If a value is present in this Optional, returns the value, otherwise throws NoSuchElementException.
+	 * @return the non-null value held by this Optional
+	 * @throws NoSuchElementException
+	 */
     public T get() throws NoSuchElementException {
         if (!isPresent()) {
             throw new NoSuchElementException("Attempting to get an empty Optional");
@@ -59,16 +76,29 @@ public final class Optional<T> {
         return optional;
     }
 
+	/**
+	 * Return true if there is a value present, otherwise false.
+	 * @return true if there is a value present, otherwise false.
+	 */
     public boolean isPresent() {
         return optional != null;
     }
 
+	/**
+	 * If a value is present, invoke the specified consumer with the value, otherwise do nothing.
+	 * @param consumer consumer to be invoked if present.
+	 */
 	public void ifPresent(Consumer<? super T> consumer){
 		if (isPresent()) {
 			consumer.accept(get());
 		}
 	}
 
+	/**
+	 * Return the value if present, otherwise return other.
+	 * @param other the value to be returned if there is no value present, may be null.
+	 * @return the value, if present, otherwise other
+	 */
     public T orElse(T other) {
         if (isPresent()) {
             return get();
@@ -77,9 +107,19 @@ public final class Optional<T> {
         return other;
     }
 
+	/**
+	 * If a value is present, transform is with function, and if the result is non-null,
+	 * return an Optional describing the result. Otherwise return an empty Optional.
+	 * @param function  a transform function to apply to the value, if present
+	 * @param <V>  The type of the result of the mapping function
+	 * @return an Optional describing the result of transform, if a value is present, otherwise an empty Optional
+	 */
+	@SuppressWarnings("unchecked")
 	public <V> Optional<V> transform(Function<T,V> function){
+		checkNotNull(function, "Must provide non null function to transform");
 		if (isPresent()) {
-			return Optional.of(function.apply(get()));
+			V v = function.apply(get());
+			return v == null ? (Optional<V>) Optional.empty() : Optional.of(function.apply(get()));
 		} else {
 			return Optional.empty();
 		}

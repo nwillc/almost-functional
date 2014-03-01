@@ -15,6 +15,14 @@
 
 package almost.functional;
 
+/**
+ * A supplier of results.
+ * @param <T> the type of the results supplied.
+ */
 public interface Supplier<T> {
+	/**
+	 * Get the result.
+	 * @return the result.
+	 */
 	public T get();
 }
