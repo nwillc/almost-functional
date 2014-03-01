@@ -16,8 +16,15 @@
 package almost.functional;
 
 /**
- * Java 8 featured partially pulled through to 7.
+ * A functional interface that can be used to indicate a boolean test is to be applied to
+ * some type.
+ * @param <T>  the input type of the predicate
  */
 public interface Predicate<T> {
+	/**
+	 * Evaluates this predicate on the given argument.
+	 * @param t the input argument
+	 * @return true if the input argument matches the predicate, otherwise false
+	 */
     boolean test(T t);
 }

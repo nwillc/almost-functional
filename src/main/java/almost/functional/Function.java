@@ -15,6 +15,16 @@
 
 package almost.functional;
 
+/**
+ * A functional interface and can be used to apply a function to a type and yield a result.
+ * @param <T> the type of the input to the function
+ * @param <R> the type of the result of the function
+ */
 public interface Function<T,R> {
+	/**
+	 * Applies this function to the given argument.
+	 * @param t the function argument
+	 * @return the result
+	 */
 	public R apply(T t);
 }

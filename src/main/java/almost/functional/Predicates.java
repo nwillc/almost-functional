@@ -18,7 +18,16 @@ package almost.functional;
 
 import almost.functional.utils.Iterables;
 
+/**
+ * Utility operations on predicates.
+ */
 public class Predicates {
+	/**
+	 * Returns a predicate that tests if two arguments are equal according to Objects.equals(Object, Object).
+	 * @param targetRef the object reference with which to compare for equality, which may be null
+	 * @param <T>  the type of arguments to the predicate
+	 * @return a predicate that tests if two arguments are equal according to Objects.equals(Object, Object)
+	 */
 	public static <T> Predicate<T> isEqual(final T targetRef) {
 		return new Predicate<T>() {
 			@Override
@@ -28,6 +37,12 @@ public class Predicates {
 		};
 	}
 
+	/**
+	 * Returns a predicate that that tests if an iterable contains an argument.
+	 * @param iterable the iterable, may not be null
+	 * @param <T> the type of the argument to the predicate
+	 * @return a predicate that that tests if an iterable contains an argument
+	 */
 	public static <T> Predicate<T> contains(final Iterable<T> iterable) {
 		return new Predicate<T>() {
 			@Override

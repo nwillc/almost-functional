@@ -16,10 +16,14 @@
 package almost.functional;
 
 /**
- * A functional consumer interface definition.
+ * A functional interface that consumes, without results, an argument.
  *
  * @param <T> The type consumed
  */
 public interface Consumer<T> {
+	/**
+	 * Performs this operation on the given argument.
+	 * @param t the input argument
+	 */
 	void accept(T t);
 }

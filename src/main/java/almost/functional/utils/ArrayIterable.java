@@ -20,7 +20,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- *  Iterable over an Array.
+ * An iterable over an array.
+ * @param <T> the type of the arrary elements.
  */
 public class ArrayIterable<T> implements Iterable<T> {
 	private final T[] data;
