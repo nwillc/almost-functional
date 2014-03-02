@@ -24,7 +24,7 @@ import java.util.Iterator;
 public abstract class ImmutableIterator<E> implements Iterator<E> {
 
 	/**
-	 * Make an iterator immutable;
+	 * Make an iterator immutable.
 	 * @param iterator the iterator
 	 * @param <E> the type the iterator returns
 	 * @return an immutable iterator
