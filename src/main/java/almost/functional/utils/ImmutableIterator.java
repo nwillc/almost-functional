@@ -19,6 +19,7 @@ import java.util.Iterator;
 
 /**
  * Iterator that does not support remove, making it immutable.
+ * @since 1.2
  * @param <E> the type of elements returned by this iterator
  */
 public abstract class ImmutableIterator<E> implements Iterator<E> {
