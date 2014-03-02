@@ -39,7 +39,7 @@ public class ArrayIterable<T> implements Iterable<T> {
 		return new ArrayIterator<T>(data);
 	}
 
-	private class ArrayIterator<T> implements Iterator<T> {
+	private class ArrayIterator<T> extends ImmutableIterator<T> {
 		private final T[] data;
 		private int index;
 
@@ -61,11 +61,6 @@ public class ArrayIterable<T> implements Iterable<T> {
 			T next = data[index];
 			index++;
 			return next;
-		}
-
-		@Override
-		public void remove() {
-			throw new NoSuchMethodError("Remove not implemented for ArrayIterator.");
 		}
 	}
 

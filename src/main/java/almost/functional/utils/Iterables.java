@@ -131,7 +131,7 @@ public class Iterables {
 			@Override
 			public Iterator<T> iterator() {
 				final Iterator<F> fromIterator = fromIterable.iterator();
-				return new Iterator<T>() {
+				return new ImmutableIterator<T>() {
 					@Override
 					public boolean hasNext() {
 						return fromIterator.hasNext();
@@ -140,11 +140,6 @@ public class Iterables {
 					@Override
 					public T next() {
 						return function.apply(fromIterator.next());
-					}
-
-					@Override
-					public void remove() {
-					  throw new NoSuchMethodError("transform does not implement remove");
 					}
 				};
 			}
