@@ -20,28 +20,49 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
 
+/**
+ * A runnable supplier promise. The supplier will be called on run() and if is succeeds or fails
+ * associated consumers will be informed.
+ * @param <T> the type the supplier is committed to provide.
+ */
 public class Promise<T> implements Runnable {
 	private static final Logger LOG = Logger.getLogger(Promise.class.getName());
 	private final Supplier<T> supplier;
-	private final List<Consumer<T>> fullfilledConsumers = new CopyOnWriteArrayList<Consumer<T>>();
+	private final List<Consumer<T>> fulfilledConsumers = new CopyOnWriteArrayList<Consumer<T>>();
 	private final List<Consumer<Exception>> rejectedConsumers = new CopyOnWriteArrayList<Consumer<Exception>>();
 	private final List<Consumer<Optional<T>>> settledConsumers = new CopyOnWriteArrayList<Consumer<Optional<T>>>();
-	private final AtomicReference<State> state = new AtomicReference<State>(State.PENDING);
+	private final AtomicReference<State> state = new AtomicReference<State>(State.CREATED);
 
-	public enum State {PENDING, FULFILLED, REJECTED}
+	/**
+	 * The current state of the promise.
+	 */
+	public enum State {CREATED, PENDING, FULFILLED, REJECTED}
 
+	/**
+	 * Create a Promise based on a given supplier.
+	 * @param supplier the supplier
+	 */
 	public Promise(Supplier<T> supplier) {
 		this.supplier = supplier;
 	}
 
+	/**
+	 * This method calls the supplier and on successful completion informs the fulfilled consumers of the
+	 * return value. If the supplier throws an exception the rejected consumers are informed. In either case
+	 * when the call to the supplier completes the settled consumers are informed with an Optional containing the
+	 * supplied value on success.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void run() {
+		if (!state.compareAndSet(State.CREATED, State.PENDING)) {
+			return;
+		}
 		T result;
 		try {
 			result = supplier.get();
 			state.set(State.FULFILLED);
-			inform(result, fullfilledConsumers);
+			inform(result, fulfilledConsumers);
 			inform(Optional.of(result), settledConsumers);
 		} catch (Exception e) {
 			state.set(State.REJECTED);
@@ -50,18 +71,35 @@ public class Promise<T> implements Runnable {
 		}
 	}
 
-	public void fullfilled(Consumer<T> consumer) {
-		fullfilledConsumers.add(consumer);
+	/**
+	 * Add a Consumer to be informed upon successful completion of the invocation of the supplier.
+	 * @param consumer the consumer
+	 */
+	public void fulfilled(Consumer<T> consumer) {
+		fulfilledConsumers.add(consumer);
 	}
 
+	/**
+	 * Add a Consumer to be informed if the supplier throws an exception and is rejected.
+	 * @param consumer the consumer to inform
+	 */
 	public void rejected(Consumer<Exception> consumer) {
 		rejectedConsumers.add(consumer);
 	}
 
+	/**
+	 * Add a consumer to be informed when the promise is settled either by fulfillment or rejection. The
+	 * consumer will be passed an Optional that will contain the value supplied if the promise was fulfilled.
+	 * @param consumer the consumer
+	 */
 	public void settled(Consumer<Optional<T>> consumer) {
 		settledConsumers.add(consumer);
 	}
 
+	/**
+	 * Get the current state of this promise.
+	 * @return the state
+	 */
 	public State getState() {
 		return state.get();
 	}

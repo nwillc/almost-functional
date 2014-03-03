@@ -30,7 +30,7 @@ public class PromiseTest {
 		});
 
 		Variable<Boolean> value = new Variable<Boolean>(false);
-		promise.fullfilled(value);
+		promise.fulfilled(value);
 		assertThat(value.get()).isFalse();
 		promise.run();
 		assertThat(value.get()).isNotNull();
@@ -98,7 +98,7 @@ public class PromiseTest {
 			}
 		});
 
-		assertThat(promise.getState()).isEqualTo(Promise.State.PENDING);
+		assertThat(promise.getState()).isEqualTo(Promise.State.CREATED);
 		promise.run();
 		assertThat(promise.getState()).isEqualTo(Promise.State.FULFILLED);
 	}
@@ -112,7 +112,7 @@ public class PromiseTest {
 			}
 		});
 
-		assertThat(promise.getState()).isEqualTo(Promise.State.PENDING);
+		assertThat(promise.getState()).isEqualTo(Promise.State.CREATED);
 		promise.run();
 		assertThat(promise.getState()).isEqualTo(Promise.State.REJECTED);
 	}
