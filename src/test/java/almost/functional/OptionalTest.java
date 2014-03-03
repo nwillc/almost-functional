@@ -42,9 +42,8 @@ public class OptionalTest {
 	@Test
 	public void shouldIfPresent() throws Exception {
 		Optional<Integer> optional = Optional.of(5);
-		Variable<Integer> variable = new Variable<Integer>();
+		Variable<Integer> variable = new Variable<Integer>(10);
 
-		variable.accept(10);
 		assertThat(variable.get()).isEqualTo(10);
 		optional.ifPresent(variable);
 		assertThat(optional.get()).isEqualTo(5);
@@ -86,20 +85,6 @@ public class OptionalTest {
 	public void shouldTransformNullFunction() throws Exception {
 		Optional<Integer> optional = Optional.of(0);
 		optional.transform(null);
-	}
-
-	private class Variable<T> implements Consumer<T>, Supplier<T> {
-		private T t;
-
-		@Override
-		public void accept(T t) {
-			this.t = t;
-		}
-
-		@Override
-		public T get() {
-			return t;
-		}
 	}
 
 	private class Increment implements Function<Integer,Integer> {
