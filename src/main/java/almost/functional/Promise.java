@@ -74,26 +74,32 @@ public class Promise<T> implements Runnable {
 	/**
 	 * Add a Consumer to be informed upon successful completion of the invocation of the supplier.
 	 * @param consumer the consumer
+	 * @return this promise
 	 */
-	public void fulfilled(Consumer<T> consumer) {
+	public Promise<T> fulfilled(Consumer<T> consumer) {
 		fulfilledConsumers.add(consumer);
+		return this;
 	}
 
 	/**
 	 * Add a Consumer to be informed if the supplier throws an exception and is rejected.
 	 * @param consumer the consumer to inform
+	 * @return this promise
 	 */
-	public void rejected(Consumer<Exception> consumer) {
+	public Promise<T> rejected(Consumer<Exception> consumer) {
 		rejectedConsumers.add(consumer);
+		return this;
 	}
 
 	/**
 	 * Add a consumer to be informed when the promise is settled either by fulfillment or rejection. The
 	 * consumer will be passed an Optional that will contain the value supplied if the promise was fulfilled.
 	 * @param consumer the consumer
+	 * @return this promise
 	 */
-	public void settled(Consumer<Optional<T>> consumer) {
+	public Promise<T> settled(Consumer<Optional<T>> consumer) {
 		settledConsumers.add(consumer);
+		return this;
 	}
 
 	/**
