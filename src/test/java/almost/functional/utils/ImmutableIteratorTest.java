@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, nwillc@gmail.com
+ * Copyright (c) 2013-2014, nwillc@gmail.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or
  * without fee is hereby granted, provided that the above copyright notice and this permission
@@ -20,8 +20,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import static almost.functional.utils.ImmutableIterator.makeImmutable;
 
+import static almost.functional.utils.ImmutableIterator.makeImmutable;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class ImmutableIteratorTest {

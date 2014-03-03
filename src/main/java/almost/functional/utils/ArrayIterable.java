@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, nwillc@gmail.com
+ * Copyright (c) 2013-2014, nwillc@gmail.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or
  * without fee is hereby granted, provided that the above copyright notice and this permission
@@ -21,17 +21,27 @@ import java.util.NoSuchElementException;
 
 /**
  * An iterable over an array.
- * @param <T> the type of the arrary elements.
+ * @param <T> the type of the array elements.
  */
 public class ArrayIterable<T> implements Iterable<T> {
 	private final T[] data;
 
-	public ArrayIterable(T[] data) {
+	/**
+	 * Basic constructor.
+	 * @param data array of type T
+	 */
+	public ArrayIterable(T ... data) {
 		this.data = data;
 	}
 
-    public static <T> ArrayIterable<T> newIterable(T[] a) {
-        return new ArrayIterable<T>(a);
+	/**
+	 * Factory function to create an iterable over an array of T.
+	 * @param data the array of type T
+	 * @param <T>  the type of the elements in the array
+	 * @return and ArrayIterable of type T
+	 */
+    public static <T> ArrayIterable<T> newIterable(T ... data) {
+        return new ArrayIterable<T>(data);
     }
 
 	@Override

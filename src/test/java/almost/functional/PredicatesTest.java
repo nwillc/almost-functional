@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, nwillc@gmail.com
+ * Copyright (c) 2013-2014, nwillc@gmail.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or
  * without fee is hereby granted, provided that the above copyright notice and this permission
@@ -15,9 +15,9 @@
 
 package almost.functional;
 
-import almost.functional.utils.ArrayIterable;
 import org.junit.Test;
 
+import static almost.functional.utils.ArrayIterable.newIterable;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class PredicatesTest {
@@ -35,14 +35,14 @@ public class PredicatesTest {
 
 	@Test
 	public void shouldContain() throws Exception {
-		Iterable<String> strings = new ArrayIterable<String>(new String[]{"one", "two", "three"});
+		Iterable<String> strings = newIterable("one", "two", "three");
 		Predicate<String> predicate = Predicates.contains(strings);
 		assertThat(predicate.test("one")).isTrue();
 	}
 
 	@Test
 	public void shouldNotContain() throws Exception {
-		Iterable<String> strings = new ArrayIterable<String>(new String[]{"one", "two", "three"});
+		Iterable<String> strings = newIterable("one", "two", "three");
 		Predicate<String> predicate = Predicates.contains(strings);
 		assertThat(predicate.test("four")).isFalse();
 	}
