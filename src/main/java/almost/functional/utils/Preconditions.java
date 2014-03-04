@@ -28,20 +28,24 @@ public class Preconditions {
      * @param reference    The reference to check
      * @param errorMessage the message for the exception if the reference is null
      * @param <T>          the type of the reference
-     * @return the reference
      * @throws NullPointerException if the reference is null
      */
-    public static <T> T checkNotNull(T reference, String errorMessage) {
+    public static <T> void checkNotNull(T reference, String errorMessage) {
         if (reference == null) {
             throw new NullPointerException(errorMessage);
         }
-        return reference;
     }
 
-    public static boolean isAssignableTo(Class from, Class to, String message) {
+    /**
+     * Check that one class is assignable to another.
+     * @param from the class assigning from
+     * @param to the class assigning to
+     * @param message the message used in the exception if thrown
+     * @throws ClassCastException if the assignment can not be made
+     */
+    public static void isAssignableTo(Class from, Class to, String message) {
         if (!to.isAssignableFrom(from)) {
             throw new ClassCastException(message);
         }
-        return true;
     }
 }
