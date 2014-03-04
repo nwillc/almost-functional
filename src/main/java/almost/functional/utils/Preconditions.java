@@ -19,20 +19,29 @@ package almost.functional.utils;
  * Utility operations designed to be used as precondition tests.
  */
 public class Preconditions {
-	private Preconditions() {}
+    private Preconditions() {
+    }
 
-	/**
-	 * Check that a reference is not null, throwing a NullPointerException if it is.
-	 * @param reference The reference to check
-	 * @param errorMessage the message for the exception if the reference is null
-	 * @param <T> the type of the reference
-	 * @return the reference
-	 * @throws  NullPointerException if the reference is null
-	 */
-	public static <T> T checkNotNull(T reference, String errorMessage) {
-		if (reference == null) {
-			throw new NullPointerException(errorMessage);
-		}
-		return reference;
-	}
+    /**
+     * Check that a reference is not null, throwing a NullPointerException if it is.
+     *
+     * @param reference    The reference to check
+     * @param errorMessage the message for the exception if the reference is null
+     * @param <T>          the type of the reference
+     * @return the reference
+     * @throws NullPointerException if the reference is null
+     */
+    public static <T> T checkNotNull(T reference, String errorMessage) {
+        if (reference == null) {
+            throw new NullPointerException(errorMessage);
+        }
+        return reference;
+    }
+
+    public static boolean isAssignableTo(Class from, Class to, String message) {
+        if (!to.isAssignableFrom(from)) {
+            throw new ClassCastException(message);
+        }
+        return true;
+    }
 }
