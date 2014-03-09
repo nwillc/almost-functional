@@ -23,6 +23,9 @@ import java.util.logging.Logger;
 /**
  * A runnable supplier promise. The supplier will be called on run() and if is succeeds or fails
  * associated consumers will be informed.
+ *
+ * This implements Runnable so that it can be tucked into a Future etc.
+ *
  * @param <T> the type the supplier is committed to provide.
  */
 public class Promise<T> implements Runnable {
