@@ -15,17 +15,14 @@
 
 package almost.functional.utils;
 
-import almost.functional.Consumer;
-import almost.functional.Function;
-import almost.functional.Predicate;
+import almost.functional.*;
 import org.junit.Test;
 
 import java.util.Iterator;
 
+import static almost.functional.Predicates.isEqual;
 import static almost.functional.utils.ArrayIterable.newIterable;
-import static almost.functional.utils.Iterables.filter;
-import static almost.functional.utils.Iterables.forEach;
-import static almost.functional.utils.Iterables.map;
+import static almost.functional.utils.Iterables.*;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 
@@ -55,10 +52,47 @@ public class IterablesTest {
 				return stringBuffer.toString();
 			}
 		};
-		assertThat(forEach(newIterable(strings),function)).isEqualTo("abc");
+		assertThat(forEach(newIterable(strings), function)).isEqualTo("abc");
 	}
 
-    @Test
+	@Test
+	public void shouldFind() throws Exception {
+		Iterable<Integer> twos = newIterable(2, 4, 6, 8);
+
+		Optional<Integer> six = find(twos, isEqual(6));
+		assertThat(six.isPresent()).isTrue();
+		assertThat(six.get()).isEqualTo(6);
+	}
+
+	@Test
+	public void shouldNotFind() throws Exception {
+		Iterable<Integer> twos = newIterable(2, 4, 6, 8);
+
+		Optional<Integer> seven = find(twos, isEqual(7));
+		assertThat(seven.isPresent()).isFalse();
+	}
+
+	@Test
+	public void shouldNotFindUseDefault() throws Exception {
+		Iterable<Integer> twos = newIterable(2, 4, 6, 8);
+		assertThat(find(twos, isEqual(7), 9)).isEqualTo(9);
+	}
+
+	@Test
+	public void shouldAny() throws Exception {
+		Iterable<Integer> twos = newIterable(2, 4, 6, 8);
+
+		assertThat(any(twos, isEqual(4))).isTrue();
+	}
+
+	@Test
+	public void shouldNotAny() throws Exception {
+		Iterable<Integer> twos = newIterable(2, 4, 6, 8);
+
+		assertThat(any(twos, isEqual(5))).isFalse();
+	}
+
+	@Test
     public void testMap() throws Exception {
         Iterable<Integer> twos = newIterable(2, 4, 6, 8);
 
@@ -76,7 +110,21 @@ public class IterablesTest {
         }
     }
 
-    @Test
+	@Test
+	public void shouldContain() throws Exception {
+		Iterable<Integer> numbers = newIterable(1,2,3,4,5);
+
+		assertThat(contains(numbers, 4)).isTrue();
+	}
+
+	@Test
+	public void shouldNotContain() throws Exception {
+		Iterable<Integer> numbers = newIterable(1,2,3,4,5);
+
+		assertThat(contains(numbers, 6)).isFalse();
+	}
+
+	@Test
     public void testFilter() throws Exception {
         Iterable<Integer> numbers = newIterable(1, 2, 3, 4, 5, 6);
         Iterable<Integer> odds = newIterable(1, 3, 5);

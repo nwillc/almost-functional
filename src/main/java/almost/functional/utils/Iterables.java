@@ -152,7 +152,7 @@ public class Iterables {
      * @param fromIterable Iterable being filtered
      * @param predicate the predicate to base inclusion upon, true cases are included, false excluded
      * @param <T> the type of the elements
-     * @return
+     * @return iterable of filtered elements
      */
     public static <T> Iterable<T> filter(final Iterable<T> fromIterable, final Predicate<? super T> predicate) {
         checkNotNull(fromIterable, "iterable must be non null");
@@ -188,7 +188,6 @@ public class Iterables {
                         }
                      return Optional.empty();
                     }
-
                 };
             }
         };
