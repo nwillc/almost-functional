@@ -108,15 +108,15 @@ public final class Optional<T> {
     }
 
 	/**
-	 * If a value is present, transform is with function, and if the result is non-null,
+	 * If a value is present, map is with function, and if the result is non-null,
 	 * return an Optional describing the result. Otherwise return an empty Optional.
-	 * @param function  a transform function to apply to the value, if present
+	 * @param function  a map function to apply to the value, if present
 	 * @param <V>  The type of the result of the mapping function
-	 * @return an Optional describing the result of transform, if a value is present, otherwise an empty Optional
+	 * @return an Optional describing the result of map, if a value is present, otherwise an empty Optional
 	 */
 	@SuppressWarnings("unchecked")
-	public <V> Optional<V> transform(Function<T,V> function){
-		checkNotNull(function, "Must provide non null function to transform");
+	public <V> Optional<V> map(Function<T, V> function){
+		checkNotNull(function, "Must provide non null function to map");
 		if (isPresent()) {
 			V v = function.apply(get());
 			return v == null ? (Optional<V>) Optional.empty() : Optional.of(function.apply(get()));

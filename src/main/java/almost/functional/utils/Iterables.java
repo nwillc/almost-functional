@@ -18,6 +18,7 @@ package almost.functional.utils;
 import almost.functional.*;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static almost.functional.utils.Preconditions.checkNotNull;
 
@@ -117,16 +118,16 @@ public class Iterables {
 	}
 
 	/**
-	 * Create an iterable that transforms an existing iterable by applying a function to each or it's elements.
+	 * Create an iterable that maps an existing iterable to a new one by applying a function to each of it's elements.
 	 * @param fromIterable the iterable to be transformed
 	 * @param function the function to apply to the elements
 	 * @param <F> the type of the original elements, and the argument to the function
 	 * @param <T> the type of the resulting iterable, and the result of the function
 	 * @return an iterable that transforms an existing iterable by applying a function to each or it's elements.
 	 */
-	public static <F,T> Iterable<T>	transform(final Iterable<F> fromIterable, final Function<? super F,? extends T> function) {
+	public static <F,T> Iterable<T> map(final Iterable<F> fromIterable, final Function<? super F, ? extends T> function) {
 		checkNotNull(fromIterable, "iterable must be non null");
-		checkNotNull(function, "function must be non null");
+		checkNotNull(function, "map function must be non null");
 		return new Iterable<T>() {
 			@Override
 			public Iterator<T> iterator() {
@@ -145,4 +146,44 @@ public class Iterables {
 			}
 		};
 	}
+
+    public static <T> Iterable<T> filter(final Iterable<T> fromIterable, final Predicate<? super T> predicate) {
+        checkNotNull(fromIterable, "iterable must be non null");
+        checkNotNull(predicate, "predicate must be non null");
+        return new Iterable<T>() {
+            @Override
+            public Iterator<T> iterator() {
+                final Iterator<T> fromIterator = fromIterable.iterator();
+                return new ImmutableIterator<T>() {
+                    Optional<T> next = advance();
+
+                    @Override
+                    public boolean hasNext() {
+                        return next.isPresent();
+                    }
+
+                    @Override
+                    public T next() {
+                        if (!hasNext()) {
+                            throw new NoSuchElementException();
+                        }
+                        T value = next.get();
+                        next = advance();
+                        return value;
+                    }
+
+                    private Optional<T> advance(){
+                        while (fromIterator.hasNext()) {
+                            T value = fromIterator.next();
+                            if (predicate.test(value)) {
+                                return Optional.of(value);
+                            }
+                        }
+                     return Optional.empty();
+                    }
+
+                };
+            }
+        };
+    }
 }

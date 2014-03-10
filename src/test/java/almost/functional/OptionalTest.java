@@ -69,14 +69,14 @@ public class OptionalTest {
 	public void shouldTransformEmpty() throws Exception {
 		Optional<Integer> optional = Optional.empty();
 
-		assertThat(optional.transform(new Increment()).isPresent()).isFalse();
+		assertThat(optional.map(new Increment()).isPresent()).isFalse();
 	}
 
 	@Test
 	public void shouldTransformOf() throws Exception {
 		Optional<Integer> optional = Optional.of(0);
 
-		Optional<Integer> returned = optional.transform(new Increment());
+		Optional<Integer> returned = optional.map(new Increment());
 		assertThat(returned.isPresent()).isTrue();
 		assertThat(returned.get()).isEqualTo(1);
 	}
@@ -84,7 +84,7 @@ public class OptionalTest {
 	@Test(expected = NullPointerException.class)
 	public void shouldTransformNullFunction() throws Exception {
 		Optional<Integer> optional = Optional.of(0);
-		optional.transform(null);
+		optional.map(null);
 	}
 
 	private class Increment implements Function<Integer,Integer> {
