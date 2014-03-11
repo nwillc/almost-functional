@@ -39,7 +39,16 @@ public class Promise<T> implements Runnable {
 	/**
 	 * The current state of the promise.
 	 */
-	public enum State {CREATED, PENDING, FULFILLED, REJECTED}
+	public enum State {
+        /** The promise has been created. */
+        CREATED,
+        /** The promise has been run but not completed. */
+        PENDING,
+        /** The promise is completed successfully */
+        FULFILLED,
+        /** The promise is had error before successful completion */
+        REJECTED
+    }
 
 	/**
 	 * Create a Promise based on a given supplier.
