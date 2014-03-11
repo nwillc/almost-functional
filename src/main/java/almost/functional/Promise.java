@@ -44,9 +44,9 @@ public class Promise<T> implements Runnable {
         CREATED,
         /** The promise has been run but not completed. */
         PENDING,
-        /** The promise is completed successfully */
+        /** The promise is completed successfully. */
         FULFILLED,
-        /** The promise is had error before successful completion */
+        /** The promise had error before successful completion. */
         REJECTED
     }
 
