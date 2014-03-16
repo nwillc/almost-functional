@@ -10,7 +10,7 @@
     <groupId>com.github.nwillc</groupId>
     <artifactId>almost-functional</artifactId>
     <packaging>jar</packaging>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.4</version>
     <name>almost-functional</name>
     <description>Almost Functional is very low impact functional classes inspired by guava, jdk 1.8 and various others.</description>
     <url>https://github.com/nwillc/almost-functional</url>
