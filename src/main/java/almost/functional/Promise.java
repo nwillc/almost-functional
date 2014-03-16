@@ -20,6 +20,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
 
+import static almost.functional.utils.LogFactory.getLogger;
+
 /**
  * A runnable supplier promise. The supplier will be called on run() and if is succeeds or fails
  * associated consumers will be informed.
@@ -29,7 +31,7 @@ import java.util.logging.Logger;
  * @param <T> the type the supplier is committed to provide.
  */
 public class Promise<T> implements Runnable {
-	private static final Logger LOG = Logger.getLogger(Promise.class.getName());
+	private static final Logger LOG = getLogger();
 	private final Supplier<T> supplier;
 	private final List<Consumer<T>> fulfilledConsumers = new CopyOnWriteArrayList<Consumer<T>>();
 	private final List<Consumer<Exception>> rejectedConsumers = new CopyOnWriteArrayList<Consumer<Exception>>();
