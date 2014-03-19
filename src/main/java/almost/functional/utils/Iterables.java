@@ -52,6 +52,7 @@ public class Iterables {
 	 * @return the final result of the function after being applied to the elements
 	 * @deprecated Should use Iterables.reduce()
 	 */
+	@Deprecated
 	public static <T,R> R forEach(Iterable<T> i, final Function<T,R> f) {
 		checkNotNull(i, "forEach must have a valid iterable");
 		checkNotNull(f, "forEach must have a valid function");
@@ -73,6 +74,7 @@ public class Iterables {
 	 * @param <T> Type returned by the function, and its initial argument.
 	 * @param <R> Type returned by the function, and the iterable's elements.
 	 * @return the final result of the function.
+	 * @since 1.5
 	 */
 	public static <T, R> T reduce(Iterable<R> i, final T initial, final BiFunction<T,? super R,T> f) {
 		checkNotNull(i, "forEach must have a valid iterable");

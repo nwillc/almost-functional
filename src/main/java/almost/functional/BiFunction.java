@@ -20,7 +20,14 @@ package almost.functional;
  * @param <F> Type of the first argument.
  * @param <S> Type of the second argument.
  * @param <R> Type of the result.
+ * @since 1.5
  */
 public interface BiFunction<F, S, R> {
+	/**
+	 * Apply the function to the first and second argument and return a result.
+	 * @param first argument.
+	 * @param second argument.
+	 * @return the result of applying the function.
+	 */
 	public R apply(F first, S second);
 }
