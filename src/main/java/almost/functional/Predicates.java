@@ -53,4 +53,52 @@ public class Predicates {
 			}
 		};
 	}
+
+    /**
+     * Negate an existing predicate's test result.
+     * @param predicate An existing predicate.
+     * @param <T> type of the predicate.
+     * @return new predicate.
+     */
+    public static <T> Predicate<T> negate(final Predicate<? super T> predicate) {
+        return new Predicate<T>() {
+            @Override
+            public boolean test(T t) {
+                return !predicate.test(t);
+            }
+        };
+    }
+
+    /**
+     * Create a predicate which is a logical and of two existing predicate.
+     * @param first first predicate.
+     * @param second second predicate.
+     * @param <T> type of the predicates
+     * @return resultant predicate
+     */
+    public static <T> Predicate<T> and(final Predicate<? super T> first, final Predicate<? super T> second) {
+        return new Predicate<T>() {
+            @Override
+            public boolean test(T t) {
+                return first.test(t) && second.test(t);
+            }
+        };
+    }
+
+    /**
+     * Create a predicate which is a logical or of two existing predicate.
+     * @param first first predicate.
+     * @param second second predicate.
+     * @param <T> type of the predicates
+     * @return resultant predicate
+     */
+    public static <T> Predicate<T> or(final Predicate<? super T> first, final Predicate<? super T> second) {
+        return new Predicate<T>() {
+            @Override
+            public boolean test(T t) {
+                return first.test(t) || second.test(t);
+            }
+        };
+    }
+
 }

@@ -15,8 +15,14 @@
 
 package almost.functional;
 
+import almost.functional.utils.Iterables;
 import org.junit.Test;
 
+import java.util.InputMismatchException;
+
+import static almost.functional.Predicates.and;
+import static almost.functional.Predicates.negate;
+import static almost.functional.Predicates.or;
 import static almost.functional.utils.ArrayIterable.newIterable;
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -46,4 +52,65 @@ public class PredicatesTest {
 		Predicate<String> predicate = Predicates.contains(strings);
 		assertThat(predicate.test("four")).isFalse();
 	}
+
+    @Test
+    public void testNegate() throws Exception {
+        Predicate<Boolean> alwaysTrue = new Predicate<Boolean>() {
+            @Override
+            public boolean test(Boolean aBoolean) {
+                return true;
+            }
+        };
+
+        assertThat(alwaysTrue.test(true)).isTrue();
+        assertThat(alwaysTrue.test(false)).isTrue();
+
+        Predicate<Boolean> alwaysFalse = negate(alwaysTrue);
+        assertThat(alwaysFalse.test(true)).isFalse();
+        assertThat(alwaysFalse.test(false)).isFalse();
+    }
+
+    @Test
+    public void testAnd() throws Exception {
+        Predicate<Integer> isEven = new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer integer) {
+                return integer % 2 == 0;
+            }
+        };
+
+        Predicate<Integer> isDivisibleByThree = new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer integer) {
+                return integer % 3 == 0;
+            }
+        };
+
+        Predicate<Integer> test = and(isEven, isDivisibleByThree);
+        assertThat(test.test(6)).isTrue();
+        assertThat(test.test(4)).isFalse();
+    }
+
+    @Test
+    public void testOr() throws Exception {
+        Predicate<Integer> isEven = new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer integer) {
+                return integer % 2 == 0;
+            }
+        };
+
+        Predicate<Integer> isDivisibleByThree = new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer integer) {
+                return integer % 3 == 0;
+            }
+        };
+
+        Predicate<Integer> test = or(isEven, isDivisibleByThree);
+        assertThat(test.test(6)).isTrue();
+        assertThat(test.test(4)).isTrue();
+        assertThat(test.test(3)).isTrue();
+        assertThat(test.test(7)).isFalse();
+    }
 }
