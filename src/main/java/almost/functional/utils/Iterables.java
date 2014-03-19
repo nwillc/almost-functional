@@ -50,6 +50,7 @@ public class Iterables {
 	 * @param <T> the type of the iterable and input to the function
 	 * @param <R> the type of the function result
 	 * @return the final result of the function after being applied to the elements
+	 * @deprecated Should use Iterables.reduce()
 	 */
 	public static <T,R> R forEach(Iterable<T> i, final Function<T,R> f) {
 		checkNotNull(i, "forEach must have a valid iterable");
@@ -60,6 +61,27 @@ public class Iterables {
 			ret = f.apply(t);
 		}
 		checkNotNull(ret, "Function can not return null");
+		return ret;
+	}
+
+	/**
+	 * Perform a reduction of an iterable, using an initial value, and a two argument function. The function
+	 * is applied to each element using the last result as the first argument and the element as the second.
+	 * @param i the iterable.
+	 * @param initial the initial value of the first argument.
+	 * @param f the two argument function.
+	 * @param <T> Type returned by the function, and its initial argument.
+	 * @param <R> Type returned by the function, and the iterable's elements.
+	 * @return the final result of the function.
+	 */
+	public static <T, R> T reduce(Iterable<R> i, final T initial, final BiFunction<T,? super R,T> f) {
+		checkNotNull(i, "forEach must have a valid iterable");
+		checkNotNull(f, "forEach must have a valid function");
+
+		T ret = initial;
+		for (R r : i) {
+			ret = f.apply(ret, r);
+		}
 		return ret;
 	}
 

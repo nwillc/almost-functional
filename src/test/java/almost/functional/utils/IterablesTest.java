@@ -93,6 +93,21 @@ public class IterablesTest {
 	}
 
 	@Test
+	public void shouldReduce() throws Exception {
+		Iterable<String> numbers = newIterable("1", "2", "3", "4", "5");
+
+		BiFunction<Integer, String, Integer> accumulator = new BiFunction<Integer, String, Integer>() {
+			@Override
+			public Integer apply(Integer first, String second) {
+				return first + Integer.valueOf(second);
+			}
+		};
+
+		Integer sum = reduce(numbers, 1, accumulator);
+		assertThat(sum).isEqualTo(16);
+	}
+
+	@Test
     public void testMap() throws Exception {
         Iterable<Integer> twos = newIterable(2, 4, 6, 8);
 
