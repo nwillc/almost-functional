@@ -59,6 +59,7 @@ public class Predicates {
      * @param predicate An existing predicate.
      * @param <T> type of the predicate.
      * @return new predicate.
+     * @since 1.5
      */
     public static <T> Predicate<T> negate(final Predicate<? super T> predicate) {
         return new Predicate<T>() {
@@ -75,6 +76,7 @@ public class Predicates {
      * @param second second predicate.
      * @param <T> type of the predicates
      * @return resultant predicate
+     * @since 1.5
      */
     public static <T> Predicate<T> and(final Predicate<? super T> first, final Predicate<? super T> second) {
         return new Predicate<T>() {
@@ -91,6 +93,7 @@ public class Predicates {
      * @param second second predicate.
      * @param <T> type of the predicates
      * @return resultant predicate
+     * @since 1.5
      */
     public static <T> Predicate<T> or(final Predicate<? super T> first, final Predicate<? super T> second) {
         return new Predicate<T>() {
