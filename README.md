@@ -2,7 +2,7 @@ Almost Functional
 =================
 
 Almost functional is geared to be a simple, light weight, set of functional code for Java 1.6 - 1.7.
-It's small and simple with concepts drawn from guava, Java 1.8, reactive programming, and world at large.
+It's small and simple with concepts drawn from guava, Java 1.8, reactive programming, and the world at large.
 
 The Bits
 --------
@@ -25,7 +25,7 @@ Almost functional is available via the Maven central repository so the easiest r
 
 Dependiencies
 -------------
-None, that's sort of the point. It's ~20k jar and you're done.
+None, that's sort of the point. It's ~25k jar and you're done.
 
 API Docs
 --------
