@@ -26,6 +26,12 @@ import static almost.functional.utils.ArrayIterable.newIterable;
 import static almost.functional.utils.Iterables.forEach;
 import static almost.functional.utils.LogFactory.getLogger;
 
+/**
+ * A single Observer that allow for multiple Observers to observe a single event.
+ * @see almost.functional.reactive.Observer
+ * @see almost.functional.Consumer
+ * @param <T> type being observed
+ */
 public class BroadcastObserver<T> implements Observer<T> {
     private static final Logger LOGGER = getLogger();
     private final List<Consumer<T>> nextConsumers = new CopyOnWriteArrayList<Consumer<T>>();
@@ -63,16 +69,31 @@ public class BroadcastObserver<T> implements Observer<T> {
         inform(e, errorConsumers);
     }
 
+	/**
+	 * Add multiple next Consumers to this observer.
+	 * @param consumers a number of next Consumers.
+	 * @return this Observer
+	 */
     public Observer<T> addNextConsumer(Consumer<T> ... consumers) {
         addAll(nextConsumers, consumers);
         return this;
     }
 
+	/**
+	 * Add multiple error Consumers to this observer.
+	 * @param consumers a number or error Consumers
+	 * @return this Observer
+	 */
     public Observer<T> addErrorConsumer(Consumer<Throwable> ... consumers) {
         addAll(errorConsumers, consumers);
         return this;
     }
 
+	/**
+	 * Add multiple completed Consumers to this observer.
+	 * @param consumers a number of completed Consumers
+	 * @return this Observer
+	 */
     public Observer<T> addCompletedConsumer(Consumer<Boolean> ... consumers) {
         addAll(completedConsumers, consumers);
         return this;

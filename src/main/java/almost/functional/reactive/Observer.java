@@ -17,10 +17,24 @@ package almost.functional.reactive;
 
 /**
  * An Observer implementation that observes data, errors, and the completion of what is being observed.
- * @param <T>
+ * @param <T> type being observed.
  */
 public interface Observer<T> {
+	/**
+	 * Observe the completion.
+	 * @param withoutError if completed without error.
+	 */
     void completed(Boolean withoutError);
+
+	/**
+	 * Observe each data item made available.
+	 * @param t a data item.
+	 */
     void next(T t);
+
+	/**
+	 * Observe an error that occurred. This allows for exceptions without stopping the observations.
+	 * @param e the throwable.
+	 */
     void error(Throwable e);
 }

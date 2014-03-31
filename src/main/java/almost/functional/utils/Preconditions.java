@@ -18,7 +18,8 @@ package almost.functional.utils;
 /**
  * Utility operations designed to be used as precondition tests.
  */
-public class Preconditions {
+public final class Preconditions {
+
     private Preconditions() {
     }
 
@@ -35,6 +36,20 @@ public class Preconditions {
             throw new NullPointerException(errorMessage);
         }
     }
+
+	/**
+	 * Check that a String is not empty after removing whitespace.
+	 * @param reference the string
+	 * @param errorMessage the message for the exception
+	 * @throws java.lang.NullPointerException if the String is null
+	 * @throws java.lang.IllegalArgumentException if the string is non-null but zero length
+	 */
+	public static void checkNonEmptyString(String reference, String errorMessage) {
+		checkNotNull(reference, errorMessage);
+		if (reference.trim().length() == 0) {
+			throw new IllegalArgumentException(errorMessage);
+		}
+	}
 
     /**
      * Check that one class is assignable to another.

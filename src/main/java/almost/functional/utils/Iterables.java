@@ -25,7 +25,8 @@ import static almost.functional.utils.Preconditions.checkNotNull;
 /**
  * Utility operations on an iterable.
  */
-public class Iterables {
+public final class Iterables {
+
 	private Iterables() {}
 
 	/**

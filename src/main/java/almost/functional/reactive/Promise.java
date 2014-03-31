@@ -24,6 +24,9 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * This implements Runnable so that it can be tucked into a Future etc.
  *
+ * @see almost.functional.reactive.Observer
+ * @see almost.functional.Consumer
+ * @see almost.functional.Supplier
  * @param <T> the type the supplier is committed to provide.
  */
 public class Promise<T> implements Runnable {
@@ -46,7 +49,7 @@ public class Promise<T> implements Runnable {
     }
 
 	/**
-	 * Create a Promise based on a given supplier.
+	 * Create a Promise based on a given supplier and with an Observer.
 	 * @param supplier the supplier
 	 */
 	public Promise(Supplier<T> supplier, Observer<T> observer) {
