@@ -71,19 +71,19 @@ public final class Iterables {
 	 * is applied to each element using the last result as the first argument and the element as the second.
 	 * @param i the iterable.
 	 * @param initial the initial value of the first argument.
-	 * @param f the two argument function.
-	 * @param <T> Type returned by the function, and its initial argument.
-	 * @param <R> Type returned by the function, and the iterable's elements.
+	 * @param accumulator the two argument function.
+	 * @param <T> type of the iterable elements and accumulator's second argument
+	 * @param <R> type returned by reduce, the accumulator and it's first argument
 	 * @return the final result of the function.
 	 * @since 1.5
 	 */
-	public static <T, R> T reduce(Iterable<R> i, final T initial, final BiFunction<T,? super R,T> f) {
-		checkNotNull(i, "forEach must have a valid iterable");
-		checkNotNull(f, "forEach must have a valid function");
+	public static <T, R> R reduce(Iterable<T> i, final R initial, final BiFunction<R, ? super T, R> accumulator) {
+		checkNotNull(i, "reduce must have a non null iterable");
+		checkNotNull(accumulator, "reduce must have a non null function");
 
-		T ret = initial;
-		for (R r : i) {
-			ret = f.apply(ret, r);
+		R ret = initial;
+		for (T r : i) {
+			ret = accumulator.apply(ret, r);
 		}
 		return ret;
 	}

@@ -17,9 +17,9 @@ package almost.functional;
 
 /**
  * An interface of a function that accepts a first and second argument and returns a result.
+ * @param <R> Type of the result.
  * @param <F> Type of the first argument.
  * @param <S> Type of the second argument.
- * @param <R> Type of the result.
  * @since 1.5
  */
 public interface BiFunction<F, S, R> {
