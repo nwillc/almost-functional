@@ -27,7 +27,8 @@ import static almost.functional.utils.Iterables.forEach;
 import static almost.functional.utils.LogFactory.getLogger;
 
 /**
- * A single Observer that allow for multiple Observers to observe a single event.
+ * A single Observer that allow for multiple Observers to observe a single event. Once this Observer
+ * is completed all the various consumers are released.
  * @see almost.functional.reactive.Observer
  * @see almost.functional.Consumer
  * @param <T> type being observed
@@ -57,6 +58,9 @@ public class BroadcastObserver<T> implements Observer<T> {
     @Override
     public void completed(Boolean withoutError) {
         inform(withoutError, completedConsumers);
+		nextConsumers.clear();
+		errorConsumers.clear();
+		completedConsumers.clear();
     }
 
     @Override

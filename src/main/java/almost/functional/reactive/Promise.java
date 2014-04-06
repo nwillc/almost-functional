@@ -22,7 +22,8 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * A Promise is a composite of a Supplier and an Observer allowing for observation or the supplier.
  *
- * This implements Runnable so that it can be tucked into a Future etc.
+ * This implements Runnable so that it can be tucked into a Future etc.  Once the Observer is completed
+ * it is released.
  *
  * @see almost.functional.reactive.Observer
  * @see almost.functional.Consumer
@@ -31,8 +32,8 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class Promise<T> implements Runnable {
 	private final Supplier<T> supplier;
-	private final Observer<T> observer;
 	private final AtomicReference<State> state = new AtomicReference<State>(State.CREATED);
+	private Observer<T> observer;
 
 	/**
 	 * The current state of the promise.
@@ -79,6 +80,7 @@ public class Promise<T> implements Runnable {
 			observer.error(e);
             observer.completed(false);
 		}
+		observer = null;
 	}
 
 	/**
