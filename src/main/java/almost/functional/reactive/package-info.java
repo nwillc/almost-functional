@@ -13,31 +13,8 @@
  * OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package almost.functional.utils;
-
-import java.util.logging.Logger;
-
 /**
- * Provide consistently named instances of Logger. Names are based on the callers class name.
+ * Package includes rudimentary reactive style code. Reactive code inverts traditionally pull
+ * based operations like iteration and stream reading to a more functional push based approach.
  */
-public final class LogFactory {
-
-	private LogFactory() {}
-
-	/**
-	 * Returns a Logger named after the callers class.
-	 * @return a Logger
-	 */
-	public static Logger getLogger(){
-		return getLogger(Thread.currentThread().getStackTrace()[2].getClassName());
-	}
-
-	/**
-	 * Return a instance of Logger with a given name.
-	 * @param name of the resultant instance.
-	 * @return a Logger
-	 */
-	public static Logger getLogger(String name){
-		return Logger.getLogger(name);
-	}
-}
+package almost.functional.reactive;

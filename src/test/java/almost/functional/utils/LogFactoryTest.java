@@ -25,6 +25,14 @@ import static org.fest.assertions.api.Assertions.assertThat;
 public class LogFactoryTest {
 
 	@Test
+	public void shouldGetClassName() throws Exception {
+	   Logger logger = getLogger();
+
+		assertThat(logger).isNotNull();
+		assertThat(logger.getName()).isEqualTo(LogFactoryTest.class.getName());
+	}
+
+	@Test
 	public void shouldGetLogger() throws Exception {
 		Logger logger1 = getLogger(getClass().getName());
 		Logger logger2 = getLogger();

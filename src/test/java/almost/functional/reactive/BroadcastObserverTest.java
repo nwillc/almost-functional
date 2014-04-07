@@ -16,6 +16,7 @@
 package almost.functional.reactive;
 
 import almost.functional.Consumer;
+import almost.functional.Optional;
 import org.junit.Test;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -24,6 +25,22 @@ import java.util.concurrent.atomic.AtomicReference;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class BroadcastObserverTest {
+
+	@Test
+	public void shouldAllowSimplifiedConstructor() throws Exception {
+		BooleanConsumer booleanConsumer = new BooleanConsumer();
+
+		BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>(
+				Optional.<Consumer<Boolean>>of(booleanConsumer),
+				Optional.<Consumer<Throwable>>empty(),
+				Optional.<Consumer<Boolean>>empty()
+		);
+
+		assertThat(booleanConsumer.flag.get()).isFalse();
+		broadcastObserver.next(true);
+		assertThat(booleanConsumer.flag.get()).isTrue();
+	}
+
 	@Test
 	public void shouldBeCompleted() throws Exception {
 		BooleanConsumer consumer = new BooleanConsumer();
@@ -59,7 +76,7 @@ public class BroadcastObserverTest {
 
 	@Test
 	public void shouldRespectCompleted() throws Exception {
-	  	BooleanConsumer next = new BooleanConsumer();
+		BooleanConsumer next = new BooleanConsumer();
 		BooleanConsumer completed = new BooleanConsumer();
 		ErrorConsumer error = new ErrorConsumer();
 		BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>();
