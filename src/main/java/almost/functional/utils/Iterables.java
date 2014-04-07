@@ -17,6 +17,7 @@ package almost.functional.utils;
 
 import almost.functional.*;
 
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -29,7 +30,7 @@ public final class Iterables {
 
 	private Iterables() {}
 
-	/**
+    /**
 	 * Accept a consumer for each element of an iterable.
 	 * @param i the iterable
 	 * @param c the consumer to accept for each element
@@ -217,4 +218,32 @@ public final class Iterables {
             }
         };
     }
+
+    /**
+     * Convert an enumeration to an iterator.
+     * @param enumeration
+     * @param <E> type of the enumeration
+     * @throws java.lang.NullPointerException if enumeration is null
+     * @return An Iterable
+     */
+    public static <E> Iterable<E> iterable(final Enumeration<E> enumeration) {
+        checkNotNull(enumeration, "Can not create an Iterable from a null enumeration");
+        return new Iterable<E>() {
+            public Iterator<E> iterator() {
+                return new Iterator<E>() {
+                    public boolean hasNext() {
+                        return enumeration.hasMoreElements();
+                    }
+                    public E next() {
+                        return enumeration.nextElement();
+                    }
+                    public void remove() {
+                        throw new UnsupportedOperationException();
+                    }
+                };
+            }
+        };
+    }
+
+
 }

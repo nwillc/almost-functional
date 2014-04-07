@@ -18,7 +18,7 @@ package almost.functional.utils;
 import almost.functional.*;
 import org.junit.Test;
 
-import java.util.Iterator;
+import java.util.*;
 
 import static almost.functional.Predicates.isEqual;
 import static almost.functional.utils.ArrayIterable.newIterable;
@@ -95,14 +95,7 @@ public class IterablesTest {
 	@Test
 	public void shouldReduce() throws Exception {
 		Iterable<String> numbers = newIterable("1", "2", "3", "4", "5");
-
-		BiFunction<Integer, String, Integer> accumulator = new BiFunction<Integer, String, Integer>() {
-			@Override
-			public Integer apply(Integer first, String second) {
-				return first + Integer.valueOf(second);
-			}
-		};
-
+        Accumulator accumulator = new Accumulator();
 		Integer sum = reduce(numbers, 1, accumulator);
 		assertThat(sum).isEqualTo(16);
 	}
@@ -159,4 +152,26 @@ public class IterablesTest {
 
         assertThat(filteredValues.hasNext()).isFalse();
     }
+
+    @Test
+    public void testShouldCreateIterableFromEnumeration() throws Exception {
+
+        Collection<String> numbers = new ArrayList<String>();
+        numbers.add("1");
+        numbers.add("2");
+        numbers.add("3");
+
+        int sum = reduce(numbers, 0, new Accumulator());
+
+        Enumeration<String> enumeration = Collections.enumeration(numbers);
+        Iterable<String> iterable = Iterables.iterable(enumeration);
+        assertThat(reduce(iterable, 0, new Accumulator())).isEqualTo(sum);
+    }
+
+    private class Accumulator implements BiFunction<Integer, String, Integer> {
+        @Override
+        public Integer apply(Integer first, String second) {
+            return first + Integer.valueOf(second);
+        }
+    };
 }
