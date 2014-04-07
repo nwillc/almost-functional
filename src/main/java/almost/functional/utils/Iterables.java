@@ -221,7 +221,7 @@ public final class Iterables {
 
     /**
      * Convert an enumeration to an iterator.
-     * @param enumeration
+     * @param enumeration  the enumeration to make into an Iterator
      * @param <E> type of the enumeration
      * @throws java.lang.NullPointerException if enumeration is null
      * @return An Iterable
@@ -230,15 +230,12 @@ public final class Iterables {
         checkNotNull(enumeration, "Can not create an Iterable from a null enumeration");
         return new Iterable<E>() {
             public Iterator<E> iterator() {
-                return new Iterator<E>() {
+                return new ImmutableIterator<E>() {
                     public boolean hasNext() {
                         return enumeration.hasMoreElements();
                     }
                     public E next() {
                         return enumeration.nextElement();
-                    }
-                    public void remove() {
-                        throw new UnsupportedOperationException();
                     }
                 };
             }
