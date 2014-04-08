@@ -114,12 +114,11 @@ public final class Optional<T> {
 	 * @param <V>  The type of the result of the mapping function
 	 * @return an Optional describing the result of map, if a value is present, otherwise an empty Optional
 	 */
-	@SuppressWarnings("unchecked")
 	public <V> Optional<V> map(Function<T, V> function){
 		checkNotNull(function, "Must provide non null function to map");
 		if (isPresent()) {
 			V v = function.apply(get());
-			return v == null ? (Optional<V>) Optional.empty() : Optional.of(function.apply(get()));
+			return v == null ? Optional.<V>empty() : Optional.of(function.apply(get()));
 		} else {
 			return Optional.empty();
 		}
