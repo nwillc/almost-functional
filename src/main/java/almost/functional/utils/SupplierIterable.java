@@ -21,6 +21,8 @@ import almost.functional.Supplier;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import static almost.functional.utils.Preconditions.checkNotNull;
+
 /**
  * Creates an Iterable from any Supplier of Optionals. The resulting Iterator hasNext until the
  * Supplier returns and empty Optional.
@@ -34,6 +36,7 @@ public class SupplierIterable<T> implements Iterable<T> {
 	 * @param supplier a Supplier of Optionals of type T
 	 */
 	public SupplierIterable(Supplier<Optional<T>> supplier) {
+		checkNotNull(supplier, "Supplier must not be null");
 		this.supplier = supplier;
 	}
 
