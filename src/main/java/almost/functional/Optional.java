@@ -61,9 +61,23 @@ public final class Optional<T> {
 	 * @return an Optional with the value present
 	 */
     public static <T> Optional<T> of(T value) {
+        checkNotNull(value, "Optional value may not be null in method of");
         return new Optional<T>(value);
     }
 
+    /**
+     * Returns an Optional of a value which might be null.
+     * @param value the value
+     * @param <T> the type of the optional
+     * @return an Optional of the value, or empty if value was null
+     */
+    public static <T> Optional<T> ofNullable(T value) {
+        if (value == null) {
+            return Optional.empty();
+        }
+
+        return of(value);
+    }
 	/**
 	 * If a value is present in this Optional, returns the value, otherwise throws NoSuchElementException.
 	 * @return the non-null value held by this Optional
