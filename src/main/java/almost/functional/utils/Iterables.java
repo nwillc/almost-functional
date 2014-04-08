@@ -19,7 +19,6 @@ import almost.functional.*;
 
 import java.util.Enumeration;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import static almost.functional.utils.Preconditions.checkNotNull;
 
@@ -183,40 +182,18 @@ public final class Iterables {
     public static <T> Iterable<T> filter(final Iterable<T> fromIterable, final Predicate<? super T> predicate) {
         checkNotNull(fromIterable, "iterable must be non null");
         checkNotNull(predicate, "predicate must be non null");
-        return new Iterable<T>() {
-            @Override
-            public Iterator<T> iterator() {
-                final Iterator<T> fromIterator = fromIterable.iterator();
-                return new ImmutableIterator<T>() {
-                    Optional<T> next = advance();
-
-                    @Override
-                    public boolean hasNext() {
-                        return next.isPresent();
-                    }
-
-                    @Override
-                    public T next() {
-                        if (!hasNext()) {
-                            throw new NoSuchElementException();
-                        }
-                        T value = next.get();
-                        next = advance();
-                        return value;
-                    }
-
-                    private Optional<T> advance(){
-                        while (fromIterator.hasNext()) {
-                            T value = fromIterator.next();
-                            if (predicate.test(value)) {
-                                return Optional.of(value);
-                            }
-                        }
-                     return Optional.empty();
-                    }
-                };
-            }
-        };
+	    return new SupplierIterable<T>(new Supplier<Optional<T>>() {
+			private Iterator<T> fromIterator = fromIterable.iterator();
+			public Optional<T> get() {
+				while (fromIterator.hasNext()) {
+					T value = fromIterator.next();
+					if (predicate.test(value)) {
+						return Optional.of(value);
+					}
+				}
+				return Optional.empty();
+			}
+		});
     }
 
     /**
