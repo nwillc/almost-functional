@@ -58,7 +58,7 @@ public final class Preconditions {
      * @param message the message used in the exception if thrown
      * @throws ClassCastException if the assignment can not be made
      */
-    public static void isAssignableTo(Class from, Class to, String message) {
+    public static void isAssignableTo(Class<?> from, Class<?> to, String message) {
         if (!to.isAssignableFrom(from)) {
             throw new ClassCastException(message);
         }

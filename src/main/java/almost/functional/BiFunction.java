@@ -29,5 +29,5 @@ public interface BiFunction<F, S, R> {
 	 * @param second argument.
 	 * @return the result of applying the function.
 	 */
-	public R apply(F first, S second);
+	 R apply(F first, S second);
 }
