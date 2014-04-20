@@ -1,5 +1,8 @@
-# [almost-functional]()
+## Almost Functional
+- [Home]()
+- [Usage](#docs/usage)
 
+## The Bits
 - [Github Repository](http://github.com/nwillc/almost-functional)
 
 ## Links
