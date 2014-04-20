@@ -26,5 +26,5 @@ public interface Function<A,R> {
 	 * @param t the function argument
 	 * @return the result
 	 */
-	public R apply(A t);
+	 R apply(A t);
 }

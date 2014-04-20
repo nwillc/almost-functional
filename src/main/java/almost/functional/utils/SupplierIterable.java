@@ -32,7 +32,7 @@ public class SupplierIterable<T> implements Iterable<T> {
 	private final Supplier<Optional<T>> supplier;
 
 	/**
-	 * Constructor accepting the Supplier.
+	 * Constructor accepting the Supplier. Supplier must return non null Optionals.
 	 * @param supplier a Supplier of Optionals of type T
 	 */
 	public SupplierIterable(Supplier<Optional<T>> supplier) {
@@ -43,11 +43,15 @@ public class SupplierIterable<T> implements Iterable<T> {
 	@Override
 	public Iterator<T> iterator() {
 		return new ImmutableIterator<T>() {
-			private Optional<T> next = supplier.get();
+			private Optional<T> next = null;
 
 			@Override
 			public boolean hasNext() {
-				return next.isPresent();
+                if (next == null) {
+                    next = supplier.get();
+                    checkNotNull(next, "supplier returned null");
+                }
+                return next.isPresent();
 			}
 
 			@Override
@@ -56,7 +60,7 @@ public class SupplierIterable<T> implements Iterable<T> {
 					throw new NoSuchElementException("next invoke on iterator where hasNext is false.");
 				}
 				T value = next.get();
-				next = supplier.get();
+				next = null;
 				return value;
 			}
 		};

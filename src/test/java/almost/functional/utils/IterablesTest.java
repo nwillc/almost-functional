@@ -42,6 +42,7 @@ public class IterablesTest {
 	}
 
 	@Test
+    @SuppressWarnings("deprecation")
 	public void shouldForEachFunction() throws Exception {
         String[] strings = {"a", "b", "c"};
 		Function<String,String> function = new Function<String, String>() {
