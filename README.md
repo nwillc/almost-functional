@@ -27,10 +27,3 @@ Dependiencies
 -------------
 None, that's sort of the point. It's ~25k jar and you're done.
 
-API Docs
---------
-The API docs are [here](http://nwillc.github.io/almost-functional/apidocs/).
-
-Issues
-------
-The issue tracking is [here](https://github.com/nwillc/almost-functional/issues).
