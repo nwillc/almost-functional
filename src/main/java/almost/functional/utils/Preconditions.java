@@ -46,9 +46,11 @@ public final class Preconditions {
 	 */
 	public static void checkNonEmptyString(String reference, String errorMessage) {
 		checkNotNull(reference, errorMessage);
-		if (reference.trim().length() == 0) {
-			throw new IllegalArgumentException(errorMessage);
-		}
+        for (Character c : reference.toCharArray()) {
+            if (!Character.isWhitespace(c)) {
+                throw new IllegalArgumentException(errorMessage);
+            }
+        }
 	}
 
     /**

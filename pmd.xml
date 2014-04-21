@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2014, nwillc@gmail.com
+  ~
+  ~ Permission to use, copy, modify, and/or distribute this software for any purpose with or
+  ~ without fee is hereby granted, provided that the above copyright notice and this permission
+  ~ notice appear in all copies.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO
+  ~ THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT
+  ~ SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR
+  ~ ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF
+  ~ CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE
+  ~ OR PERFORMANCE OF THIS SOFTWARE.
+  -->
+
+<ruleset name="Custom ruleset"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd"
+         xsi:noNamespaceSchemaLocation="http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+
+    <description>Alpha Android application ruleset...I call him the gatekeeper</description>
+    <exclude-pattern>.*/android/UnusedStub.*</exclude-pattern>
+
+    <rule ref="rulesets/java/imports.xml">
+        <exclude name="TooManyStaticImports"/>
+        <exclude name="UnnecessaryFullyQualifiedName"/>
+    </rule>
+
+    <rule ref="rulesets/java/controversial.xml">
+        <exclude name="UseConcurrentHashMap"/>
+        <exclude name="UseObjectForClearerAPI"/>
+        <exclude name="AvoidFinalLocalVariable"/>
+        <exclude name="AtLeastOneConstructor"/>
+        <exclude name="CallSuperInConstructor"/>
+        <exclude name="OnlyOneReturn"/>
+        <exclude name="DefaultPackage"/>
+        <exclude name="AvoidLiteralsInIfCondition"/>
+        <exclude name="BooleanInversion"/>
+        <exclude name="DataflowAnomalyAnalysis"/>
+        <exclude name="AvoidPrefixingMethodParameters"/>
+    </rule>
+
+    <rule ref="rulesets/java/strings.xml"/>
+    <rule ref="rulesets/java/android.xml"/>
+    <rule ref="rulesets/java/basic.xml">
+        <exclude name="EmptyCatchBlock"/>
+    </rule>
+    <rule ref="rulesets/java/coupling.xml">
+        <exclude name="ExcessiveImports" />
+        <exclude name="LawOfDemeter"/>
+        <exclude name="LoosePackageCoupling"/>
+    </rule>
+    <rule ref="rulesets/java/unusedcode.xml">
+        <exclude name="UnusedModifier" />
+    </rule>
+    <rule ref="rulesets/java/codesize.xml">
+        <exclude name="TooManyMethods"/>
+    </rule>
+
+    <rule ref="rulesets/java/braces.xml"/>
+    <rule ref="rulesets/java/optimizations.xml">
+        <exclude name="LocalVariableCouldBeFinal"/>
+        <exclude name="MethodArgumentCouldBeFinal"/>
+        <exclude name="AvoidInstantiatingObjectsInLoops"/>
+    </rule>
+    <rule ref="rulesets/java/design.xml">
+        <exclude name="FieldDeclarationsShouldBeAtStartOfClass"/>
+        <exclude name="UncommentedEmptyMethod"/>
+        <exclude name="TooFewBranchesForASwitchStatement"/>
+        <exclude name="AvoidSynchronizedAtMethodLevel"/>
+        <!-- Excluded so that such classes can be mocked in tests -->
+        <exclude name="ClassWithOnlyPrivateConstructorsShouldBeFinal"/>
+        <!-- Excluded because using Locale.getDefault suffices on the client -->
+        <exclude name="SimpleDateFormatNeedsLocale"/>
+        <!-- Excluded so that JUnit test base classes can be declared abstract -->
+        <exclude name="AbstractClassWithoutAbstractMethod"/>
+        <exclude name="ConstructorCallsOverridableMethod"/>
+    </rule>
+
+    <rule ref="rulesets/java/basic.xml/EmptyCatchBlock">
+        <properties>
+            <property name="allowCommentedBlocks" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="rulesets/java/codesize.xml/TooManyMethods">
+        <properties>
+            <property name="maxmethods" value="25"/>
+        </properties>
+    </rule>
+    <rule ref="rulesets/java/imports.xml/TooManyStaticImports">
+        <properties>
+            <property name="maximumStaticImports" value="20"/>
+        </properties>
+    </rule>
+</ruleset>

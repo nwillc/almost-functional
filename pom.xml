@@ -20,14 +20,15 @@
     <url>https://github.com/nwillc/almost-functional</url>
 
     <properties>
+        <compiler.version>3.1</compiler.version>
         <fest.version>2.0M10</fest.version>
         <javadoc.version>2.9.1</javadoc.version>
         <jdk.version>1.6</jdk.version>
         <junit.version>4.11</junit.version>
+        <pmd.skip>false</pmd.skip>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <surefire.version>2.17</surefire.version>
-        <compiler.version>3.1</compiler.version>
         <release.version>2.5</release.version>
+        <surefire.version>2.17</surefire.version>
     </properties>
 
     <dependencies>
@@ -123,13 +124,16 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <linkXref>true</linkXref>
                     <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-                    <minimumTokens>100</minimumTokens>
                     <targetJdk>${jdk.version}</targetJdk>
-                    <excludes>
-                        <exclude>**/tests/*.java</exclude>
-                    </excludes>
+                    <skip>${pmd.skip}</skip>
+                    <outputDirectory>${project.basedir}/target</outputDirectory>
+                    <targetDirectory>${project.basedir}/target</targetDirectory>
+                    <linkXRef>false</linkXRef>
+                    <includeTests>false</includeTests>
+                    <rulesets>
+                        <ruleset>file://${project.basedir}/pmd.xml</ruleset>
+                    </rulesets>
                 </configuration>
             </plugin>
             <!-- FindBugs -->

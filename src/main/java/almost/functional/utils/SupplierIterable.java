@@ -43,7 +43,7 @@ public class SupplierIterable<T> implements Iterable<T> {
 	@Override
 	public Iterator<T> iterator() {
 		return new ImmutableIterator<T>() {
-			private Optional<T> next = null;
+			private Optional<T> next;
 
 			@Override
 			public boolean hasNext() {
