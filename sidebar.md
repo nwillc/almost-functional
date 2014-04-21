@@ -1,4 +1,4 @@
-## Almost Functional
+## AF
 - [Home]()
 - [Usage](#docs/usage)
 - [Dependencies](#docs/dependencies)
@@ -9,3 +9,6 @@
 ## Links
 - [API docs](./apidocs)
 - [Issue Tracking](https://github.com/nwillc/almost-functional/issues)
+
+## Projects that using AF
+- [scotty](http://nwillc.github.io/scotty)
