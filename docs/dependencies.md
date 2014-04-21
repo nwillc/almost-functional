@@ -1,5 +1,5 @@
-# Few ...
-That's sort of the point. It's ~25k jar and you're done.
+# Dependencies
+Few ... that's sort of the point. It's ~25k jar and you're done.
 
 ##  Building
 - Maven 2.2.1 or greater
