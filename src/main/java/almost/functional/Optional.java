@@ -78,6 +78,22 @@ public final class Optional<T> {
 
         return of(value);
     }
+
+    /**
+     * Apply a predicate to the optional, if the optional is present, and the predicate is true, return the optional, otherwise
+     * return empty.
+     * @since 1.7
+     * @param predicate the predicate to apply
+     * @return the optional if the predicate is true, empty if not
+     */
+    public Optional<T> filter(Predicate<? super T> predicate) {
+        if (isPresent() && predicate.test(get())) {
+            return this;
+        }
+
+        return empty();
+    }
+
 	/**
 	 * If a value is present in this Optional, returns the value, otherwise throws NoSuchElementException.
 	 * @return the non-null value held by this Optional
@@ -119,6 +135,20 @@ public final class Optional<T> {
         }
 
         return other;
+    }
+
+    /**
+     * Return the value if present, otherwise get the value from the Supplier.
+     * @param other a Supplier
+     * @return the value, if present, or the return of the Supplier
+     * @since 1.7
+     */
+    public T orElseSupplier(Supplier<T> other) {
+        checkNotNull(other, "orElse requires a non null supplier");
+        if (isPresent()) {
+            return get();
+        }
+        return other.get();
     }
 
 	/**

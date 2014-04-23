@@ -155,6 +155,34 @@ public class IterablesTest {
     }
 
     @Test
+    public void shouldGetNthElement() throws Exception {
+        Iterable<Integer> numbers = newIterable(0, 1, 2, 3, 4, 5, 6);
+
+        Optional third = get(numbers, 3);
+        assertThat(third).isNotNull();
+        assertThat(third.isPresent()).isTrue();
+        assertThat(third.get()).isEqualTo(3);
+    }
+
+    @Test
+    public void shouldGetEmptyOnNegative() throws Exception {
+        Iterable<Integer> numbers = newIterable(0, 1, 2, 3, 4, 5, 6);
+
+        Optional third = get(numbers, -1);
+        assertThat(third).isNotNull();
+        assertThat(third.isPresent()).isFalse();
+    }
+
+    @Test
+    public void shouldGetEmptyPastEnd() throws Exception {
+        Iterable<Integer> numbers = newIterable(0, 1, 2, 3, 4, 5, 6);
+
+        Optional third = get(numbers, 10);
+        assertThat(third).isNotNull();
+        assertThat(third.isPresent()).isFalse();
+    }
+
+    @Test
     public void testShouldCreateIterableFromEnumeration() throws Exception {
 
         Collection<String> numbers = new ArrayList<String>();

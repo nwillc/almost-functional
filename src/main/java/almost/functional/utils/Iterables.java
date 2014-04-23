@@ -20,6 +20,7 @@ import almost.functional.*;
 import java.util.Enumeration;
 import java.util.Iterator;
 
+import static almost.functional.Optional.of;
 import static almost.functional.utils.Preconditions.checkNotNull;
 
 /**
@@ -101,7 +102,7 @@ public final class Iterables {
 		checkNotNull(predicate, "the predicate may not be null");
 		for (T t : iterable) {
 			if (predicate.test(t)) {
-				return Optional.of(t);
+				return of(t);
 			}
 		}
 		return Optional.empty();
@@ -188,7 +189,7 @@ public final class Iterables {
 				while (fromIterator.hasNext()) {
 					T value = fromIterator.next();
 					if (predicate.test(value)) {
-						return Optional.of(value);
+						return of(value);
 					}
 				}
 				return Optional.empty();
@@ -219,5 +220,31 @@ public final class Iterables {
         };
     }
 
+    /**
+     * Return an optional of an element from a specified position in an iterable. If the position is out of bounds
+     * an empty optional is returned. Positions start at 0.
+     * @since 1.7
+     * @param iterable the iterable
+     * @param position the position
+     * @param <E> the type of the elements
+     * @return an optional from the given position, or empty if out of bounds
+     */
+    public static <E> Optional<E> get(final Iterable<E> iterable, int position) {
+        checkNotNull(iterable, "Get requires an iterable");
+        if (position < 0) {
+            return Optional.empty();
+        }
 
+        int index = 0;
+        Iterator<E> iterator = iterable.iterator();
+        while (iterator.hasNext()) {
+            Optional<E> element = of(iterator.next());
+            if (index == position) {
+                return element;
+            }
+            index++;
+        }
+
+        return Optional.empty();
+    }
 }

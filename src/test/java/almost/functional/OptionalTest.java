@@ -19,6 +19,7 @@ import org.junit.Test;
 
 import java.util.NoSuchElementException;
 
+import static almost.functional.Predicates.isEqual;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class OptionalTest {
@@ -65,6 +66,27 @@ public class OptionalTest {
 		assertThat(optional.orElse(10)).isEqualTo(optional.get());
 	}
 
+    @Test
+    public void shouldFilterTrue() throws Exception {
+        Optional<Boolean> booleanOptional = Optional.of(true);
+
+        Optional<Boolean> result = booleanOptional.filter(isEqual(true));
+
+        assertThat(result).isNotNull();
+        assertThat(result.isPresent()).isTrue();
+        assertThat(result.get()).isTrue();
+    }
+
+    @Test
+    public void shouldFilterFalse() throws Exception {
+        Optional<Boolean> booleanOptional = Optional.of(true);
+
+        Optional<Boolean> result = booleanOptional.filter(isEqual(false));
+
+        assertThat(result).isNotNull();
+        assertThat(result.isPresent()).isFalse();
+    }
+
 	@Test
 	public void shouldTransformEmpty() throws Exception {
 		Optional<Integer> optional = Optional.empty();
@@ -87,7 +109,51 @@ public class OptionalTest {
 		optional.map(null);
 	}
 
-	private class Increment implements Function<Integer,Integer> {
+    @Test
+    public void shouldEmptyOnOfNullableNull() throws Exception {
+        Optional<String> stringOptional = Optional.ofNullable(null);
+        assertThat(stringOptional).isNotNull();
+        assertThat(stringOptional.isPresent()).isFalse();
+    }
+
+    @Test
+    public void shouldReturnValueOfOrElseNotSupplier() throws Exception {
+        Optional<Boolean> booleanOptional = Optional.of(Boolean.TRUE);
+
+        Boolean value = booleanOptional.orElseSupplier(new Supplier<Boolean>() {
+            @Override
+            public Boolean get() {
+                return false;
+            }
+        });
+
+        assertThat(value).isNotNull();
+        assertThat(value).isTrue();
+    }
+
+    @Test
+    public void shouldReturnValueOfOrElseSupplier() throws Exception {
+        Optional<Boolean> booleanOptional = Optional.empty();
+
+        Boolean value = booleanOptional.orElseSupplier(new Supplier<Boolean>() {
+            @Override
+            public Boolean get() {
+                return false;
+            }
+        });
+
+        assertThat(value).isNotNull();
+        assertThat(value).isFalse();
+    }
+
+    @Test
+    public void shouldPresentOfNullable() throws Exception {
+        Optional<String> stringOptional = Optional.ofNullable("");
+        assertThat(stringOptional).isNotNull();
+        assertThat(stringOptional.isPresent()).isTrue();
+    }
+
+    private class Increment implements Function<Integer,Integer> {
 		@Override
 		public Integer apply(Integer integer) {
 			return integer + 1;
