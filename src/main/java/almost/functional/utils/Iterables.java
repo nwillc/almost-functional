@@ -174,7 +174,7 @@ public final class Iterables {
 	}
 
     /**
-     * Create an tererable that filters an existing iterable based on a predicate.
+     * Create an iterable that filters an existing iterable based on a predicate.
      * @param fromIterable Iterable being filtered
      * @param predicate the predicate to base inclusion upon, true cases are included, false excluded
      * @param <T> the type of the elements
