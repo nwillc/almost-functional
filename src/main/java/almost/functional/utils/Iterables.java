@@ -247,4 +247,25 @@ public final class Iterables {
 
         return Optional.empty();
     }
+
+    /**
+     * Return the last element of an iterable, or empty if the iterable is element.
+     * @param iterable the iterable
+     * @param <E> type of the iterable elements
+     * @return Optional of the last element, or empty if nothing in the iterable
+     */
+    public static <E> Optional<E> last(final Iterable<E> iterable) {
+        checkNotNull(iterable, "last requires a non null iterable");
+        Iterator<E> iterator = iterable.iterator();
+        if (!iterator.hasNext()) {
+            return Optional.empty();
+        }
+
+        E element;
+        do {
+            element = iterator.next();
+        } while (iterator.hasNext());
+
+        return Optional.of(element);
+    }
 }

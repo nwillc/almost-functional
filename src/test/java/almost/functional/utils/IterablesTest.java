@@ -197,6 +197,25 @@ public class IterablesTest {
         assertThat(reduce(iterable, 0, new Accumulator())).isEqualTo(sum);
     }
 
+    @Test
+    public void shouldReturnLastNotEmpty() throws Exception {
+        Iterable<Integer> numbers = newIterable(0, 1, 2, 3, 4, 5, 6);
+        Optional<Integer> last = last(numbers);
+
+        assertThat(last).isNotNull();
+        assertThat(last.isPresent()).isTrue();
+        assertThat(last.get()).isEqualTo(6);
+    }
+
+    @Test
+    public void shouldReturnLastEmpty() throws Exception {
+        Iterable<Integer> numbers = new ArrayIterable<Integer>();
+        Optional<Integer> last = last(numbers);
+
+        assertThat(last).isNotNull();
+        assertThat(last.isPresent()).isFalse();
+    }
+
     private class Accumulator implements BiFunction<Integer, String, Integer> {
         @Override
         public Integer apply(Integer first, String second) {
