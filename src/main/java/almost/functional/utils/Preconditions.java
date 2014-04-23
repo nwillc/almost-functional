@@ -48,9 +48,10 @@ public final class Preconditions {
 		checkNotNull(reference, errorMessage);
         for (Character c : reference.toCharArray()) {
             if (!Character.isWhitespace(c)) {
-                throw new IllegalArgumentException(errorMessage);
+                return;
             }
         }
+        throw new IllegalArgumentException(errorMessage);
 	}
 
     /**

@@ -49,11 +49,11 @@ public class ArrayIterable<T> implements Iterable<T> {
 		return new ArrayIterator<T>(data);
 	}
 
-	private class ArrayIterator<T> extends ImmutableIterator<T> {
-		private final T[] data;
+	private class ArrayIterator<D> extends ImmutableIterator<D> {
+		private final D[] data;
 		private int index;
 
-		private ArrayIterator(T[] data) {
+		private ArrayIterator(D[] data) {
 			this.data = data;
 			index = 0;
 		}
@@ -64,11 +64,11 @@ public class ArrayIterable<T> implements Iterable<T> {
 		}
 
 		@Override
-		public T next() {
+		public D next() {
 			if (!hasNext()) {
 				throw new NoSuchElementException();
 			}
-			T next = data[index];
+			D next = data[index];
 			index++;
 			return next;
 		}

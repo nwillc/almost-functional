@@ -46,28 +46,6 @@ public final class Iterables {
 	}
 
 	/**
-	 * Apply a function to an iterable, returning the final result.
-	 * @param i the iterable
-	 * @param f the function to apply
-	 * @param <T> the type of the iterable and input to the function
-	 * @param <R> the type of the function result
-	 * @return the final result of the function after being applied to the elements
-	 * @deprecated Should use Iterables.reduce()
-	 */
-	@Deprecated
-	public static <T,R> R forEach(Iterable<T> i, final Function<T,R> f) {
-		checkNotNull(i, "forEach must have a valid iterable");
-		checkNotNull(f, "forEach must have a valid function");
-		R ret = null;
-
-		for (T t : i) {
-			ret = f.apply(t);
-		}
-		checkNotNull(ret, "Function can not return null");
-		return ret;
-	}
-
-	/**
 	 * Perform a reduction of an iterable, using an initial value, and a two argument function. The function
 	 * is applied to each element using the last result as the first argument and the element as the second.
 	 * @param i the iterable.
@@ -106,19 +84,6 @@ public final class Iterables {
 			}
 		}
 		return Optional.empty();
-	}
-
-	/**
-	 * Apply a predicate to an iterable, returning the first element where the predicate is true,
-	 * or the default value if no true is found.
-	 * @param iterable the iterable to traverse
-	 * @param predicate the predicate to test
-	 * @param defaultValue the default value should a value not be found
-	 * @param <T> they type of the iterable, predicate and deault value
-	 * @return the first element where the predicate is true, or the default value if no true is found.
-	 */
-	public static <T> T find(Iterable<? extends T> iterable, Predicate<? super T> predicate, T defaultValue) {
-		return find(iterable, predicate).orElse(defaultValue);
 	}
 
 	/**
@@ -236,11 +201,9 @@ public final class Iterables {
         }
 
         int index = 0;
-        Iterator<E> iterator = iterable.iterator();
-        while (iterator.hasNext()) {
-            Optional<E> element = of(iterator.next());
+        for (E anIterable : iterable) {
             if (index == position) {
-                return element;
+                return of(anIterable);
             }
             index++;
         }

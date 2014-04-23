@@ -17,27 +17,41 @@ package almost.functional.utils;
 
 import org.junit.Test;
 
+import static almost.functional.utils.Preconditions.checkNonEmptyString;
+import static almost.functional.utils.Preconditions.checkNotNull;
+import static almost.functional.utils.Preconditions.isAssignableTo;
+
 /**
  * Created by nchristopher on 3/4/14.
  */
 public class PreconditionsTest {
     @Test
     public void shouldPassNotNull() throws Exception {
-        Preconditions.checkNotNull(Boolean.TRUE, "Testing preconditions");
+        checkNotNull(Boolean.TRUE, "Testing preconditions");
     }
 
     @Test(expected = NullPointerException.class)
     public void shouldFailNotNull() throws Exception {
-        Preconditions.checkNotNull(null, "Testing preconditions");
+        checkNotNull(null, "Testing preconditions");
     }
 
     @Test
     public void shouldPassIsAssignableTo() throws Exception {
-        Preconditions.isAssignableTo(NullPointerException.class, Exception.class, "Should be assignable");
+        isAssignableTo(NullPointerException.class, Exception.class, "Should be assignable");
     }
 
     @Test(expected = ClassCastException.class)
     public void shouldFailIsAssignableTo() throws Exception {
-        Preconditions.isAssignableTo(NullPointerException.class, Integer.class, "Should not be assignable");
+        isAssignableTo(NullPointerException.class, Integer.class, "Should not be assignable");
+    }
+
+    @Test
+    public void shouldPassNonEmptyString() throws Exception {
+        checkNonEmptyString(" hello world", "Shouldn't fail");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testName() throws Exception {
+        checkNonEmptyString(" ", "Should fail");
     }
 }

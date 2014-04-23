@@ -42,21 +42,6 @@ public class IterablesTest {
 	}
 
 	@Test
-    @SuppressWarnings("deprecation")
-	public void shouldForEachFunction() throws Exception {
-        String[] strings = {"a", "b", "c"};
-		Function<String,String> function = new Function<String, String>() {
-			private StringBuffer stringBuffer = new StringBuffer();
-			@Override
-			public String apply(String s) {
-				stringBuffer.append(s);
-				return stringBuffer.toString();
-			}
-		};
-		assertThat(forEach(newIterable(strings), function)).isEqualTo("abc");
-	}
-
-	@Test
 	public void shouldFind() throws Exception {
 		Iterable<Integer> twos = newIterable(2, 4, 6, 8);
 
@@ -71,12 +56,6 @@ public class IterablesTest {
 
 		Optional<Integer> seven = find(twos, isEqual(7));
 		assertThat(seven.isPresent()).isFalse();
-	}
-
-	@Test
-	public void shouldNotFindUseDefault() throws Exception {
-		Iterable<Integer> twos = newIterable(2, 4, 6, 8);
-		assertThat(find(twos, isEqual(7), 9)).isEqualTo(9);
 	}
 
 	@Test
@@ -221,5 +200,5 @@ public class IterablesTest {
         public Integer apply(Integer first, String second) {
             return first + Integer.valueOf(second);
         }
-    };
+    }
 }
