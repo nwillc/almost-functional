@@ -16,6 +16,7 @@
 package almost.functional.utils;
 
 import almost.functional.*;
+import almost.functional.assertions.PrivateConstructorAssert;
 import org.junit.Test;
 
 import java.util.*;
@@ -27,8 +28,12 @@ import static org.fest.assertions.api.Assertions.assertThat;
 
 
 public class IterablesTest {
+    @Test
+    public void shouldHavePrivateConstructor() throws Exception {
+        PrivateConstructorAssert.assertThat(Iterables.class).hasOnlyPrivateConstructor();
+    }
 
-	@Test
+    @Test
 	public void shouldForEachConsumer() throws Exception {
         String[] strings = {"a", "b", "c"};
 		final StringBuffer stringBuffer = new StringBuffer();

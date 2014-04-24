@@ -15,16 +15,19 @@
 
 package almost.functional.utils;
 
+import almost.functional.assertions.PrivateConstructorAssert;
 import org.junit.Test;
 
 import static almost.functional.utils.Preconditions.checkNonEmptyString;
 import static almost.functional.utils.Preconditions.checkNotNull;
 import static almost.functional.utils.Preconditions.isAssignableTo;
 
-/**
- * Created by nchristopher on 3/4/14.
- */
 public class PreconditionsTest {
+    @Test
+    public void shouldHavePrivateConstructor() throws Exception {
+        PrivateConstructorAssert.assertThat(Preconditions.class).hasOnlyPrivateConstructor();
+    }
+
     @Test
     public void shouldPassNotNull() throws Exception {
         checkNotNull(Boolean.TRUE, "Testing preconditions");

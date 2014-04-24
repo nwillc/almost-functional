@@ -20,6 +20,8 @@ import almost.functional.reactive.Observer;
 import almost.functional.reactive.Promise;
 import org.junit.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class PromiseTest {
@@ -90,6 +92,23 @@ public class PromiseTest {
         promise.run();
         assertThat(promise.getState()).isEqualTo(Promise.State.ERROR);
 	}
+
+    @Test(expected = IllegalStateException.class)
+    public void shouldRefuseToRunMultipleTimes() throws Exception {
+        Supplier<Boolean> supplier = new Supplier<Boolean>() {
+            @Override
+            public Boolean get() {
+                return true;
+            }
+        };
+        BooleanObserver observer = new BooleanObserver();
+        Promise<Boolean> promise = new Promise<Boolean>(supplier, observer);
+
+        assertThat(promise.getState()).isEqualTo(Promise.State.CREATED);
+        promise.run();
+        assertThat(promise.getState()).isEqualTo(Promise.State.COMPLETED);
+        promise.run();
+    }
 
     private class BooleanObserver implements Observer<Boolean> {
         Boolean value;

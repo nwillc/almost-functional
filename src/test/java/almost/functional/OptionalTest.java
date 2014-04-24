@@ -51,7 +51,17 @@ public class OptionalTest {
 		assertThat(variable.get()).isEqualTo(optional.get());
 	}
 
-	@Test
+    @Test
+    public void shouldIfPresentEmpty() throws Exception {
+        Optional<Integer> optional = Optional.empty();
+        Variable<Integer> variable = new Variable<Integer>(10);
+
+        assertThat(variable.get()).isEqualTo(10);
+        optional.ifPresent(variable);
+        assertThat(variable.get()).isEqualTo(10);
+    }
+
+    @Test
 	public void shouldOrElseEmpty() throws Exception {
 		Optional<Integer> optional = Optional.empty();
 
@@ -87,7 +97,17 @@ public class OptionalTest {
         assertThat(result.isPresent()).isFalse();
     }
 
-	@Test
+    @Test
+    public void shouldFilterEmpty() throws Exception {
+        Optional<Boolean> booleanOptional = Optional.empty();
+
+        Optional<Boolean> result = booleanOptional.filter(isEqual(false));
+
+        assertThat(result).isNotNull();
+        assertThat(result.isPresent()).isFalse();
+    }
+
+    @Test
 	public void shouldTransformEmpty() throws Exception {
 		Optional<Integer> optional = Optional.empty();
 
@@ -95,7 +115,7 @@ public class OptionalTest {
 	}
 
 	@Test
-	public void shouldTransformOf() throws Exception {
+	public void shouldMapOf() throws Exception {
 		Optional<Integer> optional = Optional.of(0);
 
 		Optional<Integer> returned = optional.map(new Increment());
@@ -103,8 +123,22 @@ public class OptionalTest {
 		assertThat(returned.get()).isEqualTo(1);
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void shouldTransformNullFunction() throws Exception {
+    @Test
+    public void shouldMapOfNullReturn() throws Exception {
+        Optional<Integer> optional = Optional.of(0);
+        Optional<Integer> returned = optional.map(new Function<Integer, Integer>() {
+            @Override
+            public Integer apply(Integer t) {
+                return null;
+            }
+        });
+
+        assertThat(returned).isNotNull();
+        assertThat(returned.isPresent()).isFalse();
+    }
+
+    @Test(expected = NullPointerException.class)
+	public void shouldMapNullFunction() throws Exception {
 		Optional<Integer> optional = Optional.of(0);
 		optional.map(null);
 	}

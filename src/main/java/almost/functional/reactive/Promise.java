@@ -67,7 +67,7 @@ public class Promise<T> implements Runnable {
 	@Override
 	public void run() {
 		if (!state.compareAndSet(State.CREATED, State.PENDING)) {
-			return;
+			throw new IllegalStateException("Can only run a promise in the CREATED state");
 		}
 		T result;
 		try {

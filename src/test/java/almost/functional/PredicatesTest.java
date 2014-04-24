@@ -15,18 +15,20 @@
 
 package almost.functional;
 
-import almost.functional.utils.Iterables;
+import almost.functional.assertions.PrivateConstructorAssert;
 import org.junit.Test;
 
-import java.util.InputMismatchException;
-
-import static almost.functional.Predicates.and;
-import static almost.functional.Predicates.negate;
-import static almost.functional.Predicates.or;
+import static almost.functional.Predicates.*;
 import static almost.functional.utils.ArrayIterable.newIterable;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class PredicatesTest {
+
+    @Test
+    public void testOnlyPrivateConstructor() throws Exception {
+        PrivateConstructorAssert.assertThat(Predicates.class).hasOnlyPrivateConstructor();
+    }
+
 	@Test
 	public void shouldBeEqual() throws Exception {
 		Predicate<String> equals = Predicates.isEqual("some value");
@@ -53,6 +55,7 @@ public class PredicatesTest {
 		assertThat(predicate.test("four")).isFalse();
 	}
 
+
     @Test
     public void testNegate() throws Exception {
         Predicate<Boolean> alwaysTrue = new Predicate<Boolean>() {
@@ -68,6 +71,10 @@ public class PredicatesTest {
         Predicate<Boolean> alwaysFalse = negate(alwaysTrue);
         assertThat(alwaysFalse.test(true)).isFalse();
         assertThat(alwaysFalse.test(false)).isFalse();
+
+        Predicate<Boolean> alwaysTrueAgain = negate(alwaysFalse);
+        assertThat(alwaysTrueAgain.test(true)).isTrue();
+        assertThat(alwaysTrueAgain.test(false)).isTrue();
     }
 
     @Test
@@ -89,6 +96,7 @@ public class PredicatesTest {
         Predicate<Integer> test = and(isEven, isDivisibleByThree);
         assertThat(test.test(6)).isTrue();
         assertThat(test.test(4)).isFalse();
+        assertThat(test.test(5)).isFalse();
     }
 
     @Test

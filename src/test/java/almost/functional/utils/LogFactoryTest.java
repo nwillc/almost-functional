@@ -15,6 +15,7 @@
 
 package almost.functional.utils;
 
+import almost.functional.assertions.PrivateConstructorAssert;
 import org.junit.Test;
 
 import java.util.logging.Logger;
@@ -23,6 +24,11 @@ import static almost.functional.utils.LogFactory.getLogger;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class LogFactoryTest {
+
+    @Test
+    public void shouldHavePrivateConstructor() throws Exception {
+        PrivateConstructorAssert.assertThat(LogFactory.class).hasOnlyPrivateConstructor();
+    }
 
 	@Test
 	public void shouldGetClassName() throws Exception {
