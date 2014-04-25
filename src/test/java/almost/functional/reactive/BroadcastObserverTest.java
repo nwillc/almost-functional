@@ -79,10 +79,9 @@ public class BroadcastObserverTest {
 		BooleanConsumer next = new BooleanConsumer();
 		BooleanConsumer completed = new BooleanConsumer();
 		ErrorConsumer error = new ErrorConsumer();
-		BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>();
-		broadcastObserver.addNextConsumer(next);
-		broadcastObserver.addErrorConsumer(error);
-		broadcastObserver.addCompletedConsumer(completed);
+		BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>(Optional.of(next),
+                                                                                Optional.of(error),
+                                                                                Optional.of(completed));
 
 		assertThat(next.flag.get()).isFalse();
 		assertThat(completed.flag.get()).isFalse();
@@ -148,7 +147,22 @@ public class BroadcastObserverTest {
 		assertThat(four.flag.get()).isTrue();
 	}
 
-	private class BooleanConsumer implements Consumer<Boolean> {
+    @Test
+    public void shouldIgnoreExceptions() throws Exception {
+        Consumer<Boolean> exceptionThrower = new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean aBoolean) {
+                throw new IllegalArgumentException();
+            }
+        };
+        BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>(Optional.of(exceptionThrower),
+                                                                    Optional.<Consumer<Throwable>>empty(),
+                                                                    Optional.<Consumer<Boolean>>empty());
+
+        broadcastObserver.next(true);
+    }
+
+    private class BooleanConsumer implements Consumer<Boolean> {
 		final AtomicBoolean flag = new AtomicBoolean(false);
 
 		@Override

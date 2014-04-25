@@ -43,7 +43,7 @@ public class BroadcastObserver<T> implements Observer<T> {
         this(Optional.<Consumer<T>>empty(), Optional.<Consumer<Throwable>>empty(), Optional.<Consumer<Boolean>>empty());
     }
 
-    public BroadcastObserver(Optional<Consumer<T>> nextConsumer, Optional<Consumer<Throwable>> errorConsumer, Optional<Consumer<Boolean>> completedConsumer) {
+    public BroadcastObserver(Optional<? extends Consumer<T>> nextConsumer, Optional<? extends Consumer<Throwable>> errorConsumer, Optional<? extends Consumer<Boolean>> completedConsumer) {
         if (nextConsumer.isPresent()) {
             nextConsumers.add(nextConsumer.get());
         }
