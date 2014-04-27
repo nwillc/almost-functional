@@ -2,6 +2,7 @@
 - [Home]()
 - [Usage](#docs/usage)
 - [Dependencies](#docs/dependencies)
+- [Example](#docs/dependencies)
 
 ## The Bits
 - [Github Repository](http://github.com/nwillc/almost-functional)
