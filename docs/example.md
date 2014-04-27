@@ -2,8 +2,9 @@
 The following is a useful example, the emphasis was on using AF, so it is contrived in spots. That said, worth note are:
 
 * Using `Optional`'s `orElse` and `orElseSupplier` methods to deal with error cases in the argument parsing.
-* Searching the jars entries based on a `Predicate` to mache the given argument.
-* Using `SupplierIterable`, and a simple `Consumer` to output the file's contents.   
+* Searching the jars entries based on a `Predicate` to match the given argument.
+* Using `SupplierIterable`, and a simple `Consumer` to output the file's contents.  
+* Using `Iterables` methods on `Iterable` instances based on arrays and enumerations. 
 
 -----
 	package jarinfo;
