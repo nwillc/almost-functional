@@ -25,7 +25,20 @@ import java.util.concurrent.TimeUnit;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class PromiseTest {
-	@Test
+    @Test
+    public void shouldHaveProperStates() throws Exception {
+        Promise.State[] values = Promise.State.values();
+
+        assertThat(values).isNotNull();
+        assertThat(values).containsExactly(Promise.State.CREATED,
+                Promise.State.PENDING,
+                Promise.State.COMPLETED,
+                Promise.State.ERROR);
+
+        assertThat(Promise.State.valueOf("CREATED")).isEqualTo(Promise.State.CREATED);
+    }
+
+    @Test
 	public void shouldObserveNext() throws Exception {
 	    Supplier<Boolean> supplier = new Supplier<Boolean>() {
             @Override
