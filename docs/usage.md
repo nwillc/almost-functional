@@ -5,5 +5,5 @@ Almost functional is available via the Maven central repository so the easiest r
 	<dependency>
 		<groupId>com.github.nwillc</groupId>
 		<artifactId>almost-functional</artifactId>
-		<version>1.6</version>
+		<version>1.7.1</version>
 	</dependency>
