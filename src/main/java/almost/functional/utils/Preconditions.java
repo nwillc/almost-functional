@@ -31,10 +31,11 @@ public final class Preconditions {
      * @param <T>          the type of the reference
      * @throws NullPointerException if the reference is null
      */
-    public static <T> void checkNotNull(T reference, String errorMessage) {
+    public static <T> T checkNotNull(T reference, String errorMessage) {
         if (reference == null) {
             throw new NullPointerException(errorMessage);
         }
+		return reference;
     }
 
 	/**
@@ -44,11 +45,10 @@ public final class Preconditions {
 	 * @throws java.lang.NullPointerException if the String is null
 	 * @throws java.lang.IllegalArgumentException if the string is non-null but zero length
 	 */
-	public static void checkNonEmptyString(String reference, String errorMessage) {
-		checkNotNull(reference, errorMessage);
-        for (Character c : reference.toCharArray()) {
+	public static String checkNonEmptyString(String reference, String errorMessage) {
+        for (Character c : checkNotNull(reference, errorMessage).toCharArray()) {
             if (!Character.isWhitespace(c)) {
-                return;
+                return reference;
             }
         }
         throw new IllegalArgumentException(errorMessage);
@@ -61,9 +61,10 @@ public final class Preconditions {
      * @param message the message used in the exception if thrown
      * @throws ClassCastException if the assignment can not be made
      */
-    public static void isAssignableTo(Class<?> from, Class<?> to, String message) {
+    public static Class isAssignableTo(Class<?> from, Class<?> to, String message) {
         if (!to.isAssignableFrom(from)) {
             throw new ClassCastException(message);
         }
+		return from;
     }
 }

@@ -21,6 +21,7 @@ import org.junit.Test;
 import static almost.functional.utils.Preconditions.checkNonEmptyString;
 import static almost.functional.utils.Preconditions.checkNotNull;
 import static almost.functional.utils.Preconditions.isAssignableTo;
+import static org.fest.assertions.Assertions.assertThat;
 
 public class PreconditionsTest {
     @Test
@@ -57,4 +58,10 @@ public class PreconditionsTest {
     public void testName() throws Exception {
         checkNonEmptyString(" ", "Should fail");
     }
+
+	@Test
+	public void shouldReturnValue() throws Exception {
+		final String str = "hello";
+		assertThat(checkNonEmptyString(checkNotNull(str, "null"), "empty")).isEqualTo(str);
+	}
 }
