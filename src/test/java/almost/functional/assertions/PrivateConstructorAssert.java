@@ -20,7 +20,6 @@ import org.fest.assertions.Assertions;
 import org.fest.assertions.GenericAssert;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 public class PrivateConstructorAssert extends GenericAssert<PrivateConstructorAssert,Class> {
 
@@ -42,7 +41,7 @@ public class PrivateConstructorAssert extends GenericAssert<PrivateConstructorAs
         try {
             cons[0].newInstance((Object[])null);
         } catch (Exception e) {
-            fail("Could not executed no argument constructor", e);
+            fail("Could not execute no argument constructor", e);
         }
         return this;
     }
