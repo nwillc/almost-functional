@@ -16,11 +16,7 @@
 package almost.functional.reactive;
 
 import almost.functional.Supplier;
-import almost.functional.reactive.Observer;
-import almost.functional.reactive.Promise;
 import org.junit.Test;
-
-import java.util.concurrent.TimeUnit;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 

@@ -18,10 +18,6 @@ package almost.functional;
 public class Variable<T> implements Consumer<T>, Supplier<T> {
 	private T t;
 
-	public Variable() {
-		this(null);
-	}
-
 	public Variable(T t) {
 		this.t = t;
 	}
