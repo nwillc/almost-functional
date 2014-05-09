@@ -45,7 +45,7 @@ public abstract class ImmutableIterator<E> implements Iterator<E> {
 	}
 
 	/**
-	 * @throws java.lang.NoSuchMethodError
+	 * @throws java.lang.UnsupportedOperationException
 	 */
 	@Override
 	public void remove(){
