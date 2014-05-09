@@ -13,17 +13,26 @@
  * OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package almost.functional.utils;
+package almost.functional.contracts;
 
-import almost.functional.contracts.ImmutableIteratorContract;
+import org.junit.Test;
 
 import java.util.Iterator;
 
-import static almost.functional.utils.ArrayIterable.newIterable;
+import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.failBecauseExceptionWasNotThrown;
 
-public class ImmutableIteratorTest extends ImmutableIteratorContract<String> {
-    @Override
-    protected Iterator<String> getIterator() {
-        return ImmutableIterator.makeImmutable(newIterable(new String[]{"a","b","c"}).iterator());
+public abstract class ImmutableIteratorContract<T> extends IteratorContract<T> {
+
+    @Test
+    public void shouldNotImplementRemove() throws Exception {
+        Iterator<T> iterator = getIterator();
+        assertThat(iterator).isNotNull();
+        try {
+            iterator.remove();
+            failBecauseExceptionWasNotThrown(UnsupportedOperationException.class);
+        } catch (UnsupportedOperationException e) {
+
+        }
     }
 }

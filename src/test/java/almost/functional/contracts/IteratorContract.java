@@ -13,17 +13,35 @@
  * OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package almost.functional.utils;
+package almost.functional.contracts;
 
-import almost.functional.contracts.ImmutableIteratorContract;
+
+import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-import static almost.functional.utils.ArrayIterable.newIterable;
+import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.failBecauseExceptionWasNotThrown;
 
-public class ImmutableIteratorTest extends ImmutableIteratorContract<String> {
-    @Override
-    protected Iterator<String> getIterator() {
-        return ImmutableIterator.makeImmutable(newIterable(new String[]{"a","b","c"}).iterator());
+public abstract class IteratorContract<T> {
+
+    protected abstract Iterator<T> getIterator();
+
+    @Test
+    public void shouldNotPassEndOfIterator() throws Exception {
+        Iterator<T> anIterator = getIterator();
+        assertThat(anIterator).isNotNull();
+        assertThat(anIterator.hasNext()).isTrue();
+        while(anIterator.hasNext()) {
+            anIterator.next();
+        }
+
+       try {
+           anIterator.next();
+           failBecauseExceptionWasNotThrown(NoSuchElementException.class);
+       } catch (NoSuchElementException e) {
+
+       }
     }
 }

@@ -15,6 +15,8 @@
 
 package almost.functional.utils;
 
+import almost.functional.contracts.ImmutableIteratorContract;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -26,9 +28,14 @@ import static org.fest.assertions.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 
 
-public class ArrayIterableTest {
+public class ArrayIterableTest extends ImmutableIteratorContract<String> {
 
-	@Test
+    @Override
+    protected Iterator<String> getIterator() {
+        return newIterable("a").iterator();
+    }
+
+    @Test
 	public void shouldHandleNullArray() throws Exception {
 		Iterable<String> strings = new ArrayIterable<String>(null);
 
@@ -49,15 +56,4 @@ public class ArrayIterableTest {
 		}
 		assertThat(length).isEqualTo(stringArray.length);
 	}
-
-    @Test(expected = NoSuchElementException.class)
-    public void shouldThrowExceptionPastEndOfArray() throws Exception {
-        Iterable<String> iterable = newIterable("a", "b");
-
-        Iterator<String> iterator = iterable.iterator();
-        while (iterator.hasNext()) {
-            iterator.next();
-        }
-        iterator.next();
-    }
 }

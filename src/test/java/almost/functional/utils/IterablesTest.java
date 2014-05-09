@@ -17,6 +17,8 @@ package almost.functional.utils;
 
 import almost.functional.*;
 import almost.functional.assertions.PrivateConstructorAssert;
+import almost.functional.contracts.ImmutableIteratorContract;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
@@ -27,7 +29,18 @@ import static almost.functional.utils.Iterables.*;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 
-public class IterablesTest {
+public class IterablesTest extends ImmutableIteratorContract<String> {
+
+    @Override
+    protected Iterator<String> getIterator() {
+        Collection<String> numbers = new ArrayList<String>();
+        numbers.add("1");
+        numbers.add("2");
+        numbers.add("3");
+        Enumeration<String> enumeration = Collections.enumeration(numbers);
+        return iterable(enumeration).iterator();
+    }
+
     @Test
     public void shouldHavePrivateConstructor() throws Exception {
         PrivateConstructorAssert.assertThat(Iterables.class).hasOnlyPrivateConstructor();
@@ -164,21 +177,6 @@ public class IterablesTest {
         Optional third = get(numbers, 10);
         assertThat(third).isNotNull();
         assertThat(third.isPresent()).isFalse();
-    }
-
-    @Test
-    public void testShouldCreateIterableFromEnumeration() throws Exception {
-
-        Collection<String> numbers = new ArrayList<String>();
-        numbers.add("1");
-        numbers.add("2");
-        numbers.add("3");
-
-        int sum = reduce(numbers, 0, new Accumulator());
-
-        Enumeration<String> enumeration = Collections.enumeration(numbers);
-        Iterable<String> iterable = Iterables.iterable(enumeration);
-        assertThat(reduce(iterable, 0, new Accumulator())).isEqualTo(sum);
     }
 
     @Test

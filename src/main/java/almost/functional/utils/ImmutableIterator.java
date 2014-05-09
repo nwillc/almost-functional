@@ -49,7 +49,7 @@ public abstract class ImmutableIterator<E> implements Iterator<E> {
 	 */
 	@Override
 	public void remove(){
-		throw new NoSuchMethodError("Iterator is immutable");
+		throw new UnsupportedOperationException("Iterator is immutable");
 	}
 
 }
