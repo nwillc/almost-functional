@@ -18,10 +18,10 @@ package almost.functional.utils;
 import almost.functional.*;
 import almost.functional.assertions.PrivateConstructorAssert;
 import almost.functional.contracts.ImmutableIteratorContract;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Vector;
 
 import static almost.functional.Predicates.isEqual;
 import static almost.functional.utils.ArrayIterable.newIterable;
@@ -33,12 +33,9 @@ public class IterablesTest extends ImmutableIteratorContract<String> {
 
     @Override
     protected Iterator<String> getIterator() {
-        Collection<String> numbers = new ArrayList<String>();
-        numbers.add("1");
-        numbers.add("2");
-        numbers.add("3");
-        Enumeration<String> enumeration = Collections.enumeration(numbers);
-        return iterable(enumeration).iterator();
+        Vector<String> strings = new Vector<String>();
+        strings.add("a");
+        return iterable(strings.elements()).iterator();
     }
 
     @Test
