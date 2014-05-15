@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2014, nwillc@gmail.com
+ * Copyright (c) 2014, nwillc@gmail.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or
  * without fee is hereby granted, provided that the above copyright notice and this permission
@@ -16,33 +16,11 @@
 package almost.functional.utils;
 
 import almost.functional.contracts.PrivateConstructorContract;
-import org.junit.Test;
 
-import java.util.logging.Logger;
-
-import static almost.functional.utils.LogFactory.getLogger;
-import static org.fest.assertions.api.Assertions.assertThat;
-
-public class LogFactoryTest extends PrivateConstructorContract {
+public class IterablesPrivateConstructorTest extends PrivateConstructorContract {
 
     @Override
     protected Class<?> getUtilityClass() {
-        return LogFactory.class;
+        return Iterables.class;
     }
-
-    @Test
-	public void shouldGetClassName() throws Exception {
-	   Logger logger = getLogger();
-
-		assertThat(logger).isNotNull();
-		assertThat(logger.getName()).isEqualTo(LogFactoryTest.class.getName());
-	}
-
-	@Test
-	public void shouldGetLogger() throws Exception {
-		Logger logger1 = getLogger(getClass().getName());
-		Logger logger2 = getLogger();
-
-		assertThat(logger2).isEqualTo(logger1);
-	}
 }

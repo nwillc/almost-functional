@@ -13,26 +13,24 @@
  * OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package almost.functional.assertions;
-
+package almost.functional.contracts;
 
 import org.fest.assertions.Assertions;
-import org.fest.assertions.GenericAssert;
+import org.junit.Test;
 
 import java.lang.reflect.Constructor;
 
-public class PrivateConstructorAssert extends GenericAssert<PrivateConstructorAssert,Class> {
+import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.api.Fail.fail;
 
-    public PrivateConstructorAssert(Class actual) {
-        super(PrivateConstructorAssert.class, actual);
-    }
+public abstract class PrivateConstructorContract {
 
-    public static PrivateConstructorAssert assertThat(Class actual) {
-        return new PrivateConstructorAssert(actual);
-    }
+    protected abstract Class<?> getUtilityClass();
 
-    public PrivateConstructorAssert hasOnlyPrivateConstructor() {
-        isNotNull();
+    @Test
+    public void shouldHaveOnlyPrivateNoArgConstructor() throws Exception {
+        Class<?> actual = getUtilityClass();
+        assertThat(actual).isNotNull();
 
         Constructor<?>[] cons = actual.getDeclaredConstructors();
         Assertions.assertThat(cons.length).isEqualTo(1);
@@ -43,6 +41,5 @@ public class PrivateConstructorAssert extends GenericAssert<PrivateConstructorAs
         } catch (Exception e) {
             fail("Could not execute no argument constructor", e);
         }
-        return this;
     }
 }

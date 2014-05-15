@@ -16,7 +16,6 @@
 package almost.functional.utils;
 
 import almost.functional.*;
-import almost.functional.assertions.PrivateConstructorAssert;
 import almost.functional.contracts.ImmutableIteratorContract;
 import org.junit.Test;
 
@@ -36,11 +35,6 @@ public class IterablesTest extends ImmutableIteratorContract<String> {
         Vector<String> strings = new Vector<String>();
         strings.add("a");
         return iterable(strings.elements()).iterator();
-    }
-
-    @Test
-    public void shouldHavePrivateConstructor() throws Exception {
-        PrivateConstructorAssert.assertThat(Iterables.class).hasOnlyPrivateConstructor();
     }
 
     @Test

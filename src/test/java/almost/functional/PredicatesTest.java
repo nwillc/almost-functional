@@ -15,18 +15,18 @@
 
 package almost.functional;
 
-import almost.functional.assertions.PrivateConstructorAssert;
+import almost.functional.contracts.PrivateConstructorContract;
 import org.junit.Test;
 
 import static almost.functional.Predicates.*;
 import static almost.functional.utils.ArrayIterable.newIterable;
 import static org.fest.assertions.api.Assertions.assertThat;
 
-public class PredicatesTest {
+public class PredicatesTest extends PrivateConstructorContract {
 
-    @Test
-    public void testOnlyPrivateConstructor() throws Exception {
-        PrivateConstructorAssert.assertThat(Predicates.class).hasOnlyPrivateConstructor();
+    @Override
+    protected Class<?> getUtilityClass() {
+        return Predicates.class;
     }
 
 	@Test

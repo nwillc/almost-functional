@@ -15,18 +15,17 @@
 
 package almost.functional.utils;
 
-import almost.functional.assertions.PrivateConstructorAssert;
+import almost.functional.contracts.PrivateConstructorContract;
 import org.junit.Test;
 
-import static almost.functional.utils.Preconditions.checkNonEmptyString;
-import static almost.functional.utils.Preconditions.checkNotNull;
-import static almost.functional.utils.Preconditions.isAssignableTo;
+import static almost.functional.utils.Preconditions.*;
 import static org.fest.assertions.Assertions.assertThat;
 
-public class PreconditionsTest {
-    @Test
-    public void shouldHavePrivateConstructor() throws Exception {
-        PrivateConstructorAssert.assertThat(Preconditions.class).hasOnlyPrivateConstructor();
+public class PreconditionsTest extends PrivateConstructorContract {
+
+    @Override
+    protected Class<?> getUtilityClass() {
+        return Preconditions.class;
     }
 
     @Test
