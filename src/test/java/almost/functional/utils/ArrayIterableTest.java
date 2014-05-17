@@ -15,23 +15,21 @@
 
 package almost.functional.utils;
 
-import almost.functional.contracts.ImmutableIteratorContract;
-import org.junit.Before;
+import com.github.nwillc.contracts.ImmutableIteratorContract;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import static almost.functional.utils.ArrayIterable.newIterable;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 
 
-public class ArrayIterableTest extends ImmutableIteratorContract<String> {
+public class ArrayIterableTest extends ImmutableIteratorContract {
 
     @Override
-    protected Iterator<String> getIterator() {
+    protected Iterator getNonEmptyIterator() {
         return newIterable("a").iterator();
     }
 

@@ -16,7 +16,7 @@
 package almost.functional.utils;
 
 import almost.functional.*;
-import almost.functional.contracts.ImmutableIteratorContract;
+import com.github.nwillc.contracts.ImmutableIteratorContract;
 import org.junit.Test;
 
 import java.util.Iterator;
@@ -28,10 +28,10 @@ import static almost.functional.utils.Iterables.*;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 
-public class IterablesTest extends ImmutableIteratorContract<String> {
+public class IterablesTest extends ImmutableIteratorContract {
 
     @Override
-    protected Iterator<String> getIterator() {
+    protected Iterator<String> getNonEmptyIterator() {
         Vector<String> strings = new Vector<String>();
         strings.add("a");
         return iterable(strings.elements()).iterator();

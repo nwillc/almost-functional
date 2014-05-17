@@ -15,7 +15,7 @@
 
 package almost.functional.utils;
 
-import almost.functional.contracts.PrivateConstructorContract;
+import com.github.nwillc.contracts.PrivateConstructorContract;
 
 public class IterablesPrivateConstructorTest extends PrivateConstructorContract {
 

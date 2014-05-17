@@ -21,7 +21,7 @@ import almost.functional.utils.Iterables;
 /**
  * Utility operations on predicates.
  */
-public class Predicates {
+public final class Predicates {
 	private Predicates(){}
 
 	/**

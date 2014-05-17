@@ -15,15 +15,15 @@
 
 package almost.functional.utils;
 
-import almost.functional.contracts.ImmutableIteratorContract;
+import com.github.nwillc.contracts.ImmutableIteratorContract;
 
 import java.util.Iterator;
 
 import static almost.functional.utils.ArrayIterable.newIterable;
 
-public class ImmutableIteratorTest extends ImmutableIteratorContract<String> {
+public class ImmutableIteratorTest extends ImmutableIteratorContract {
     @Override
-    protected Iterator<String> getIterator() {
+    protected Iterator getNonEmptyIterator() {
         return ImmutableIterator.makeImmutable(newIterable(new String[]{"a","b","c"}).iterator());
     }
 }

@@ -15,7 +15,7 @@
 
 package almost.functional;
 
-import almost.functional.contracts.PrivateConstructorContract;
+import com.github.nwillc.contracts.PrivateConstructorContract;
 import org.junit.Test;
 
 import static almost.functional.Predicates.*;
