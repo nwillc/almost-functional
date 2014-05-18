@@ -2,7 +2,11 @@
 - [Home]()
 - [Usage](#docs/usage)
 - [Dependencies](#docs/dependencies)
+<<<<<<< HEAD
 - [Example](#docs/example)
+=======
+- [Licence](#docs/LICENSE)
+>>>>>>> Added license notes
 
 ## The Bits
 - [Github Repository](http://github.com/nwillc/almost-functional)
