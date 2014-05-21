@@ -2,7 +2,7 @@
 The following is a useful example, the emphasis was on using AF, so it is contrived in spots. That said, worth note are:
 
 * Using `Optional` instances to cleanly deal with nulls.
-* Using `Optional`'s `orElse` and `orElseSupplier` methods to deal with error cases in the argument parsing.
+* Using `Optional`'s `orElse` and `orElseThrow` methods to deal with error cases in the argument parsing.
 * Searching the jars entries based on a `Predicate` to match the given argument.
 * Using `SupplierIterable`, and a simple `Consumer` to output the file's contents.  
 * Using `Iterables` methods on `Iterable` instances based on arrays and enumerations. 
@@ -25,26 +25,15 @@ The following is a useful example, the emphasis was on using AF, so it is contri
 	
 	public class JarInfo {
 	    public static void main(String[] args) throws Exception {
-	        final JarFile jarFile = new JarFile(get(newIterable(args),0).orElseSupplier(new Supplier<String>() {
-	            @Override
-	            public String get() {
-	                throw new IllegalArgumentException("Requires a jar file as first argument");
-	            }
-	        }));
-	
-	        final String searchName = get(newIterable(args), 1).orElse("META-INF/MANIFEST.MF");
-	
-	        final JarEntry searchResult = find(iterable(jarFile.entries()), new Predicate<JarEntry>() {
-	            @Override
-	            public boolean test(JarEntry jarEntry) {
-	                return jarEntry.getName().equals(searchName);
-	            }
-	        }).orElseSupplier(new Supplier<JarEntry>() {
-	            @Override
-	            public JarEntry get() {
-	                throw new IllegalArgumentException("Manifest " + searchName + " not found!");
-	            }
-	        });
+	    	final JarFile jarFile = new JarFile(get(newIterable(args),0)
+	    		.orElseThrow("Requires a jar file as first argument"));
+        	final String searchName = get(newIterable(args), 1).orElse("META-INF/MANIFEST.MF");
+        	final JarEntry searchResult = find(iterable(jarFile.entries()), new Predicate<JarEntry>() {
+            		@Override
+            		public boolean test(JarEntry jarEntry) {
+               			return jarEntry.getName().equals(searchName);
+            		}
+        		}).orElseThrow("Could not find " + searchName + " in jar");
 	
 	        try (InputStream inputStream = jarFile.getInputStream(searchResult);
 	             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
