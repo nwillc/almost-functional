@@ -53,7 +53,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>${groupId}</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>contracts</artifactId>
             <version>${contracts.version}</version>
             <scope>test</scope>

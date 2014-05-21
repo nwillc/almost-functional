@@ -14,26 +14,15 @@ import static almost.functional.utils.Iterables.*;
 
 public class JarInfo {
     public static void main(String[] args) throws Exception {
-        final JarFile jarFile = new JarFile(get(newIterable(args),0).orElseSupplier(new Supplier<String>() {
-            @Override
-            public String get() {
-                throw new IllegalArgumentException("Requires a jar file as first argument");
-            }
-        }));
-
+        final JarFile jarFile = new JarFile(get(newIterable(args),0).orElseThrow("Requires a jar file as first argument"));
         final String searchName = get(newIterable(args), 1).orElse("META-INF/MANIFEST.MF");
-
         final JarEntry searchResult = find(iterable(jarFile.entries()), new Predicate<JarEntry>() {
             @Override
             public boolean test(JarEntry jarEntry) {
                 return jarEntry.getName().equals(searchName);
             }
-        }).orElseSupplier(new Supplier<JarEntry>() {
-            @Override
-            public JarEntry get() {
-                throw new IllegalArgumentException("Manifest " + searchName + " not found!");
-            }
-        });
+        }).orElseThrow("Could not find " + searchName + " in jar");
+
 
         try (InputStream inputStream = jarFile.getInputStream(searchResult);
              BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {

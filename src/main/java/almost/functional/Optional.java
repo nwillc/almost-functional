@@ -17,6 +17,7 @@ package almost.functional;
 
 import java.util.NoSuchElementException;
 
+import static almost.functional.utils.Preconditions.checkNonEmptyString;
 import static almost.functional.utils.Preconditions.checkNotNull;
 
 /**
@@ -149,6 +150,22 @@ public final class Optional<T> {
             return get();
         }
         return other.get();
+    }
+
+    /**
+     * If optional is not empty return it's value, if empty throw a NoSuchElementException with message.
+     * @param msg message for exception
+     * @throws java.util.NoSuchElementException thrown if optional is empty
+     * @return optional value if present
+     * @since 1.7.3
+     */
+    public T orElseThrow(String msg) {
+        checkNonEmptyString(msg, "Valid message required");
+        if (isPresent()) {
+            return get();
+        }
+
+        throw new NoSuchElementException(msg);
     }
 
 	/**

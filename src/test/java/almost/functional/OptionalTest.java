@@ -17,6 +17,7 @@ package almost.functional;
 
 import org.junit.Test;
 
+import javax.swing.text.html.Option;
 import java.util.NoSuchElementException;
 
 import static almost.functional.Predicates.isEqual;
@@ -185,6 +186,26 @@ public class OptionalTest {
         Optional<String> stringOptional = Optional.ofNullable("");
         assertThat(stringOptional).isNotNull();
         assertThat(stringOptional.isPresent()).isTrue();
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void shouldThrowExceptionOnEmpty() throws Exception {
+        final String msg = "Hello";
+
+        try {
+            Optional.empty().orElseThrow(msg);
+        } catch (Exception e) {
+            assertThat(e.getMessage()).isEqualTo(msg);
+            throw e;
+        }
+    }
+
+    @Test
+    public void shouldReturnValueNotThrow() throws Exception {
+        final String msg = "Hey";
+
+        Optional<String> optional = Optional.of(msg);
+        assertThat(optional.orElseThrow("Bail")).isEqualTo(msg);
     }
 
     private class Increment implements Function<Integer,Integer> {
