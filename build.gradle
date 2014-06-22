@@ -6,8 +6,8 @@ apply plugin: 'release'
 
 group = "com.github.nwillc"
 archivesBaseName = "almost-functional"
-version = "1.7.4-SNAPSHOT"
-targetCompatibility = "1.7"
+version = "1.7.4"
+targetCompatibility = "1.6"
 sourceCompatibility = "1.6"
 
 repositories {
@@ -18,7 +18,7 @@ dependencies {
     testCompile 'junit:junit:4.11', 
                 'org.easytesting:fest-assert:1.4',
                 'org.easytesting:fest-assert-core:2.0M10',
-                'com.github.nwillc:contracts:1.0'
+                'com.github.nwillc:contracts:1.2'
 }
 
 buildscript {
