@@ -35,9 +35,8 @@ public class ArrayIterableTest extends ImmutableIteratorContract {
 
     @Test
 	public void shouldHandleNullArray() throws Exception {
-		Iterable<String> strings = new ArrayIterable<String>(null);
-
-		assertNotNull(strings);
+		Iterable<String> strings = new ArrayIterable<String>();
+     	assertNotNull(strings);
 		Iterator<String> iter = strings.iterator();
 		assertNotNull(iter);
 		assertThat(iter.hasNext()).isFalse();
