@@ -5,5 +5,17 @@ Almost functional is available via the Maven central repository so the easiest r
 	<dependency>
 		<groupId>com.github.nwillc</groupId>
 		<artifactId>almost-functional</artifactId>
-		<version>1.7.1</version>
+		<version>1.7.4</version>
 	</dependency>
+
+Or in gradle:
+
+    repositories {
+      mavenCentral()
+    }
+
+    dependencies {
+      compile "com.github.nwillc:almost-functional:1.7.4"
+    }
+  
+  
