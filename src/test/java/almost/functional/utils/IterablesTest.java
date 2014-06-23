@@ -129,7 +129,7 @@ public class IterablesTest extends ImmutableIteratorContract {
         Iterable<Integer> filtered = filter(numbers, new Predicate<Integer>() {
             @Override
             public boolean test(Integer integer) {
-                return integer % 2 == 1;
+                return integer % 2 != 0;
             }
         });
 
@@ -189,7 +189,7 @@ public class IterablesTest extends ImmutableIteratorContract {
         assertThat(last.isPresent()).isFalse();
     }
 
-    private class Accumulator implements BiFunction<Integer, String, Integer> {
+    private static class Accumulator implements BiFunction<Integer, String, Integer> {
         @Override
         public Integer apply(Integer first, String second) {
             return first + Integer.valueOf(second);

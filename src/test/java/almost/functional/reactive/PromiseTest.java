@@ -119,7 +119,7 @@ public class PromiseTest {
         promise.run();
     }
 
-    private class BooleanObserver implements Observer<Boolean> {
+    private static class BooleanObserver implements Observer<Boolean> {
         Boolean value;
         Boolean withoutError;
         Throwable throwable;

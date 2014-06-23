@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'pmd' 
 apply plugin: 'nexus'
 apply plugin: 'release'
+apply plugin: 'findbugs'
 
 
 group = "com.github.nwillc"
@@ -81,3 +82,6 @@ modifyPom {
     }
 }
 
+findbugs {
+    ignoreFailures = true
+}

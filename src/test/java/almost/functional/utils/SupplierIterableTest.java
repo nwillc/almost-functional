@@ -35,7 +35,7 @@ public class SupplierIterableTest {
         iterator.next();
     }
 
-   private class TestingSupplier implements Supplier<Optional<Integer>> {
+   private static class TestingSupplier implements Supplier<Optional<Integer>> {
        private int val = 0;
        @Override
        public Optional<Integer> get() {

@@ -208,7 +208,7 @@ public class OptionalTest {
         assertThat(optional.orElseThrow("Bail")).isEqualTo(msg);
     }
 
-    private class Increment implements Function<Integer,Integer> {
+    private static class Increment implements Function<Integer,Integer> {
 		@Override
 		public Integer apply(Integer integer) {
 			return integer + 1;

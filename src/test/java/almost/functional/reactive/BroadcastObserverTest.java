@@ -162,7 +162,7 @@ public class BroadcastObserverTest {
         broadcastObserver.next(true);
     }
 
-    private class BooleanConsumer implements Consumer<Boolean> {
+    private static class BooleanConsumer implements Consumer<Boolean> {
 		final AtomicBoolean flag = new AtomicBoolean(false);
 
 		@Override
@@ -171,7 +171,7 @@ public class BroadcastObserverTest {
 		}
 	}
 
-	private class ErrorConsumer implements Consumer<Throwable> {
+	private static class ErrorConsumer implements Consumer<Throwable> {
 		final AtomicReference<Throwable> error = new AtomicReference<Throwable>(null);
 
 		@Override
