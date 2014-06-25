@@ -85,3 +85,26 @@ modifyPom {
 findbugs {
     ignoreFailures = true
 }
+
+pmd {
+    ruleSets = [
+            "basic",
+            "braces",
+            "naming",
+            "clone",
+            "codesize",
+            "controversial",
+            "design",
+            "finalizers",
+            "imports",
+            "junit",
+            "logging-java",
+            "migrating",
+            "optimizations",
+            "strictexception",
+            "strings",
+            "sunsecure",
+            "typeresolution",
+            "unusedcode"
+            ]
+}
