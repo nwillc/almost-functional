@@ -33,7 +33,7 @@ public class PreconditionsTest extends PrivateConstructorContract {
         checkNotNull(Boolean.TRUE, "Testing preconditions");
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldFailNotNull() throws Exception {
         checkNotNull(null, "Testing preconditions");
     }

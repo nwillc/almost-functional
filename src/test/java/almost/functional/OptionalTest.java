@@ -138,7 +138,7 @@ public class OptionalTest {
         assertThat(returned.isPresent()).isFalse();
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
 	public void shouldMapNullFunction() throws Exception {
 		Optional<Integer> optional = Optional.of(0);
 		optional.map(null);

@@ -87,6 +87,7 @@ findbugs {
 }
 
 pmd {
+    ignoreFailures = true
     ruleSets = [
             "basic",
             "braces",
