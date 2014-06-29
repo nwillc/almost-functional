@@ -30,7 +30,7 @@ public class ArrayIterable<T> implements Iterable<T> {
 	 * Basic constructor.
 	 * @param data array of type T
 	 */
-	public ArrayIterable(T ... data) {
+	public ArrayIterable(final T ... data) {
 		this.data = data;
 	}
 
@@ -40,20 +40,21 @@ public class ArrayIterable<T> implements Iterable<T> {
 	 * @param <T>  the type of the elements in the array
 	 * @return and ArrayIterable of type T
 	 */
-    public static <T> ArrayIterable<T> newIterable(T ... data) {
+    public static <T> ArrayIterable<T> newIterable(final T ... data) {
         return new ArrayIterable<T>(data);
     }
 
 	@Override
 	public Iterator<T> iterator() {
-		return new ArrayIterator<T>(data);
+		return new ArrayIterator<T>(data);    //NOPMD
 	}
 
 	private class ArrayIterator<D> extends ImmutableIterator<D> {
 		private final D[] data;
 		private int index;
 
-		private ArrayIterator(D[] data) {
+		private ArrayIterator(final D[] data) {   //NOPMD
+			super();
 			this.data = data;
 			index = 0;
 		}
@@ -68,7 +69,7 @@ public class ArrayIterable<T> implements Iterable<T> {
 			if (!hasNext()) {
 				throw new NoSuchElementException();
 			}
-			D next = data[index];
+			final D next = data[index];
 			index++;
 			return next;
 		}

@@ -43,7 +43,9 @@ public class BroadcastObserver<T> implements Observer<T> {
         this(Optional.<Consumer<T>>empty(), Optional.<Consumer<Throwable>>empty(), Optional.<Consumer<Boolean>>empty());
     }
 
-    public BroadcastObserver(Optional<? extends Consumer<T>> nextConsumer, Optional<? extends Consumer<Throwable>> errorConsumer, Optional<? extends Consumer<Boolean>> completedConsumer) {
+    public BroadcastObserver(final Optional<? extends Consumer<T>> nextConsumer,
+							 final Optional<? extends Consumer<Throwable>> errorConsumer,
+							 final Optional<? extends Consumer<Boolean>> completedConsumer) {
         if (nextConsumer.isPresent()) {
             nextConsumers.add(nextConsumer.get());
         }
@@ -56,7 +58,7 @@ public class BroadcastObserver<T> implements Observer<T> {
     }
 
     @Override
-    public void completed(Boolean withoutError) {
+    public void completed(final Boolean withoutError) {
         inform(withoutError, completedConsumers);
 		nextConsumers.clear();
 		errorConsumers.clear();
@@ -64,13 +66,13 @@ public class BroadcastObserver<T> implements Observer<T> {
     }
 
     @Override
-    public void next(T t) {
-        inform(t, nextConsumers);
+    public void next(final T value) {
+        inform(value, nextConsumers);
     }
 
     @Override
-    public void error(Throwable e) {
-        inform(e, errorConsumers);
+    public void error(final Throwable error) {
+        inform(error, errorConsumers);
     }
 
 	/**
@@ -78,7 +80,7 @@ public class BroadcastObserver<T> implements Observer<T> {
 	 * @param consumers a number of next Consumers.
 	 * @return this Observer
 	 */
-    public Observer<T> addNextConsumer(Consumer<T> ... consumers) {
+    public Observer<T> addNextConsumer(final Consumer<T> ... consumers) {
         addAll(nextConsumers, consumers);
         return this;
     }
@@ -88,7 +90,7 @@ public class BroadcastObserver<T> implements Observer<T> {
 	 * @param consumers a number or error Consumers
 	 * @return this Observer
 	 */
-    public Observer<T> addErrorConsumer(Consumer<Throwable> ... consumers) {
+    public Observer<T> addErrorConsumer(final Consumer<Throwable> ... consumers) {
         addAll(errorConsumers, consumers);
         return this;
     }
@@ -98,21 +100,21 @@ public class BroadcastObserver<T> implements Observer<T> {
 	 * @param consumers a number of completed Consumers
 	 * @return this Observer
 	 */
-    public Observer<T> addCompletedConsumer(Consumer<Boolean> ... consumers) {
+    public Observer<T> addCompletedConsumer(final Consumer<Boolean> ... consumers) {
         addAll(completedConsumers, consumers);
         return this;
     }
 
-    private static <V> void addAll(final List<Consumer<V>> consumerList, Consumer<V> ... additions) {
+    private static <V> void addAll(final List<Consumer<V>> consumerList, final Consumer<V> ... additions) {
         forEach(newIterable(additions), new Consumer<Consumer<V>>() {
             @Override
-            public void accept(Consumer<V> vConsumer) {
+            public void accept(final Consumer<V> vConsumer) {
                 consumerList.add(vConsumer);
             }
         });
     }
 
-    private static <V> void inform(V value, List<Consumer<V>> consumers) {
+    private static <V> void inform(final V value, final List<Consumer<V>> consumers) {
         for (Consumer<V> consumer : consumers) {
             try {
                 consumer.accept(value);

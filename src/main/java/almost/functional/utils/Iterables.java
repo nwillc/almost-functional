@@ -15,7 +15,13 @@
 
 package almost.functional.utils;
 
-import almost.functional.*;
+import almost.functional.BiFunction;
+import almost.functional.Consumer;
+import almost.functional.Function;
+import almost.functional.Optional;
+import almost.functional.Predicate;
+import almost.functional.Predicates;
+import almost.functional.Supplier;
 
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -32,39 +38,39 @@ public final class Iterables {
 
     /**
 	 * Accept a consumer for each element of an iterable.
-	 * @param i the iterable
-	 * @param c the consumer to accept for each element
+	 * @param consumer the consumer to accept for each element
 	 * @param <T> the type of the iterable and consumer
+	 * @param iterable the iterable
 	 */
-	public static <T> void forEach(Iterable<T> i, final Consumer<T> c) {
-		checkNotNull(i, "forEach must have a valid iterable");
-		checkNotNull(c, "forEach must have a valid consumer");
+	public static <T> void forEach(final Iterable<T> iterable, final Consumer<T> consumer) {
+		checkNotNull(iterable, "forEach must have a valid iterable");
+		checkNotNull(consumer, "forEach must have a valid consumer");
 
-		for (T t : i) {
-			c.accept(t);
+		for (T t : iterable) {
+			consumer.accept(t);
 		}
 	}
 
 	/**
 	 * Perform a reduction of an iterable, using an initial value, and a two argument function. The function
 	 * is applied to each element using the last result as the first argument and the element as the second.
-	 * @param i the iterable.
-	 * @param initial the initial value of the first argument.
-	 * @param accumulator the two argument function.
 	 * @param <T> type of the iterable elements and accumulator's second argument
 	 * @param <R> type returned by reduce, the accumulator and it's first argument
+	 * @param iterable the iterable.
+	 * @param initial the initial value of the first argument.
+	 * @param accumulator the two argument function.
 	 * @return the final result of the function.
 	 * @since 1.5
 	 */
-	public static <T, R> R reduce(Iterable<T> i, final R initial, final BiFunction<R, ? super T, R> accumulator) {
-		checkNotNull(i, "reduce must have a non null iterable");
+	public static <T, R> R reduce(final Iterable<T> iterable, final R initial, final BiFunction<R, ? super T, R> accumulator) {
+		checkNotNull(iterable, "reduce must have a non null iterable");
 		checkNotNull(accumulator, "reduce must have a non null function");
 
-		R ret = initial;
-		for (T r : i) {
-			ret = accumulator.apply(ret, r);
+		R returnValue = initial;
+		for (T r : iterable) {
+			returnValue = accumulator.apply(returnValue, r);
 		}
-		return ret;
+		return returnValue;
 	}
 
 	/**
@@ -75,7 +81,7 @@ public final class Iterables {
 	 * @param <T> they type of the iterable and predicate
 	 * @return an optional of the first element where the predicate is true, or empty if no true is found.
 	 */
-	public static <T> Optional<T> find(Iterable<? extends T> iterable, Predicate<? super T> predicate) {
+	public static <T> Optional<T> find(final Iterable<? extends T> iterable, final Predicate<? super T> predicate) {
 		checkNotNull(iterable, "iterable may not be null");
 		checkNotNull(predicate, "the predicate may not be null");
 		for (T t : iterable) {
@@ -93,7 +99,7 @@ public final class Iterables {
 	 * @param <T> the type of the iterable and predicate
 	 * @return true if any element matches the predicate, otherwise false.
 	 */
-	public static <T> boolean any(Iterable<T> iterable, Predicate<? super T> predicate) {
+	public static <T> boolean any(final Iterable<T> iterable, final Predicate<? super T> predicate) {
 		return find(iterable, predicate).isPresent();
 	}
 
@@ -104,7 +110,7 @@ public final class Iterables {
 	 * @param <T> the type of the iterable and object
 	 * @return true if iterable contain a value as determined by Object.isEqual(Object, Object).
 	 */
-	public static <T> boolean contains(Iterable<T> iterable, T value) {
+	public static <T> boolean contains(final Iterable<T> iterable, final T value) {
 		return any(iterable, Predicates.isEqual(value));
 	}
 
@@ -152,7 +158,7 @@ public final class Iterables {
 			private Iterator<T> fromIterator = fromIterable.iterator();
 			public Optional<T> get() {
 				while (fromIterator.hasNext()) {
-					T value = fromIterator.next();
+					final T value = fromIterator.next();
 					if (predicate.test(value)) {
 						return of(value);
 					}
@@ -194,18 +200,18 @@ public final class Iterables {
      * @param <E> the type of the elements
      * @return an optional from the given position, or empty if out of bounds
      */
-    public static <E> Optional<E> get(final Iterable<E> iterable, int position) {
+    public static <E> Optional<E> get(final Iterable<E> iterable, final int position) {
         checkNotNull(iterable, "Get requires an iterable");
         if (position < 0) {
             return Optional.empty();
         }
 
-        int index = 0;
+        int iterablePosition = 0;
         for (E anIterable : iterable) {
-            if (index == position) {
+            if (iterablePosition == position) {
                 return of(anIterable);
             }
-            index++;
+            iterablePosition++;
         }
 
         return Optional.empty();
@@ -219,16 +225,16 @@ public final class Iterables {
      */
     public static <E> Optional<E> last(final Iterable<E> iterable) {
         checkNotNull(iterable, "last requires a non null iterable");
-        Iterator<E> iterator = iterable.iterator();
+        final Iterator<E> iterator = iterable.iterator();
         if (!iterator.hasNext()) {
             return Optional.empty();
         }
 
-        E element;
+        E lastElement;
         do {
-            element = iterator.next();
+            lastElement = iterator.next();
         } while (iterator.hasNext());
 
-        return Optional.of(element);
+        return Optional.of(lastElement);
     }
 }

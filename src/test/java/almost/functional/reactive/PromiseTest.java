@@ -135,8 +135,8 @@ public class PromiseTest {
         }
 
         @Override
-        public void error(Throwable e) {
-            throwable = e;
+        public void error(Throwable error) {
+            throwable = error;
         }
     }
 }

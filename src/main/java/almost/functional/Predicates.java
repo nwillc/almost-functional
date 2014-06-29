@@ -33,8 +33,8 @@ public final class Predicates {
 	public static <T> Predicate<T> isEqual(final T targetRef) {
 		return new Predicate<T>() {
 			@Override
-			public boolean test(T t) {
-				return t.equals(targetRef);
+			public boolean test(T testValue) {  //NOPMD
+				return testValue.equals(targetRef);
 			}
 		};
 	}
@@ -48,8 +48,8 @@ public final class Predicates {
 	public static <T> Predicate<T> contains(final Iterable<T> iterable) {
 		return new Predicate<T>() {
 			@Override
-			public boolean test(T t) {
-				return Iterables.contains(iterable, t);
+			public boolean test(final T testValue) {
+				return Iterables.contains(iterable, testValue);
 			}
 		};
 	}
@@ -64,8 +64,8 @@ public final class Predicates {
     public static <T> Predicate<T> negate(final Predicate<? super T> predicate) {
         return new Predicate<T>() {
             @Override
-            public boolean test(T t) {
-                return !predicate.test(t);
+            public boolean test(final T testValue) {
+                return !predicate.test(testValue);
             }
         };
     }
@@ -81,8 +81,8 @@ public final class Predicates {
     public static <T> Predicate<T> and(final Predicate<? super T> first, final Predicate<? super T> second) {
         return new Predicate<T>() {
             @Override
-            public boolean test(T t) {
-                return first.test(t) && second.test(t);
+            public boolean test(final T testValue) {
+                return first.test(testValue) && second.test(testValue);
             }
         };
     }
@@ -95,11 +95,11 @@ public final class Predicates {
      * @return resultant predicate
      * @since 1.5
      */
-    public static <T> Predicate<T> or(final Predicate<? super T> first, final Predicate<? super T> second) {
+    public static <T> Predicate<T> or(final Predicate<? super T> first, final Predicate<? super T> second) {        //NOPMD
         return new Predicate<T>() {
             @Override
-            public boolean test(T t) {
-                return first.test(t) || second.test(t);
+            public boolean test(final T testValue) {
+                return first.test(testValue) || second.test(testValue);
             }
         };
     }

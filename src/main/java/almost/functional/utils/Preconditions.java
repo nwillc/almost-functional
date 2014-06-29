@@ -31,7 +31,7 @@ public final class Preconditions {
      * @param <T>          the type of the reference
      * @throws java.lang.IllegalArgumentException if the reference is null
      */
-    public static <T> T checkNotNull(T reference, String errorMessage) {
+    public static <T> T checkNotNull(final T reference, final String errorMessage) {
         if (reference == null) {
             throw new IllegalArgumentException(errorMessage);
         }
@@ -45,7 +45,7 @@ public final class Preconditions {
 	 * @throws java.lang.NullPointerException if the String is null
 	 * @throws java.lang.IllegalArgumentException if the string is non-null but zero length
 	 */
-	public static String checkNonEmptyString(String reference, String errorMessage) {
+	public static String checkNonEmptyString(final String reference, final String errorMessage) {
         for (Character c : checkNotNull(reference, errorMessage).toCharArray()) {
             if (!Character.isWhitespace(c)) {
                 return reference;
@@ -56,15 +56,15 @@ public final class Preconditions {
 
     /**
      * Check that one class is assignable to another.
-     * @param from the class assigning from
-     * @param to the class assigning to
+     * @param fromValue the class assigning from
+     * @param toValue the class assigning to
      * @param message the message used in the exception if thrown
      * @throws ClassCastException if the assignment can not be made
      */
-    public static Class isAssignableTo(Class<?> from, Class<?> to, String message) {
-        if (!to.isAssignableFrom(from)) {
+    public static Class isAssignableTo(final Class<?> fromValue, final Class<?> toValue, final String message) {
+        if (!toValue.isAssignableFrom(fromValue)) {
             throw new ClassCastException(message);
         }
-		return from;
+		return fromValue;
     }
 }

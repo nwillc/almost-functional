@@ -25,24 +25,24 @@ import static almost.functional.utils.Preconditions.checkNotNull;
  * isPresent() will return true and get() will return the value.
  */
 public final class Optional<T> {
-    private static final Optional EMPTY = new Optional();
-    private final T optional;
+    private static final Optional EMPTY = new Optional(); //NOPMD
+    private final T optionalInstance;
 
     /**
      * Instantiate an Optional of a given non-null value.
      *
-     * @param optional the value.
-     */
-    private Optional(T optional) {
-		checkNotNull(optional, "Optionals may not contain null value");
-        this.optional = optional;
+	 * @param value the value.
+	 */
+    private Optional(final T value) {
+		checkNotNull(value, "Optionals may not contain null value");
+        this.optionalInstance = value;
     }
 
     /**
      * Instantiate an empty Optional.
      */
     private Optional() {
-        optional = null;
+        optionalInstance = null;
     }
 
 	/**
@@ -57,13 +57,13 @@ public final class Optional<T> {
 
 	/**
 	 * Returns an Optional with the specified present non-null value.
-	 * @param value the value to be present, which must be non-null
 	 * @param <T> the class of the value
+	 * @param optionalValue the value to be present, which must be non-null
 	 * @return an Optional with the value present
 	 */
-    public static <T> Optional<T> of(T value) {
-        checkNotNull(value, "Optional value may not be null in method of");
-        return new Optional<T>(value);
+    public static <T> Optional<T> of(final T optionalValue) {   //NOPMD
+        checkNotNull(optionalValue, "Optional value may not be null in method of");
+        return new Optional<T>(optionalValue);
     }
 
     /**
@@ -72,7 +72,7 @@ public final class Optional<T> {
      * @param <T> the type of the optional
      * @return an Optional of the value, or empty if value was null
      */
-    public static <T> Optional<T> ofNullable(T value) {
+    public static <T> Optional<T> ofNullable(final T value) {
         if (value == null) {
             return Optional.empty();
         }
@@ -87,7 +87,7 @@ public final class Optional<T> {
      * @param predicate the predicate to apply
      * @return the optional if the predicate is true, empty if not
      */
-    public Optional<T> filter(Predicate<? super T> predicate) {
+    public Optional<T> filter(final Predicate<? super T> predicate) {
         if (isPresent() && predicate.test(get())) {
             return this;
         }
@@ -104,7 +104,7 @@ public final class Optional<T> {
         if (!isPresent()) {
             throw new NoSuchElementException("Attempting to get an empty Optional");
         }
-        return optional;
+        return optionalInstance;
     }
 
 	/**
@@ -112,14 +112,14 @@ public final class Optional<T> {
 	 * @return true if there is a value present, otherwise false.
 	 */
     public boolean isPresent() {
-        return optional != null;
+        return optionalInstance != null;
     }
 
 	/**
 	 * If a value is present, invoke the specified consumer with the value, otherwise do nothing.
 	 * @param consumer consumer to be invoked if present.
 	 */
-	public void ifPresent(Consumer<? super T> consumer){
+	public void ifPresent(final Consumer<? super T> consumer){
 		if (isPresent()) {
 			consumer.accept(get());
 		}
@@ -130,7 +130,7 @@ public final class Optional<T> {
 	 * @param other the value to be returned if there is no value present, may be null.
 	 * @return the value, if present, otherwise other
 	 */
-    public T orElse(T other) {
+    public T orElse(final T other) {
         if (isPresent()) {
             return get();
         }
@@ -144,7 +144,7 @@ public final class Optional<T> {
      * @return the value, if present, or the return of the Supplier
      * @since 1.7
      */
-    public T orElseSupplier(Supplier<T> other) {
+    public T orElseSupplier(final Supplier<T> other) {
         checkNotNull(other, "orElse requires a non null supplier");
         if (isPresent()) {
             return get();
@@ -159,7 +159,7 @@ public final class Optional<T> {
      * @return optional value if present
      * @since 1.7.3
      */
-    public T orElseThrow(String msg) {
+    public T orElseThrow(final String msg) {
         checkNonEmptyString(msg, "Valid message required");
         if (isPresent()) {
             return get();
@@ -175,11 +175,11 @@ public final class Optional<T> {
 	 * @param <V>  The type of the result of the mapping function
 	 * @return an Optional describing the result of map, if a value is present, otherwise an empty Optional
 	 */
-	public <V> Optional<V> map(Function<T, V> function){
+	public <V> Optional<V> map(final Function<T, V> function){
 		checkNotNull(function, "Must provide non null function to map");
 		if (isPresent()) {
-			V v = function.apply(get());
-			return v == null ? Optional.<V>empty() : Optional.of(function.apply(get()));
+			final V applied = function.apply(get());
+			return applied == null ? Optional.<V>empty() : Optional.of(function.apply(get()));
 		} else {
 			return Optional.empty();
 		}

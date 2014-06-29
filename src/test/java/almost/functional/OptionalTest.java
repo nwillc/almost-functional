@@ -17,7 +17,6 @@ package almost.functional;
 
 import org.junit.Test;
 
-import javax.swing.text.html.Option;
 import java.util.NoSuchElementException;
 
 import static almost.functional.Predicates.isEqual;
@@ -129,7 +128,7 @@ public class OptionalTest {
         Optional<Integer> optional = Optional.of(0);
         Optional<Integer> returned = optional.map(new Function<Integer, Integer>() {
             @Override
-            public Integer apply(Integer t) {
+            public Integer apply(Integer argument) {
                 return null;
             }
         });

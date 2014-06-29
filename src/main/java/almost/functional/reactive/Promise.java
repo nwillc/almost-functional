@@ -53,7 +53,7 @@ public class Promise<T> implements Runnable {
 	 * Create a Promise based on a given supplier and with an Observer.
 	 * @param supplier the supplier
 	 */
-	public Promise(Supplier<T> supplier, Observer<T> observer) {
+	public Promise(final Supplier<T> supplier, final Observer<T> observer) {
 		this.supplier = supplier;
         this.observer = observer;
 	}
@@ -80,7 +80,7 @@ public class Promise<T> implements Runnable {
 			observer.error(e);
             observer.completed(false);
 		}
-		observer = null;
+		observer = null;   //NOPMD
 	}
 
 	/**

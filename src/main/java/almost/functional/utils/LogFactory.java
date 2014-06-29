@@ -37,7 +37,7 @@ public final class LogFactory {
 	 * @param name of the resultant instance.
 	 * @return a Logger
 	 */
-	public static Logger getLogger(String name){
+	public static Logger getLogger(final String name){
 		return Logger.getLogger(name);
 	}
 }

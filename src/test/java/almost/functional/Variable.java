@@ -23,8 +23,8 @@ public class Variable<T> implements Consumer<T>, Supplier<T> {
 	}
 
 	@Override
-	public void accept(T t) {
-		this.t = t;
+	public void accept(T consumable) {
+		this.t = consumable;
 	}
 
 	@Override

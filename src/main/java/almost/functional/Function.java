@@ -23,8 +23,8 @@ package almost.functional;
 public interface Function<A,R> {
 	/**
 	 * Applies this function to the given argument.
-	 * @param t the function argument
+	 * @param argument the function argument
 	 * @return the result
 	 */
-	 R apply(A t);
+	 R apply(A argument);
 }

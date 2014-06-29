@@ -23,7 +23,7 @@ package almost.functional;
 public interface Consumer<T> {
 	/**
 	 * Performs this operation on the given argument.
-	 * @param t the input argument
+	 * @param consumable the input argument
 	 */
-	void accept(T t);
+	void accept(T consumable);
 }

@@ -25,17 +25,17 @@ public interface Observer<T> {
 	 * Observe the completion.
 	 * @param withoutError if completed without error.
 	 */
-    void completed(Boolean withoutError);
+    void completed(final Boolean withoutError);
 
 	/**
 	 * Observe each data item made available.
-	 * @param t a data item.
+	 * @param value a data item.
 	 */
-    void next(T t);
+    void next(final T value);
 
 	/**
 	 * Observe an error that occurred. This allows for exceptions without stopping the observations.
-	 * @param e the throwable.
+	 * @param error the throwable.
 	 */
-    void error(Throwable e);
+    void error(final Throwable error);
 }
