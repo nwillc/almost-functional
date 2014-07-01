@@ -7,7 +7,7 @@ apply plugin: 'findbugs'
 
 group = "com.github.nwillc"
 archivesBaseName = "almost-functional"
-version = "1.7.4"
+version = "1.7.5"
 targetCompatibility = "1.6"
 sourceCompatibility = "1.6"
 
@@ -86,6 +86,12 @@ findbugs {
     ignoreFailures = true
 }
 
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
 
 pmd {
     ignoreFailures = true
