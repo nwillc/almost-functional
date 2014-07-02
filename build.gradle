@@ -94,6 +94,7 @@ tasks.withType(FindBugs) {
 }
 
 pmd {
+    toolVersion = '4.3'
     ignoreFailures = true
     ruleSets = [
             "basic",
