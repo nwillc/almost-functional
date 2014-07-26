@@ -22,9 +22,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import static almost.functional.utils.ArrayIterable.newIterable;
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
-
 
 public class ArrayIterableTest extends ImmutableIteratorContract {
 

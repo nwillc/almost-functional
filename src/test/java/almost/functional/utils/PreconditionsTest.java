@@ -19,7 +19,7 @@ import com.github.nwillc.contracts.PrivateConstructorContract;
 import org.junit.Test;
 
 import static almost.functional.utils.Preconditions.*;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PreconditionsTest extends PrivateConstructorContract {
 

@@ -25,8 +25,7 @@ import java.util.Vector;
 import static almost.functional.Predicates.isEqual;
 import static almost.functional.utils.ArrayIterable.newIterable;
 import static almost.functional.utils.Iterables.*;
-import static org.fest.assertions.api.Assertions.assertThat;
-
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class IterablesTest extends ImmutableIteratorContract {
 

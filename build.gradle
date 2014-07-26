@@ -7,7 +7,7 @@ apply plugin: 'findbugs'
 
 group = "com.github.nwillc"
 archivesBaseName = "almost-functional"
-version = "1.7.5"
+version = "1.7.6"
 targetCompatibility = "1.6"
 sourceCompatibility = "1.6"
 
@@ -16,10 +16,9 @@ repositories {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.11', 
-                'org.easytesting:fest-assert:1.4',
-                'org.easytesting:fest-assert-core:2.0M10',
-                'com.github.nwillc:contracts:1.2'
+    testCompile 'junit:junit:4.+',
+                'org.assertj:assertj-core:1.6.+',
+                'com.github.nwillc:contracts:1.+'
 }
 
 buildscript {

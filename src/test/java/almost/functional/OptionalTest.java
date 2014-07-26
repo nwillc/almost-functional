@@ -20,7 +20,8 @@ import org.junit.Test;
 import java.util.NoSuchElementException;
 
 import static almost.functional.Predicates.isEqual;
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class OptionalTest {
 
