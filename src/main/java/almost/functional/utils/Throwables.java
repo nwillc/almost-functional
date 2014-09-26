@@ -25,6 +25,6 @@ public final class Throwables {
      * @return a RuntimeException
      */
     public static RuntimeException propagate(final Throwable throwable) {
-        return new RuntimeException("Repropagated " + throwable.getMessage(), throwable);
+        return new RuntimeException("Repropagated " + throwable.getMessage(), throwable);  //NOPMD
     }
 }
