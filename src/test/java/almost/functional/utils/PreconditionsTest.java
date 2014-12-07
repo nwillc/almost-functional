@@ -18,7 +18,9 @@ package almost.functional.utils;
 import com.github.nwillc.contracts.PrivateConstructorContract;
 import org.junit.Test;
 
-import static almost.functional.utils.Preconditions.*;
+import static almost.functional.utils.Preconditions.checkNonEmptyString;
+import static almost.functional.utils.Preconditions.checkNotNull;
+import static almost.functional.utils.Preconditions.isAssignableTo;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PreconditionsTest extends PrivateConstructorContract {

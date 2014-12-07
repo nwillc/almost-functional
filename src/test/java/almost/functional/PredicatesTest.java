@@ -18,7 +18,9 @@ package almost.functional;
 import com.github.nwillc.contracts.PrivateConstructorContract;
 import org.junit.Test;
 
-import static almost.functional.Predicates.*;
+import static almost.functional.Predicates.and;
+import static almost.functional.Predicates.negate;
+import static almost.functional.Predicates.or;
 import static almost.functional.utils.ArrayIterable.newIterable;
 import static org.assertj.core.api.Assertions.assertThat;
 

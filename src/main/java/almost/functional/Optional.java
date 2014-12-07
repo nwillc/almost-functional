@@ -118,11 +118,15 @@ public final class Optional<T> {
 	/**
 	 * If a value is present, invoke the specified consumer with the value, otherwise do nothing.
 	 * @param consumer consumer to be invoked if present.
+     * @return this Optional
+     * @since 1.7.8
 	 */
-	public void ifPresent(final Consumer<? super T> consumer){
+	public Optional<T> ifPresent(final Consumer<? super T> consumer){
 		if (isPresent()) {
 			consumer.accept(get());
 		}
+
+        return this;
 	}
 
 	/**
@@ -136,6 +140,17 @@ public final class Optional<T> {
         }
 
         return other;
+    }
+
+    /**
+     * If the optional is empty run the Runnable.
+     * @param run the runnable to run.
+     * @return This Optional
+     * @since 1.7.8
+     */
+    public Optional<T> orElseRun(Runnable run) {
+        run.run();
+        return this;
     }
 
     /**

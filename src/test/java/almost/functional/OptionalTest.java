@@ -18,6 +18,7 @@ package almost.functional;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static almost.functional.Predicates.isEqual;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -198,6 +199,42 @@ public class OptionalTest {
             assertThat(e.getMessage()).isEqualTo(msg);
             throw e;
         }
+    }
+
+    @Test
+    public void testIfPresentConsumer() throws Exception {
+        final Integer increment = 5;
+        final AtomicInteger value = new AtomicInteger(increment);
+        Optional<AtomicInteger> integerOptional = Optional.of(value);
+
+        assertThat(value.get()).isEqualTo(increment);
+        assertThat(integerOptional.isPresent()).isTrue();
+        Optional<AtomicInteger> ret = integerOptional.ifPresent(new Consumer<AtomicInteger>() {
+            @Override
+            public void accept(AtomicInteger consumable) {
+                value.getAndAdd(increment);
+            }
+        });
+        assertThat(ret).isEqualTo(integerOptional);
+        assertThat(value.get()).isEqualTo(2 * increment);
+    }
+
+    @Test
+    public void testOrElseRun() throws Exception {
+        final Integer increment = 5;
+        final AtomicInteger value = new AtomicInteger(increment);
+        Optional<AtomicInteger> integerOptional = Optional.empty();
+
+        assertThat(value.get()).isEqualTo(increment);
+        assertThat(integerOptional.isPresent()).isFalse();
+        Optional<AtomicInteger> ret = integerOptional.orElseRun(new Runnable() {
+            @Override
+            public void run() {
+                value.getAndAdd(increment);
+            }
+        });
+        assertThat(ret).isEqualTo(integerOptional);
+        assertThat(value.get()).isEqualTo(2 * increment);
     }
 
     @Test

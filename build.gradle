@@ -8,7 +8,7 @@ apply plugin: 'com.github.nwillc.vplugin'
 
 group = "com.github.nwillc"
 archivesBaseName = "almost-functional"
-version = "1.7.7"
+version = "1.7.8"
 targetCompatibility = "1.6"
 sourceCompatibility = "1.6"
 
