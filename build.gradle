@@ -86,7 +86,7 @@ modifyPom {
 }
 
 findbugs {
-    toolVersion = '2.0.3'
+    toolVersion = '2.0.2'
     ignoreFailures = true
 }
 
@@ -99,6 +99,7 @@ tasks.withType(FindBugs) {
 
 pmd {
     toolVersion = '4.3'
+    sourceSets = [sourceSets.main]
     ignoreFailures = true
     ruleSets = [
             "basic",
