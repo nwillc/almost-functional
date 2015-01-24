@@ -14,3 +14,6 @@
 
 ## Projects that using AF
 - [scotty](http://nwillc.github.io/scotty)
+
+## Build Status
+Travis: [![Build Status](https://travis-ci.org/nwillc/almost-functional.svg?branch=master)](https://travis-ci.org/nwillc/almost-functional)
