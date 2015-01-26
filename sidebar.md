@@ -19,3 +19,7 @@
 *Travis Build Status:* 
    
    [![Build Status](https://travis-ci.org/nwillc/almost-functional.svg?branch=master)](https://travis-ci.org/nwillc/almost-functional)
+
+*Coveralls Coverage:*
+
+   [![Coverage Status](https://coveralls.io/repos/nwillc/almost-functional/badge.svg?branch=master)](https://coveralls.io/r/nwillc/almost-functional?branch=master)
