@@ -16,10 +16,8 @@
 - [scotty](http://nwillc.github.io/scotty)
 
 -------
-*Travis Build Status:* 
-   
-   [![Build Status](https://travis-ci.org/nwillc/almost-functional.svg?branch=master)](https://travis-ci.org/nwillc/almost-functional)
-
-*Coveralls Coverage:*
-
-   [![Coverage Status](https://coveralls.io/repos/nwillc/almost-functional/badge.svg?branch=master)](https://coveralls.io/r/nwillc/almost-functional?branch=master)
+[![Build Status](https://travis-ci.org/nwillc/almost-functional.svg?branch=master)](https://travis-ci.org/nwillc/almost-functional)
+<br/>
+[![Coverage Status](https://coveralls.io/repos/nwillc/almost-functional/badge.svg?branch=master)](https://coveralls.io/r/nwillc/almost-functional?branch=master)
+<br/>
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.nwillc/almost-functional/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.nwillc/almost-functional)
