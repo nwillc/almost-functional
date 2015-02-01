@@ -17,22 +17,15 @@ package almost.functional.utils;
 
 import almost.functional.Optional;
 import almost.functional.Supplier;
-import org.junit.Test;
+import com.github.nwillc.contracts.ImmutableIteratorContract;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
-public class SupplierIterableTest {
+public class SupplierIterableTest extends ImmutableIteratorContract {
 
-    @Test(expected = NoSuchElementException.class)
-    public void shouldThrowExceptionPastEndOfArray() throws Exception {
-        Iterable<Integer> iterable = new SupplierIterable<Integer>(new TestingSupplier());
-
-        Iterator<Integer> iterator = iterable.iterator();
-        while (iterator.hasNext()) {
-            iterator.next();
-        }
-        iterator.next();
+    @Override
+    protected Iterator getNonEmptyIterator() {
+        return new SupplierIterable<Integer>(new TestingSupplier()).iterator();
     }
 
    private static class TestingSupplier implements Supplier<Optional<Integer>> {

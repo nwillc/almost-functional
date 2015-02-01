@@ -24,7 +24,7 @@ import java.util.NoSuchElementException;
 import static almost.functional.utils.Preconditions.checkNotNull;
 
 /**
- * Creates an Iterable from any Supplier of Optionals. The resulting Iterator hasNext until the
+ * Creates an immutable Iterable from any Supplier of Optionals. The resulting Iterator hasNext until the
  * Supplier returns and empty Optional.
  * @param <T> type of the Iterable and the Suppliers Optional
  */

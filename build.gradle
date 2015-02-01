@@ -91,7 +91,7 @@ modifyPom {
 }
 
 findbugs {
-    toolVersion = '2.0.2'
+    toolVersion = '2.0.3'
     ignoreFailures = true
 }
 
