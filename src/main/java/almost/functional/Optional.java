@@ -149,7 +149,7 @@ public final class Optional<T> {
      * @return This Optional
      * @since 1.7.8
      */
-    public Optional<T> orElseRun(Runnable run) {
+    public Optional<T> orElseRun(final Runnable run) {
         run.run();
         return this;
     }

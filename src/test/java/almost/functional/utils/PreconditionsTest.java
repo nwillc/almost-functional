@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PreconditionsTest extends PrivateConstructorContract {
 
     @Override
-    protected Class<?> getUtilityClass() {
+    public Class<?> getClassToTest() {
         return Preconditions.class;
     }
 

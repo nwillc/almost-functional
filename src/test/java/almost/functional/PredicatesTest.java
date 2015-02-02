@@ -28,11 +28,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PredicatesTest extends PrivateConstructorContract {
 
     @Override
-    protected Class<?> getUtilityClass() {
+    public Class<?> getClassToTest() {
         return Predicates.class;
     }
 
-	@Test
+    @Test
 	public void shouldBeEqual() throws Exception {
 		Predicate<String> equals = Predicates.isEqual("some value");
 		assertThat(equals.test("some value")).isTrue();

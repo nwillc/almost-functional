@@ -21,7 +21,7 @@ import com.github.nwillc.contracts.PrivateConstructorContract;
 public class IterablesPrivateConstructorTest extends PrivateConstructorContract {
 
     @Override
-    protected Class<?> getUtilityClass() {
+    public Class<?> getClassToTest() {
         return Iterables.class;
     }
 }
