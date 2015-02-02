@@ -4,16 +4,14 @@ apply plugin: 'nexus'
 apply plugin: 'release'
 apply plugin: 'findbugs'
 apply plugin: 'com.github.nwillc.vplugin'
-apply plugin: 'cobertura'
+apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
-
 
 group = "com.github.nwillc"
 archivesBaseName = "almost-functional"
 version = "1.7.9"
 targetCompatibility = "1.6"
 sourceCompatibility = "1.6"
-cobertura.coverageFormats = ['html', 'xml']
 
 repositories {
     mavenLocal()
@@ -40,7 +38,6 @@ buildscript {
                     'org.tmatesoft.sqljet:sqljet:1.1.9',
                     'au.com.ish.gradle:release:2.2.2',
                     'com.github.nwillc:vplugin:1.2',
-                    'net.saliman:gradle-cobertura-plugin:2.0.0',
                     'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.1.0'
     }
 }
@@ -93,6 +90,14 @@ modifyPom {
 findbugs {
     toolVersion = '2.0.3'
     ignoreFailures = true
+}
+
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
 }
 
 tasks.withType(FindBugs) {
