@@ -150,7 +150,7 @@ public final class Iterables {
         checkNotNull(fromIterable, "iterable must be non null");
         checkNotNull(predicate, "predicate must be non null");
 	    return new SupplierIterable<T>(new Supplier<Optional<T>>() {
-			private Iterator<T> fromIterator = fromIterable.iterator();
+			private final Iterator<T> fromIterator = fromIterable.iterator();
 			public Optional<T> get() {
 				while (fromIterator.hasNext()) {
 					final T value = fromIterator.next();
