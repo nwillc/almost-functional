@@ -9,7 +9,7 @@
 - [Github Repository](http://github.com/nwillc/almost-functional)
 
 ## Links
-- [API docs](./apidocs)
+- [Javadoc](http://www.javadoc.io/doc/com.github.nwillc/almost-functional)
 - [Issue Tracking](https://github.com/nwillc/almost-functional/issues)
 
 ## Projects that using AF
