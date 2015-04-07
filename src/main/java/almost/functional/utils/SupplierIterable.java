@@ -26,7 +26,7 @@ import static almost.functional.utils.Preconditions.checkNotNull;
 
 /**
  * Creates an immutable Iterable from any Supplier of Optionals. The resulting Iterator hasNext until the
- * Supplier returns and empty Optional.
+ * Supplier returns an empty Optional.
  * @param <T> type of the Iterable and the Suppliers Optional
  */
 public class SupplierIterable<T> implements Iterable<T> {

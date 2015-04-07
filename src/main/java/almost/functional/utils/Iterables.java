@@ -213,7 +213,7 @@ public final class Iterables {
     }
 
     /**
-     * Return the last element of an iterable, or empty if the iterable is element.
+     * Return the last element of an iterable, or empty if the iterable is empty.
      * @param iterable the iterable
      * @param <E> type of the iterable elements
      * @return Optional of the last element, or empty if nothing in the iterable
