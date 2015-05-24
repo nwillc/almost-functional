@@ -1,17 +1,26 @@
-apply plugin: 'java'
-apply plugin: 'pmd' 
-apply plugin: 'nexus'
-apply plugin: 'release'
-apply plugin: 'findbugs'
-apply plugin: 'com.github.nwillc.vplugin'
-apply plugin: 'jacoco'
-apply plugin: 'com.github.kt3k.coveralls'
 
-group = "com.github.nwillc"
-archivesBaseName = "almost-functional"
-version = "1.7.9"
-targetCompatibility = "1.6"
-sourceCompatibility = "1.6"
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven {
+            url 'http://maven.tmatesoft.com/content/repositories/releases/'
+        }
+    }
+
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.7.1',
+                'org.tmatesoft.sqljet:sqljet:1.1.9',
+                'au.com.ish.gradle:release:2.2.2'
+    }
+}
+
+plugins {
+    id "java"
+    id "pmd"
+    id "com.github.nwillc.vplugin" version "1.2.1"
+    id "com.github.kt3k.coveralls" version "2.1.0"
+}
 
 repositories {
     mavenLocal()
@@ -21,26 +30,20 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.12',
                 'org.assertj:assertj-core:1.7.1',
-                'com.github.nwillc:contracts:1.6.6'
+                'com.github.nwillc:contracts:1.6.7'
 }
 
-buildscript {
-    repositories {
-        jcenter()
-        mavenCentral()
-        maven {
-              url 'http://maven.tmatesoft.com/content/repositories/releases/'
-            }
-    }
+apply plugin: 'nexus'
+apply plugin: 'release'
+apply plugin: 'findbugs'
+apply plugin: 'jacoco'
 
-    dependencies {
-        classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.7.1',
-                    'org.tmatesoft.sqljet:sqljet:1.1.9',
-                    'au.com.ish.gradle:release:2.2.2',
-                    'com.github.nwillc:vplugin:1.2',
-                    'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.1.0'
-    }
-}
+
+group = "com.github.nwillc"
+archivesBaseName = "almost-functional"
+version = "1.7.10"
+targetCompatibility = "1.6"
+sourceCompatibility = "1.6"
 
 release {
   failOnSnapshotDependencies = true
