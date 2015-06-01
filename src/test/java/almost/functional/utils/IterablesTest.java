@@ -193,7 +193,7 @@ public class IterablesTest extends ImmutableIteratorContract {
         assertThat(last.isPresent()).isFalse();
     }
 
-    private static class Accumulator implements BiFunction<Integer, String, Integer> {
+    static class Accumulator implements BiFunction<Integer, String, Integer> {
         @Override
         public Integer apply(Integer first, String second) {
             return first + Integer.valueOf(second);

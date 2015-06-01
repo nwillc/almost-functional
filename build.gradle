@@ -17,8 +17,9 @@ buildscript {
 
 plugins {
     id "java"
+    id "jacoco"
     id "pmd"
-    id "com.github.nwillc.vplugin" version "1.2.1"
+    id "com.github.nwillc.vplugin" version "1.2.3"
     id "com.github.kt3k.coveralls" version "2.1.0"
 }
 
@@ -36,12 +37,11 @@ dependencies {
 apply plugin: 'nexus'
 apply plugin: 'release'
 apply plugin: 'findbugs'
-apply plugin: 'jacoco'
 
 
 group = "com.github.nwillc"
 archivesBaseName = "almost-functional"
-version = "1.7.10"
+version = "1.8"
 targetCompatibility = "1.6"
 sourceCompatibility = "1.6"
 

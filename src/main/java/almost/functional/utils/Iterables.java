@@ -37,7 +37,7 @@ public final class Iterables {
 	 * @param <T> the type of the iterable and consumer
 	 * @param iterable the iterable
 	 */
-	public static <T> void forEach(final Iterable<T> iterable, final Consumer<T> consumer) {
+	public static <T> void forEach(final Iterable<T> iterable, final Consumer<? super T> consumer) {
 		checkNotNull(iterable, "forEach must have a valid iterable");
 		checkNotNull(consumer, "forEach must have a valid consumer");
 
