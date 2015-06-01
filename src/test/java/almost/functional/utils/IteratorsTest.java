@@ -12,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class IteratorsTest extends ImmutableIteratorContract {
 
+    @SuppressWarnings("unchecked")
     @Override
     protected Iterator getNonEmptyIterator() {
         List<Integer> first = Arrays.asList(1, 2, 3);
@@ -20,6 +21,7 @@ public class IteratorsTest extends ImmutableIteratorContract {
         return concat(first.iterator(), second.iterator());
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testBasic() throws Exception {
         Iterator<Integer> combined = getNonEmptyIterator();

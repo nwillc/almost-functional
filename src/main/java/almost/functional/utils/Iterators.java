@@ -17,7 +17,7 @@ public final class Iterators {
      * @param <T> the element type
      * @return the new iterator
      */
-    public static  <T> Iterator<T> concat(final Iterator<T> ... iterators) {
+    public static  <T> Iterator<T> concat(final Iterator<? extends T> ... iterators) {
         return new ImmutableIterator<T>() {
             int current = 0;
 

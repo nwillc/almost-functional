@@ -4,8 +4,8 @@ import almost.functional.*;
 import org.junit.Test;
 
 import static almost.functional.utils.IterablesTest.Accumulator;
+import static almost.functional.utils.Stream.concat;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.contentOf;
 
 public class StreamTest {
 
@@ -121,5 +121,20 @@ public class StreamTest {
         assertThat(reduction).isNotNull();
         assertThat(reduction.isPresent()).isTrue();
         assertThat(reduction.get()).isEqualTo("a, b, c");
+    }
+
+    @Test
+    public void testConcat() throws Exception {
+        Stream<String> strings1 = Stream.of("a", "b", "c");
+        Stream<String> strings2 = Stream.of("d", "e");
+        Optional<String> reduction = concat(strings1, strings2).reduce(new BiFunction<String, String, String>() {
+            @Override
+            public String apply(String first, String second) {
+                return first + ", " + second;
+            }
+        });
+        assertThat(reduction).isNotNull();
+        assertThat(reduction.isPresent()).isTrue();
+        assertThat(reduction.get()).isEqualTo("a, b, c, d, e");
     }
 }
