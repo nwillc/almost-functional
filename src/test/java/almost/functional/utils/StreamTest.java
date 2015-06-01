@@ -99,4 +99,15 @@ public class StreamTest {
             }
         })).isFalse();
     }
+
+    @Test
+    public void testNoneMatch() throws Exception {
+        Stream<String> strings = Stream.of("a", "b", "c");
+        assertThat(strings.noneMatch(new Predicate<String>() {
+            @Override
+            public boolean test(String testValue) {
+                return testValue.equals("d");
+            }
+        })).isTrue();
+    }
 }

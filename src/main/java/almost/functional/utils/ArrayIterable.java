@@ -45,16 +45,17 @@ public class ArrayIterable<T> implements Iterable<T> {
         return new ArrayIterable<T>(data);
     }
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Iterator<T> iterator() {
 		return new ArrayIterator<T>(data);    //NOPMD
 	}
 
-	private class ArrayIterator<D> extends ImmutableIterator<D> {
+	static public class ArrayIterator<D> extends ImmutableIterator<D> {
 		private final D[] data;
 		private int index;
 
-		private ArrayIterator(final D[] data) {   //NOPMD
+		public ArrayIterator(final D ... data) {   //NOPMD
 			super();
 			this.data = data;
 			index = 0;
