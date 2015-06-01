@@ -1,13 +1,11 @@
 package almost.functional.utils;
 
-import almost.functional.BiFunction;
-import almost.functional.Consumer;
-import almost.functional.Function;
-import almost.functional.Predicate;
+import almost.functional.*;
 import org.junit.Test;
 
 import static almost.functional.utils.IterablesTest.Accumulator;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.contentOf;
 
 public class StreamTest {
 
@@ -109,5 +107,19 @@ public class StreamTest {
                 return testValue.equals("d");
             }
         })).isTrue();
+    }
+
+    @Test
+    public void testSingleArgReduce() throws Exception {
+        Stream<String> strings = Stream.of("a", "b", "c");
+        Optional<String> reduction = strings.reduce(new BiFunction<String, String, String>() {
+            @Override
+            public String apply(String first, String second) {
+                return first + ", " + second;
+            }
+        });
+        assertThat(reduction).isNotNull();
+        assertThat(reduction.isPresent()).isTrue();
+        assertThat(reduction.get()).isEqualTo("a, b, c");
     }
 }

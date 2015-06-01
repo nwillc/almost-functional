@@ -1,9 +1,6 @@
 package almost.functional.utils;
 
-import almost.functional.BiFunction;
-import almost.functional.Consumer;
-import almost.functional.Function;
-import almost.functional.Predicate;
+import almost.functional.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,6 +29,20 @@ public class Stream<T> {
         while (iterator.hasNext()) {
             action.accept(iterator.next());
         }
+    }
+
+    public Optional<T> reduce(final BiFunction<T, ? super T, T> accumulator) {
+        boolean found = false;
+        T result = null;
+        while (iterator.hasNext()) {
+            if (!found) {
+                result = iterator.next();
+                found = true;
+            } else {
+                result = accumulator.apply(result, iterator.next());
+            }
+        }
+        return found ? Optional.of(result) : Optional.<T>empty();
     }
 
     public <R> R reduce(final R initial, final BiFunction<R, ? super T, R> accumulator) {
@@ -73,4 +84,5 @@ public class Stream<T> {
     public boolean noneMatch(Predicate<? super T> predicate) {
         return !anyMatch(predicate);
     }
+    
 }
