@@ -155,6 +155,35 @@ public class Stream<T> {
     }
 
     /**
+     *Returns whether all elements of this stream match the provided predicate.
+     * If the stream is empty then true is returned and the predicate is not evaluated.
+     * @param predicate to apply to elements of this stream
+     * @return true if all match the provided predicate
+     */
+    public boolean allMatch(Predicate<? super T> predicate) {
+        while (iterator.hasNext()) {
+            if (!predicate.test(iterator.next())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * The element count in the stream.
+     * @return the count
+     */
+    public long count() {
+        long count = 0L;
+
+        while (iterator.hasNext()) {
+            count++;
+            iterator.next();
+        }
+        return count;
+    }
+
+    /**
      * Creates a concatenated stream whose elements are all the elements of the first stream followed by all the elements of the second stream.
      * @param a first stream
      * @param b second stream

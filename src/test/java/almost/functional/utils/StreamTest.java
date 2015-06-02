@@ -137,4 +137,32 @@ public class StreamTest {
         assertThat(reduction.isPresent()).isTrue();
         assertThat(reduction.get()).isEqualTo("a, b, c, d, e");
     }
+
+    @Test
+    public void testAllMatchPass() throws Exception {
+        Stream<String> strings = Stream.of("a", "b", "c");
+        assertThat(strings.allMatch(new Predicate<String>() {
+            @Override
+            public boolean test(String testValue) {
+                return testValue.length() == 1;
+            }
+        })).isTrue();
+    }
+
+    @Test
+    public void testAllMatchFail() throws Exception {
+        Stream<String> strings = Stream.of("a", "bb", "c");
+        assertThat(strings.allMatch(new Predicate<String>() {
+            @Override
+            public boolean test(String testValue) {
+                return testValue.length() == 1;
+            }
+        })).isFalse();
+    }
+
+    @Test
+    public void testCount() throws Exception {
+        Stream<String> strings = Stream.of("a", "bb", "c");
+        assertThat(strings.count()).isEqualTo(3);
+    }
 }

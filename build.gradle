@@ -58,7 +58,7 @@ apply plugin: 'findbugs'
 
 group = "com.github.nwillc"
 archivesBaseName = "almost-functional"
-version = "1.8"
+version = "1.8.1"
 targetCompatibility = "1.6"
 sourceCompatibility = "1.6"
 
@@ -153,3 +153,20 @@ pmd {
             ]
 }
 
+test {
+    beforeTest { descriptor ->
+        logger.lifecycle("\tRunning " + descriptor.className + "." + descriptor.name)
+    }
+
+    afterSuite { descriptor, result ->
+        if (descriptor.parent == null) {
+            logger.lifecycle("\tTests run: " + result.testCount
+                    + ", Failures: " + result.failedTestCount
+                    + ", Skipped: " + result.skippedTestCount)
+        }
+    }
+
+    testLogging {
+        exceptionFormat "full"
+    }
+}
