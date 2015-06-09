@@ -22,4 +22,4 @@
 <br/>
 [![Coverage Status](https://coveralls.io/repos/nwillc/almost-functional/badge.svg?branch=master)](https://coveralls.io/r/nwillc/almost-functional?branch=master)
 <br/>
-[![Download](https://nwillc-shields.herokuapp.com/shield/maven_central?group=com.github.nwillc&package=almost-functional)](https://nwillc-shields.herokuapp.com/homepage/maven_central?group=com.github.nwillc&package=almost-functional)
+[![Download](https://repo-redirect.herokuapp.com/shield/maven_central?group=com.github.nwillc&package=almost-functional)](https://repo-redirect.herokuapp.com/homepage/maven_central?group=com.github.nwillc&package=almost-functional)
