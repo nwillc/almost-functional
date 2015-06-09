@@ -6,9 +6,6 @@
 - [Licence](#docs/LICENSE)
 - [Javadoc](http://www.javadoc.io/doc/com.github.nwillc/almost-functional)
 
-## The Bits
-- [Github Repository](http://github.com/nwillc/almost-functional)
-
 ## Links
 - [Issue Tracking](https://github.com/nwillc/almost-functional/issues)
 
@@ -23,3 +20,5 @@
 [![Coverage Status](https://coveralls.io/repos/nwillc/almost-functional/badge.svg?branch=master)](https://coveralls.io/r/nwillc/almost-functional?branch=master)
 <br/>
 [![Download](https://repo-redirect.herokuapp.com/shield/maven_central?group=com.github.nwillc&package=almost-functional)](https://repo-redirect.herokuapp.com/homepage/maven_central?group=com.github.nwillc&package=almost-functional)
+<br/>
+[![Github Repo](https://repo-redirect.herokuapp.com/shield/github)](https://repo-redirect.herokuapp.com/homepage/github?path=nwillc&package=almost-functional)
