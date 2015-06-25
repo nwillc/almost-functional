@@ -17,7 +17,7 @@
 <br/>
 [![Build Status](https://travis-ci.org/nwillc/almost-functional.svg?branch=master)](https://travis-ci.org/nwillc/almost-functional)
 <br/>
-[![Coverage Status](https://coveralls.io/repos/nwillc/almost-functional/badge.svg?branch=master)](https://coveralls.io/r/nwillc/almost-functional?branch=master)
+[![Coverage Status](https://repo-redirect.herokuapp.com/shield/codecov?path=github/nwillc&package=almost-functional)](https://repo-redirect.herokuapp.com/homepage/codecov?path=github/nwillc&package=almost-functional)
 <br/>
 [![Download](https://repo-redirect.herokuapp.com/shield/maven_central?group=com.github.nwillc&package=almost-functional)](https://repo-redirect.herokuapp.com/homepage/maven_central?group=com.github.nwillc&package=almost-functional)
 <br/>
