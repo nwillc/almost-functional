@@ -22,8 +22,7 @@ package almost.functional.utils;
  */
 public final class Preconditions {
 
-    private Preconditions() {
-    }
+    private Preconditions() {}
 
     /**
      * Check that a reference is not null, throwing a IllegalArgumentException if it is.

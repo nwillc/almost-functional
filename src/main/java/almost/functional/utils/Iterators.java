@@ -25,8 +25,7 @@ import java.util.NoSuchElementException;
  * Utility class for Iterators.
  */
 public final class Iterators {
-    private Iterators() {
-    }
+    private Iterators() {}
 
     /**
      * Create an iterator which sequentially iterates over a collection of iterators.
