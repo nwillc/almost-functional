@@ -1,8 +1,12 @@
+sudo: required
 language: java
 jdk:
   - openjdk6
   - oraclejdk7
 env:
   - TERM=dumb
+before_install:
+  - sudo pip install codecov
 after_success:
-  - gradle jacocoTestReport coveralls
+  - ./gradlew jacocoTestReport
+  - codecov
