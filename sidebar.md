@@ -17,8 +17,8 @@
 <br/>
 [![Build Status](https://travis-ci.org/nwillc/almost-functional.svg?branch=master)](https://travis-ci.org/nwillc/almost-functional)
 <br/>
-[![Coverage Status](https://repo-redirect.herokuapp.com/shield/codecov?path=github/nwillc&package=almost-functional)](https://repo-redirect.herokuapp.com/homepage/codecov?path=github/nwillc&package=almost-functional)
+[![Coverage Status](http://shields-nwillc.rhcloud.com/shield/codecov?path=github/nwillc&package=almost-functional)](http://shields-nwillc.rhcloud.com/homepage/codecov?path=github/nwillc&package=almost-functional)
 <br/>
-[![Download](https://repo-redirect.herokuapp.com/shield/maven_central?group=com.github.nwillc&package=almost-functional)](https://repo-redirect.herokuapp.com/homepage/maven_central?group=com.github.nwillc&package=almost-functional)
+[![Download](http://shields-nwillc.rhcloud.com/shield/maven_central?group=com.github.nwillc&package=almost-functional)](http://shields-nwillc.rhcloud.com/homepage/maven_central?group=com.github.nwillc&package=almost-functional)
 <br/>
-[![Github Repo](https://repo-redirect.herokuapp.com/shield/github)](https://repo-redirect.herokuapp.com/homepage/github?path=nwillc&package=almost-functional)
+[![Github Repo](http://shields-nwillc.rhcloud.com/shield/github)](http://shields-nwillc.rhcloud.com/homepage/github?path=nwillc&package=almost-functional)
