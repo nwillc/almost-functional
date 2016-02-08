@@ -33,8 +33,7 @@ buildscript {
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4',
                 'org.tmatesoft.sqljet:sqljet:1.1.9',
                 'au.com.ish.gradle:release:2.2.2',
-                'gradle.plugin.com.github.nwillc:vplugin:1.2.4',
-                'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0x'
+                'gradle.plugin.com.github.nwillc:vplugin:1.2.4'
     }
 }
 
@@ -42,7 +41,6 @@ apply plugin: "java"
 apply plugin: "jacoco"
 apply plugin: "pmd"
 apply plugin: "com.github.nwillc.vplugin"
-apply plugin: "com.github.kt3k.coveralls"
 apply plugin: 'release'
 apply plugin: 'findbugs'
 apply plugin: 'maven-publish'
@@ -63,7 +61,7 @@ dependencies {
 
 group = "com.github.nwillc"
 archivesBaseName = "almost-functional"
-version = "1.9.0-SNAPSHOT"
+version = "1.9.0"
 targetCompatibility = "1.6"
 sourceCompatibility = "1.6"
 
