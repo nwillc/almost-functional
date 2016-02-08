@@ -18,18 +18,23 @@
 package almost.functional.utils;
 
 import almost.functional.*;
+import almost.functional.Optional;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.io.Closeable;
+import java.io.IOException;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A sequence of elements supporting sequential aggregate operations.
  * @since 1.8
  * @param <T>
  */
-public class Stream<T> {
+public class Stream<T> implements Closeable {
+    private static final Logger LOGGER = LogFactory.getLogger();
     private final Iterator<T> iterator;
+    private final Set<Runnable> closeHandlers = new HashSet<Runnable>();
 
     /**
      * Create a new stream of the elements that the iterable.iterator() will yield
@@ -194,5 +199,21 @@ public class Stream<T> {
     public static <T> Stream<T> concat(Stream<? extends T> a,
                                 Stream<? extends T> b) {
         return new Stream(Iterators.concat(a.iterator, b.iterator));
+    }
+
+    public Stream<T> onClose(Runnable closeHandler) {
+        closeHandlers.add(closeHandler);
+        return this;
+    }
+
+    @Override
+    public void close() throws IOException {
+        for (Runnable runnable : closeHandlers) {
+            try {
+                runnable.run();
+            } catch (Exception e) {
+              LOGGER.log(Level.WARNING, "Exception on close", e);
+            }
+        }
     }
 }
