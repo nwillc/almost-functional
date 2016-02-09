@@ -38,11 +38,11 @@ buildscript {
 }
 
 apply plugin: "java"
+apply plugin: 'maven'
 apply plugin: "jacoco"
 apply plugin: "pmd"
 apply plugin: "com.github.nwillc.vplugin"
 apply plugin: 'release'
-apply plugin: 'findbugs'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
@@ -61,7 +61,7 @@ dependencies {
 
 group = "com.github.nwillc"
 archivesBaseName = "almost-functional"
-version = "1.9.0"
+version = "1.9.1"
 targetCompatibility = "1.6"
 sourceCompatibility = "1.6"
 
@@ -91,12 +91,6 @@ publishing {
         }
     }
 }
-
-findbugs {
-    toolVersion = '2.0.3'
-    ignoreFailures = true
-}
-
 
 jacocoTestReport {
     reports {

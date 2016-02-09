@@ -56,6 +56,17 @@ public class Stream<T> implements Closeable {
         return new Stream<R>(new ArrayIterable.ArrayIterator<R>(elements));
     }
 
+    /**
+     * Create a stream based on an iterator.
+     * @param iterator the iterator
+     * @param <R> type of elements
+     * @return a new stream
+     * @since 1.9.1
+     */
+    public static <R> Stream<R> of(Iterator<R> iterator) {
+        return new Stream<R>(iterator);
+    }
+
     private Stream(Iterator<T> iterator) {
         this.iterator = iterator;
     }
