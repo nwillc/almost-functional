@@ -212,6 +212,11 @@ public class Stream<T> implements Closeable {
         return new Stream(Iterators.concat(a.iterator, b.iterator));
     }
 
+    /**
+     * Add Runnables to run when the stream closes.
+     * @param closeHandler a Runnable
+     * @return the stream
+     */
     public Stream<T> onClose(Runnable closeHandler) {
         closeHandlers.add(closeHandler);
         return this;

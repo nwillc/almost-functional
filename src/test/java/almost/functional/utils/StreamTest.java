@@ -3,21 +3,13 @@ package almost.functional.utils;
 import almost.functional.*;
 import org.junit.Test;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import static almost.functional.utils.IterablesTest.Accumulator;
 import static almost.functional.utils.Stream.concat;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StreamTest {
-
-    @Test
-    public void testOfIterable() throws Exception {
-
-    }
-
-    @Test
-    public void testOfVarargs() throws Exception {
-
-    }
 
     @Test
     public void testForEach() throws Exception {
@@ -164,5 +156,21 @@ public class StreamTest {
     public void testCount() throws Exception {
         Stream<String> strings = Stream.of("a", "bb", "c");
         assertThat(strings.count()).isEqualTo(3);
+    }
+
+    @Test
+    public void onClose() throws Exception {
+        final AtomicBoolean tattleTale = new AtomicBoolean(false);
+        Stream<String> strings = Stream.of("a", "bb", "c");
+        strings.onClose(new Runnable() {
+            @Override
+            public void run() {
+                tattleTale.set(true);
+            }
+        });
+
+        assertThat(tattleTale.get()).isFalse();
+        strings.close();
+        assertThat(tattleTale.get()).isTrue();
     }
 }
