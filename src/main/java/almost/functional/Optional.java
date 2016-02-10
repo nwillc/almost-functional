@@ -151,7 +151,9 @@ public final class Optional<T> {
      * @since 1.7.8
      */
     public Optional<T> orElseRun(final Runnable run) {
-        run.run();
+        if (!isPresent()) {
+            run.run();
+        }
         return this;
     }
 
