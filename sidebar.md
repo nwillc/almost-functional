@@ -19,6 +19,6 @@
 <br/>
 [![Coverage Status](http://shields-nwillc.rhcloud.com/shield/codecov?path=github/nwillc&package=almost-functional)](http://shields-nwillc.rhcloud.com/homepage/codecov?path=github/nwillc&package=almost-functional)
 <br/>
-[![Download](http://shields-nwillc.rhcloud.com/shield/maven_central?group=com.github.nwillc&package=almost-functional)](http://shields-nwillc.rhcloud.com/homepage/maven_central?group=com.github.nwillc&package=almost-functional)
+[![Download](http://shields-nwillc.rhcloud.com/shield/jcenter?path=nwillc&package=almost-functional)](http://shields-nwillc.rhcloud.com/homepage/jcenter?path=nwillc&package=almost-functional)
 <br/>
 [![Github Repo](http://shields-nwillc.rhcloud.com/shield/github)](http://shields-nwillc.rhcloud.com/homepage/github?path=nwillc&package=almost-functional)
