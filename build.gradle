@@ -56,12 +56,12 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.12',
             'org.assertj:assertj-core:1.7.1',
-            'com.github.nwillc:contracts:1.6.7'
+            'com.github.nwillc:contracts:1.7.1'
 }
 
 group = "com.github.nwillc"
 archivesBaseName = "almost-functional"
-version = "1.9.2"
+version = "1.9.3-SNAPSHOT"
 targetCompatibility = "1.6"
 sourceCompatibility = "1.6"
 
