@@ -13,9 +13,9 @@
 - [scotty](http://nwillc.github.io/scotty)
 
 -------
-[![ISC License](https://img.shields.io/badge/license-ISC-green.svg?style=flat)](https://tldrlegal.com/license/-isc-license)
+[![ISC License](http://shields-nwillc.rhcloud.com/shield/tldrlegal?package=ISC)](http://shields-nwillc.rhcloud.com/hompage/tldrlegal?package=ISC)
 <br/>
-[![Build Status](https://travis-ci.org/nwillc/almost-functional.svg?branch=master)](https://travis-ci.org/nwillc/almost-functional)
+[![Build Status](http://shields-nwillc.rhcloud.com/shield/travis-ci?path=nwillc&package=almost-functional)](http://shields-nwillc.rhcloud.com/homepage/travis-ci?path=nwillc&package=almost-functional)
 <br/>
 [![Coverage Status](http://shields-nwillc.rhcloud.com/shield/codecov?path=github/nwillc&package=almost-functional)](http://shields-nwillc.rhcloud.com/homepage/codecov?path=github/nwillc&package=almost-functional)
 <br/>
