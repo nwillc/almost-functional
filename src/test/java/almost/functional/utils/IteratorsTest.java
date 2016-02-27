@@ -1,14 +1,17 @@
 package almost.functional.utils;
 
+import almost.functional.Consumer;
 import com.github.nwillc.contracts.ImmutableIteratorContract;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static almost.functional.utils.Iterators.concat;
 import static almost.functional.utils.Iterators.next;
+import static almost.functional.utils.Iterators.parallelBatch;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class IteratorsTest extends ImmutableIteratorContract {
@@ -53,5 +56,27 @@ public class IteratorsTest extends ImmutableIteratorContract {
 	@Test
 	public void shouldConcat() throws Exception {
 
+	}
+
+	@Test
+	public void shouldParallelBatch() throws Exception {
+		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+		final AtomicInteger batches = new AtomicInteger(0);
+		final AtomicInteger count = new AtomicInteger(0);
+
+		parallelBatch(numbers.iterator(),
+				new Consumer<Iterator<? extends Integer>>() {
+					@Override
+					public void accept(Iterator<? extends Integer> consumable) {
+						batches.incrementAndGet();
+						while (consumable.hasNext()) {
+							consumable.next();
+							count.incrementAndGet();
+						}
+					}
+				}, 2);
+
+		assertThat(batches.get()).isEqualTo(3);
+		assertThat(count.get()).isEqualTo(numbers.size());
 	}
 }

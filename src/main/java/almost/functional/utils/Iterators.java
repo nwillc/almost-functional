@@ -18,14 +18,28 @@
 package almost.functional.utils;
 
 
+import almost.functional.Consumer;
+
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+import static javafx.scene.input.KeyCode.T;
 
 /**
  * Utility class for Iterators.
  */
 public final class Iterators {
-    private Iterators() {}
+	private static final ExecutorService EXECUTOR_SERVICE =
+			Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+
+	private Iterators() {}
 
 	/**
 	 * This returns an Iterator limited to no more then the next count elements. The original
@@ -53,6 +67,52 @@ public final class Iterators {
 			}
 		};
     }
+
+	/**
+	 * Collect an iterator's elements into a List.
+	 * @param iterator  the iterator
+	 * @param <T> the element type
+	 * @return a List containing the elements
+	 * @since 1.9.3
+	 */
+	public static <T> List<T> collect(Iterator<T> iterator) {
+		List<T> list = new ArrayList<T>();
+		while (iterator.hasNext()) {
+			list.add(iterator.next());
+		}
+		return list;
+	}
+
+	/**
+	 * Break an iterator's elements into batches, and invoke the consumer on these batches in a thread pool.
+	 * @param iterator  the iterator to draw elements from
+	 * @param consumer  the Consumer to use the batches
+	 * @param batchSize  the maximum number of elements per batch
+	 * @param <T> the element type
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 * @since 1.9.3
+	 */
+	public static <T> void parallelBatch(Iterator<? extends T> iterator,
+										 final Consumer<Iterator<? extends T>> consumer,
+										 int batchSize) throws InterruptedException, ExecutionException {
+		List<Callable<Boolean>> callables = new ArrayList<Callable<Boolean>>();
+		while (iterator.hasNext()) {
+			Iterator<T> i = next(iterator, batchSize);
+			final List<T> list = collect(i);
+			callables.add(new Callable<Boolean>(){
+				@Override
+				public Boolean call() throws Exception {
+					consumer.accept(list.iterator());
+					return true;
+				}
+			});
+		}
+		List<Future<Boolean>> futures = EXECUTOR_SERVICE.invokeAll(callables);
+		for (Future<Boolean> future : futures) {
+			future.get();
+		}
+	}
 
     /**
      * Create an iterator which sequentially iterates over a collection of iterators.
