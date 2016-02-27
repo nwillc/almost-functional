@@ -27,6 +27,33 @@ import java.util.NoSuchElementException;
 public final class Iterators {
     private Iterators() {}
 
+	/**
+	 * This returns an Iterator limited to no more then the next count elements. The original
+	 * iterator <b>is</b> advanced by the calls to next on the returned iterator.
+	 * @param iterator the iterator to draw elements from.
+	 * @param count the maximum number of elements to draw.
+	 * @param <T>  the element type.
+	 * @return An iterator.
+	 * @since 1.9.3
+	 */
+	public static <T> Iterator<T> next(final Iterator<? extends T> iterator, final int count) {
+        return new ImmutableIterator<T>() {
+			private int position = 0;
+
+			@Override
+			public boolean hasNext() {
+				return iterator.hasNext() && position < count;
+			}
+
+			@Override
+			public T next() {
+				T next = iterator.next();
+				position++;
+				return next;
+			}
+		};
+    }
+
     /**
      * Create an iterator which sequentially iterates over a collection of iterators.
      * @param iterators the iterators to iterate
