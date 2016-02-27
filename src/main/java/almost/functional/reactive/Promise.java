@@ -23,14 +23,14 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * A Promise is a composite of a Supplier and an Observer allowing for observation or the supplier.
- *
+ * <p>
  * This implements Runnable so that it can be tucked into a Future etc.  Once the Observer is completed
  * it is released.
  *
+ * @param <T> the type the supplier is committed to provide.
  * @see almost.functional.reactive.Observer
  * @see almost.functional.Consumer
  * @see almost.functional.Supplier
- * @param <T> the type the supplier is committed to provide.
  */
 public class Promise<T> implements Runnable {
 	private final Supplier<T> supplier;
@@ -41,23 +41,32 @@ public class Promise<T> implements Runnable {
 	 * The current state of the promise.
 	 */
 	public enum State {
-        /** The promise has been created. */
-        CREATED,
-        /** The promise has been run but not completed. */
-        PENDING,
-        /** The promise is completed successfully. */
-        COMPLETED,
-        /** The promise had error before successful completion. */
-        ERROR
-    }
+		/**
+		 * The promise has been created.
+		 */
+		CREATED,
+		/**
+		 * The promise has been run but not completed.
+		 */
+		PENDING,
+		/**
+		 * The promise is completed successfully.
+		 */
+		COMPLETED,
+		/**
+		 * The promise had error before successful completion.
+		 */
+		ERROR
+	}
 
 	/**
 	 * Create a Promise based on a given supplier and with an Observer.
+	 *
 	 * @param supplier the supplier
 	 */
 	public Promise(final Supplier<T> supplier, final Observer<T> observer) {
 		this.supplier = supplier;
-        this.observer = observer;
+		this.observer = observer;
 	}
 
 	/**
@@ -75,18 +84,19 @@ public class Promise<T> implements Runnable {
 		try {
 			result = supplier.get();
 			state.set(State.COMPLETED);
-            observer.next(result);
+			observer.next(result);
 			observer.completed(true);
 		} catch (Exception e) {
 			state.set(State.ERROR);
 			observer.error(e);
-            observer.completed(false);
+			observer.completed(false);
 		}
 		observer = null;   //NOPMD
 	}
 
 	/**
 	 * Get the current state of this promise.
+	 *
 	 * @return the state
 	 */
 	public State getState() {

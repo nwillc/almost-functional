@@ -28,6 +28,7 @@ import static almost.functional.utils.Preconditions.checkNotNull;
 /**
  * Creates an immutable Iterable from any Supplier of Optionals. The resulting Iterator hasNext until the
  * Supplier returns an empty Optional.
+ *
  * @param <T> type of the Iterable and the Suppliers Optional
  */
 public class SupplierIterable<T> implements Iterable<T> {
@@ -35,6 +36,7 @@ public class SupplierIterable<T> implements Iterable<T> {
 
 	/**
 	 * Constructor accepting the Supplier. Supplier must return non null Optionals.
+	 *
 	 * @param supplier a Supplier of Optionals of type T
 	 */
 	public SupplierIterable(final Supplier<Optional<T>> supplier) {
@@ -49,11 +51,11 @@ public class SupplierIterable<T> implements Iterable<T> {
 
 			@Override
 			public boolean hasNext() {
-                if (nextValue == null) {
-                    nextValue = supplier.get();
-                    checkNotNull(nextValue, "supplier returned null");
-                }
-                return nextValue.isPresent();
+				if (nextValue == null) {
+					nextValue = supplier.get();
+					checkNotNull(nextValue, "supplier returned null");
+				}
+				return nextValue.isPresent();
 			}
 
 			@Override

@@ -24,12 +24,14 @@ import almost.functional.utils.Iterables;
  * Utility operations on predicates.
  */
 public final class Predicates {
-	private Predicates(){}
+	private Predicates() {
+	}
 
 	/**
 	 * Returns a predicate that tests if two arguments are equal according to Objects.equals(Object, Object).
+	 *
 	 * @param targetRef the object reference with which to compare for equality, which may be null
-	 * @param <T>  the type of arguments to the predicate
+	 * @param <T>       the type of arguments to the predicate
 	 * @return a predicate that tests if two arguments are equal according to Objects.equals(Object, Object)
 	 */
 	public static <T> Predicate<T> isEqual(final T targetRef) {
@@ -43,8 +45,9 @@ public final class Predicates {
 
 	/**
 	 * Returns a predicate that that tests if an iterable contains an argument.
+	 *
 	 * @param iterable the iterable, may not be null
-	 * @param <T> the type of the argument to the predicate
+	 * @param <T>      the type of the argument to the predicate
 	 * @return a predicate that that tests if an iterable contains an argument
 	 */
 	public static <T> Predicate<T> contains(final Iterable<T> iterable) {
@@ -56,54 +59,57 @@ public final class Predicates {
 		};
 	}
 
-    /**
-     * Negate an existing predicate's test result.
-     * @param predicate An existing predicate.
-     * @param <T> type of the predicate.
-     * @return new predicate.
-     * @since 1.5
-     */
-    public static <T> Predicate<T> negate(final Predicate<? super T> predicate) {
-        return new Predicate<T>() {
-            @Override
-            public boolean test(final T testValue) {
-                return !predicate.test(testValue);
-            }
-        };
-    }
+	/**
+	 * Negate an existing predicate's test result.
+	 *
+	 * @param predicate An existing predicate.
+	 * @param <T>       type of the predicate.
+	 * @return new predicate.
+	 * @since 1.5
+	 */
+	public static <T> Predicate<T> negate(final Predicate<? super T> predicate) {
+		return new Predicate<T>() {
+			@Override
+			public boolean test(final T testValue) {
+				return !predicate.test(testValue);
+			}
+		};
+	}
 
-    /**
-     * Create a predicate which is a logical and of two existing predicate.
-     * @param first first predicate.
-     * @param second second predicate.
-     * @param <T> type of the predicates
-     * @return resultant predicate
-     * @since 1.5
-     */
-    public static <T> Predicate<T> and(final Predicate<? super T> first, final Predicate<? super T> second) {
-        return new Predicate<T>() {
-            @Override
-            public boolean test(final T testValue) {
-                return first.test(testValue) && second.test(testValue);
-            }
-        };
-    }
+	/**
+	 * Create a predicate which is a logical and of two existing predicate.
+	 *
+	 * @param first  first predicate.
+	 * @param second second predicate.
+	 * @param <T>    type of the predicates
+	 * @return resultant predicate
+	 * @since 1.5
+	 */
+	public static <T> Predicate<T> and(final Predicate<? super T> first, final Predicate<? super T> second) {
+		return new Predicate<T>() {
+			@Override
+			public boolean test(final T testValue) {
+				return first.test(testValue) && second.test(testValue);
+			}
+		};
+	}
 
-    /**
-     * Create a predicate which is a logical or of two existing predicate.
-     * @param first first predicate.
-     * @param second second predicate.
-     * @param <T> type of the predicates
-     * @return resultant predicate
-     * @since 1.5
-     */
-    public static <T> Predicate<T> or(final Predicate<? super T> first, final Predicate<? super T> second) {        //NOPMD
-        return new Predicate<T>() {
-            @Override
-            public boolean test(final T testValue) {
-                return first.test(testValue) || second.test(testValue);
-            }
-        };
-    }
+	/**
+	 * Create a predicate which is a logical or of two existing predicate.
+	 *
+	 * @param first  first predicate.
+	 * @param second second predicate.
+	 * @param <T>    type of the predicates
+	 * @return resultant predicate
+	 * @since 1.5
+	 */
+	public static <T> Predicate<T> or(final Predicate<? super T> first, final Predicate<? super T> second) {        //NOPMD
+		return new Predicate<T>() {
+			@Override
+			public boolean test(final T testValue) {
+				return first.test(testValue) || second.test(testValue);
+			}
+		};
+	}
 
 }

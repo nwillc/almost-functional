@@ -23,6 +23,7 @@ import java.util.NoSuchElementException;
 
 /**
  * An iterable over an array.
+ *
  * @param <T> the type of the array elements.
  */
 public class ArrayIterable<T> implements Iterable<T> {
@@ -30,21 +31,23 @@ public class ArrayIterable<T> implements Iterable<T> {
 
 	/**
 	 * Basic constructor.
+	 *
 	 * @param data array of type T
 	 */
-	public ArrayIterable(final T ... data) {
+	public ArrayIterable(final T... data) {
 		this.data = data;
 	}
 
 	/**
 	 * Factory function to create an iterable over an array of T.
+	 *
 	 * @param data the array of type T
 	 * @param <T>  the type of the elements in the array
 	 * @return and ArrayIterable of type T
 	 */
-    public static <T> ArrayIterable<T> newIterable(final T ... data) {
-        return new ArrayIterable<T>(data);
-    }
+	public static <T> ArrayIterable<T> newIterable(final T... data) {
+		return new ArrayIterable<T>(data);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -56,7 +59,7 @@ public class ArrayIterable<T> implements Iterable<T> {
 		private final D[] data;
 		private int index;
 
-		public ArrayIterator(final D ... data) {   //NOPMD
+		public ArrayIterator(final D... data) {   //NOPMD
 			super();
 			this.data = data;
 			index = 0;

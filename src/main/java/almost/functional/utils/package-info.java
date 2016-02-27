@@ -16,6 +16,6 @@
  */
 
 /**
- *  Utility classes and functions in support of the functional aspects of Almost Functional.
+ * Utility classes and functions in support of the functional aspects of Almost Functional.
  */
 package almost.functional.utils;

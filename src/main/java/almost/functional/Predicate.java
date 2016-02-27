@@ -20,13 +20,15 @@ package almost.functional;
 /**
  * A functional interface that can be used to indicate a boolean test is to be applied to
  * some type.
- * @param <T>  the input type of the predicate
+ *
+ * @param <T> the input type of the predicate
  */
 public interface Predicate<T> {
 	/**
 	 * Evaluates this predicate on the given argument.
+	 *
 	 * @param testValue the input argument
 	 * @return true if the input argument matches the predicate, otherwise false
 	 */
-    boolean test(final T testValue); //NOPMD
+	boolean test(final T testValue); //NOPMD
 }

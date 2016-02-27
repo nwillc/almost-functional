@@ -21,15 +21,17 @@ import java.util.Iterator;
 
 /**
  * Iterator that does not support remove, making it immutable.
- * @since 1.2
+ *
  * @param <E> the type of elements returned by this iterator
+ * @since 1.2
  */
 public abstract class ImmutableIterator<E> implements Iterator<E> {
 
 	/**
 	 * Make an iterator immutable.
+	 *
 	 * @param iterator the iterator
-	 * @param <E> the type the iterator returns
+	 * @param <E>      the type the iterator returns
 	 * @return an immutable iterator
 	 */
 	public static <E> ImmutableIterator<E> makeImmutable(final Iterator<E> iterator) {
@@ -50,7 +52,7 @@ public abstract class ImmutableIterator<E> implements Iterator<E> {
 	 * @throws java.lang.UnsupportedOperationException
 	 */
 	@Override
-	public void remove(){
+	public void remove() {
 		throw new UnsupportedOperationException("Iterator is immutable");
 	}
 

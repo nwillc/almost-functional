@@ -25,6 +25,7 @@ package almost.functional;
 public interface Consumer<T> {
 	/**
 	 * Performs this operation on the given argument.
+	 *
 	 * @param consumable the input argument
 	 */
 	void accept(T consumable);

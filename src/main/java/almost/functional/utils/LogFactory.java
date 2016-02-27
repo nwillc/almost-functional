@@ -24,22 +24,25 @@ import java.util.logging.Logger;
  */
 public final class LogFactory {
 
-	private LogFactory() {}
+	private LogFactory() {
+	}
 
 	/**
 	 * Returns a Logger named after the callers class.
+	 *
 	 * @return a Logger
 	 */
-	public static Logger getLogger(){
+	public static Logger getLogger() {
 		return getLogger(Thread.currentThread().getStackTrace()[2].getClassName());
 	}
 
 	/**
 	 * Return a instance of Logger with a given name.
+	 *
 	 * @param name of the resultant instance.
 	 * @return a Logger
 	 */
-	public static Logger getLogger(final String name){
+	public static Logger getLogger(final String name) {
 		return Logger.getLogger(name);
 	}
 }

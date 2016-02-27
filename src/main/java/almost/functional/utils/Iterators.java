@@ -30,8 +30,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import static javafx.scene.input.KeyCode.T;
-
 /**
  * Utility class for Iterators.
  */
@@ -39,19 +37,21 @@ public final class Iterators {
 	private static final ExecutorService EXECUTOR_SERVICE =
 			Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
-	private Iterators() {}
+	private Iterators() {
+	}
 
 	/**
 	 * This returns an Iterator limited to no more then the next count elements. The original
 	 * iterator <b>is</b> advanced by the calls to next on the returned iterator.
+	 *
 	 * @param iterator the iterator to draw elements from.
-	 * @param count the maximum number of elements to draw.
-	 * @param <T>  the element type.
+	 * @param count    the maximum number of elements to draw.
+	 * @param <T>      the element type.
 	 * @return An iterator.
 	 * @since 1.9.3
 	 */
 	public static <T> Iterator<T> next(final Iterator<? extends T> iterator, final int count) {
-        return new ImmutableIterator<T>() {
+		return new ImmutableIterator<T>() {
 			private int position = 0;
 
 			@Override
@@ -66,12 +66,13 @@ public final class Iterators {
 				return next;
 			}
 		};
-    }
+	}
 
 	/**
 	 * Collect an iterator's elements into a List.
-	 * @param iterator  the iterator
-	 * @param <T> the element type
+	 *
+	 * @param iterator the iterator
+	 * @param <T>      the element type
 	 * @return a List containing the elements
 	 * @since 1.9.3
 	 */
@@ -85,10 +86,11 @@ public final class Iterators {
 
 	/**
 	 * Break an iterator's elements into batches, and invoke the consumer on these batches in a thread pool.
+	 *
 	 * @param iterator  the iterator to draw elements from
 	 * @param consumer  the Consumer to use the batches
-	 * @param batchSize  the maximum number of elements per batch
-	 * @param <T> the element type
+	 * @param batchSize the maximum number of elements per batch
+	 * @param <T>       the element type
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 * @since 1.9.3
@@ -100,7 +102,7 @@ public final class Iterators {
 		while (iterator.hasNext()) {
 			Iterator<T> i = next(iterator, batchSize);
 			final List<T> list = collect(i);
-			callables.add(new Callable<Boolean>(){
+			callables.add(new Callable<Boolean>() {
 				@Override
 				public Boolean call() throws Exception {
 					consumer.accept(list.iterator());
@@ -114,39 +116,40 @@ public final class Iterators {
 		}
 	}
 
-    /**
-     * Create an iterator which sequentially iterates over a collection of iterators.
-     * @param iterators the iterators to iterate
-     * @param <T> the element type
-     * @return the new iterator
-     */
-    public static  <T> Iterator<T> concat(final Iterator<? extends T> ... iterators) {
-        return new ImmutableIterator<T>() {
-            int current = 0;
+	/**
+	 * Create an iterator which sequentially iterates over a collection of iterators.
+	 *
+	 * @param iterators the iterators to iterate
+	 * @param <T>       the element type
+	 * @return the new iterator
+	 */
+	public static <T> Iterator<T> concat(final Iterator<? extends T>... iterators) {
+		return new ImmutableIterator<T>() {
+			int current = 0;
 
-            @Override
-            public boolean hasNext() {
-                advance();
-                return current < iterators.length;
-            }
+			@Override
+			public boolean hasNext() {
+				advance();
+				return current < iterators.length;
+			}
 
-            @Override
-            public T next() {
-                advance();
-                try {
-                    return iterators[current].next();
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new NoSuchElementException();
-                }
-            }
+			@Override
+			public T next() {
+				advance();
+				try {
+					return iterators[current].next();
+				} catch (ArrayIndexOutOfBoundsException e) {
+					throw new NoSuchElementException();
+				}
+			}
 
-            private void advance() {
-                while (current < iterators.length && !iterators[current].hasNext()) {
-                    current++;
-                }
-            }
-        };
-    }
+			private void advance() {
+				while (current < iterators.length && !iterators[current].hasNext()) {
+					current++;
+				}
+			}
+		};
+	}
 
 
 }

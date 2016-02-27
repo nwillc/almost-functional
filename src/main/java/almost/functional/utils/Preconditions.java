@@ -22,50 +22,53 @@ package almost.functional.utils;
  */
 public final class Preconditions {
 
-    private Preconditions() {}
+	private Preconditions() {
+	}
 
-    /**
-     * Check that a reference is not null, throwing a IllegalArgumentException if it is.
-     *
-     * @param reference    The reference to check
-     * @param errorMessage the message for the exception if the reference is null
-     * @param <T>          the type of the reference
-     * @throws java.lang.IllegalArgumentException if the reference is null
-     */
-    public static <T> T checkNotNull(final T reference, final String errorMessage) {
-        if (reference == null) {
-            throw new IllegalArgumentException(errorMessage);
-        }
+	/**
+	 * Check that a reference is not null, throwing a IllegalArgumentException if it is.
+	 *
+	 * @param reference    The reference to check
+	 * @param errorMessage the message for the exception if the reference is null
+	 * @param <T>          the type of the reference
+	 * @throws java.lang.IllegalArgumentException if the reference is null
+	 */
+	public static <T> T checkNotNull(final T reference, final String errorMessage) {
+		if (reference == null) {
+			throw new IllegalArgumentException(errorMessage);
+		}
 		return reference;
-    }
+	}
 
 	/**
 	 * Check that a String is not empty after removing whitespace.
-	 * @param reference the string
+	 *
+	 * @param reference    the string
 	 * @param errorMessage the message for the exception
-	 * @throws java.lang.NullPointerException if the String is null
+	 * @throws java.lang.NullPointerException     if the String is null
 	 * @throws java.lang.IllegalArgumentException if the string is non-null but zero length
 	 */
 	public static String checkNonEmptyString(final String reference, final String errorMessage) {
-        for (Character c : checkNotNull(reference, errorMessage).toCharArray()) {
-            if (!Character.isWhitespace(c)) {
-                return reference;
-            }
-        }
-        throw new IllegalArgumentException(errorMessage);
+		for (Character c : checkNotNull(reference, errorMessage).toCharArray()) {
+			if (!Character.isWhitespace(c)) {
+				return reference;
+			}
+		}
+		throw new IllegalArgumentException(errorMessage);
 	}
 
-    /**
-     * Check that one class is assignable to another.
-     * @param fromValue the class assigning from
-     * @param toValue the class assigning to
-     * @param message the message used in the exception if thrown
-     * @throws ClassCastException if the assignment can not be made
-     */
-    public static Class isAssignableTo(final Class<?> fromValue, final Class<?> toValue, final String message) {
-        if (!toValue.isAssignableFrom(fromValue)) {
-            throw new ClassCastException(message);
-        }
+	/**
+	 * Check that one class is assignable to another.
+	 *
+	 * @param fromValue the class assigning from
+	 * @param toValue   the class assigning to
+	 * @param message   the message used in the exception if thrown
+	 * @throws ClassCastException if the assignment can not be made
+	 */
+	public static Class isAssignableTo(final Class<?> fromValue, final Class<?> toValue, final String message) {
+		if (!toValue.isAssignableFrom(fromValue)) {
+			throw new ClassCastException(message);
+		}
 		return fromValue;
-    }
+	}
 }
