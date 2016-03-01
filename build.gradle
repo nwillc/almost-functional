@@ -61,7 +61,7 @@ dependencies {
 
 group = "com.github.nwillc"
 archivesBaseName = "almost-functional"
-version = "1.9.3"
+version = "1.9.4-SNAPSHOT"
 targetCompatibility = "1.6"
 sourceCompatibility = "1.6"
 

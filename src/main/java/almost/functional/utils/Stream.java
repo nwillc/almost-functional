@@ -39,7 +39,7 @@ import java.util.logging.Logger;
  * @param <T>
  * @since 1.8
  */
-public class Stream<T> implements Closeable {
+public final class Stream<T> implements Closeable {
 	private static final Logger LOGGER = LogFactory.getLogger();
 	private final Iterator<T> iterator;
 	private final Set<Runnable> closeHandlers = new HashSet<Runnable>();
