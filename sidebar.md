@@ -4,7 +4,7 @@
 - [Dependencies](#docs/dependencies)
 - [Example](#docs/example)
 - [Licence](#docs/LICENSE)
-- [Javadoc](http://www.javadoc.io/doc/com.github.nwillc/almost-functional)
+- [Javadoc](javadoc)
 
 ## Links
 - [Issue Tracking](https://github.com/nwillc/almost-functional/issues)
