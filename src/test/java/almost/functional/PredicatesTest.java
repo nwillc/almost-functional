@@ -124,4 +124,23 @@ public class PredicatesTest extends PrivateConstructorContract {
         assertThat(test.test(3)).isTrue();
         assertThat(test.test(7)).isFalse();
     }
+
+    @Test
+    public void testNotEmptyString() throws Exception {
+        final Predicate<String> stringPredicate = Predicates.notEmptyString();
+
+        assertThat(stringPredicate.test(null)).isFalse();
+        assertThat(stringPredicate.test("")).isFalse();
+        assertThat(stringPredicate.test(" ")).isFalse();
+        assertThat(stringPredicate.test("foo")).isTrue();
+        assertThat(stringPredicate.test(" foo")).isTrue();
+    }
+
+    @Test
+    public void testNotNull() throws Exception {
+        final Predicate<Object> objectPredicate = Predicates.notNull();
+
+        assertThat(objectPredicate.test(null)).isFalse();
+        assertThat(objectPredicate.test("foo")).isTrue();
+    }
 }

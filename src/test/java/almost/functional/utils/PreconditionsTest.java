@@ -16,12 +16,11 @@
 
 package almost.functional.utils;
 
+import almost.functional.Predicates;
 import com.github.nwillc.contracts.PrivateConstructorContract;
 import org.junit.Test;
 
-import static almost.functional.utils.Preconditions.checkNonEmptyString;
-import static almost.functional.utils.Preconditions.checkNotNull;
-import static almost.functional.utils.Preconditions.isAssignableTo;
+import static almost.functional.utils.Preconditions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PreconditionsTest extends PrivateConstructorContract {
@@ -66,4 +65,13 @@ public class PreconditionsTest extends PrivateConstructorContract {
 		final String str = "hello";
 		assertThat(checkNonEmptyString(checkNotNull(str, "null"), "empty")).isEqualTo(str);
 	}
+
+    @Test(expected = RuntimeException.class)
+    public void testPreconditionBadException() throws Exception {
+         precondition(null, Predicates.notNull(),
+                 BadException.class, "foo");
+
+    }
+
+    private static class BadException extends RuntimeException {}
 }
