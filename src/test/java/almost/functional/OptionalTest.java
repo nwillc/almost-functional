@@ -236,6 +236,16 @@ public class OptionalTest {
         });
         assertThat(ret).isEqualTo(integerOptional);
         assertThat(value.get()).isEqualTo(2 * increment);
+
+        integerOptional = Optional.of(value);
+        ret = integerOptional.orElseRun(new Runnable() {
+            @Override
+            public void run() {
+                value.getAndAdd(increment);
+            }
+        });
+        assertThat(ret).isEqualTo(integerOptional);
+        assertThat(value.get()).isEqualTo(2 * increment);
     }
 
     @Test
