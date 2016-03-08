@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, nwillc@gmail.com
+ * Copyright (c) 2016, nwillc@gmail.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -24,24 +24,24 @@ package almost.functional.reactive;
  * @param <T> type being observed.
  */
 public interface Observer<T> {
-	/**
-	 * Observe the completion.
-	 *
-	 * @param withoutError if completed without error.
-	 */
-	void completed(final Boolean withoutError);
+    /**
+     * Observe the completion.
+     *
+     * @param withoutError if completed without error.
+     */
+    void completed(final Boolean withoutError);
 
-	/**
-	 * Observe each data item made available.
-	 *
-	 * @param value a data item.
-	 */
-	void next(final T value);
+    /**
+     * Observe each data item made available.
+     *
+     * @param value a data item.
+     */
+    void next(final T value);
 
-	/**
-	 * Observe an error that occurred. This allows for exceptions without stopping the observations.
-	 *
-	 * @param error the throwable.
-	 */
-	void error(final Throwable error);
+    /**
+     * Observe an error that occurred. This allows for exceptions without stopping the observations.
+     *
+     * @param error the throwable.
+     */
+    void error(final Throwable error);
 }

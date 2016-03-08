@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, nwillc@gmail.com
+ * Copyright (c) 2016, nwillc@gmail.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -33,74 +33,74 @@ import java.util.concurrent.atomic.AtomicReference;
  * @see almost.functional.Supplier
  */
 public class Promise<T> implements Runnable {
-	private final Supplier<T> supplier;
-	private final AtomicReference<State> state = new AtomicReference<State>(State.CREATED);
-	private Observer<T> observer;
+    private final Supplier<T> supplier;
+    private final AtomicReference<State> state = new AtomicReference<State>(State.CREATED);
+    private Observer<T> observer;
 
-	/**
-	 * The current state of the promise.
-	 */
-	public enum State {
-		/**
-		 * The promise has been created.
-		 */
-		CREATED,
-		/**
-		 * The promise has been run but not completed.
-		 */
-		PENDING,
-		/**
-		 * The promise is completed successfully.
-		 */
-		COMPLETED,
-		/**
-		 * The promise had error before successful completion.
-		 */
-		ERROR
-	}
+    /**
+     * The current state of the promise.
+     */
+    public enum State {
+        /**
+         * The promise has been created.
+         */
+        CREATED,
+        /**
+         * The promise has been run but not completed.
+         */
+        PENDING,
+        /**
+         * The promise is completed successfully.
+         */
+        COMPLETED,
+        /**
+         * The promise had error before successful completion.
+         */
+        ERROR
+    }
 
-	/**
-	 * Create a Promise based on a given supplier and with an Observer.
-	 *
-	 * @param supplier the supplier
-	 */
-	public Promise(final Supplier<T> supplier, final Observer<T> observer) {
-		this.supplier = supplier;
-		this.observer = observer;
-	}
+    /**
+     * Create a Promise based on a given supplier and with an Observer.
+     *
+     * @param supplier the supplier
+     */
+    public Promise(final Supplier<T> supplier, final Observer<T> observer) {
+        this.supplier = supplier;
+        this.observer = observer;
+    }
 
-	/**
-	 * This method calls the supplier and on successful completion informs the fulfilled consumers of the
-	 * return value. If the supplier throws an exception the rejected consumers are informed. In either case
-	 * when the call to the supplier completes the settled consumers are informed with an Optional containing the
-	 * supplied value on success.
-	 */
-	@Override
-	public void run() {
-		if (!state.compareAndSet(State.CREATED, State.PENDING)) {
-			throw new IllegalStateException("Can only run a promise in the CREATED state");
-		}
-		T result;
-		try {
-			result = supplier.get();
-			state.set(State.COMPLETED);
-			observer.next(result);
-			observer.completed(true);
-		} catch (Exception e) {
-			state.set(State.ERROR);
-			observer.error(e);
-			observer.completed(false);
-		}
-		observer = null;   //NOPMD
-	}
+    /**
+     * This method calls the supplier and on successful completion informs the fulfilled consumers of the
+     * return value. If the supplier throws an exception the rejected consumers are informed. In either case
+     * when the call to the supplier completes the settled consumers are informed with an Optional containing the
+     * supplied value on success.
+     */
+    @Override
+    public void run() {
+        if (!state.compareAndSet(State.CREATED, State.PENDING)) {
+            throw new IllegalStateException("Can only run a promise in the CREATED state");
+        }
+        T result;
+        try {
+            result = supplier.get();
+            state.set(State.COMPLETED);
+            observer.next(result);
+            observer.completed(true);
+        } catch (Exception e) {
+            state.set(State.ERROR);
+            observer.error(e);
+            observer.completed(false);
+        }
+        observer = null;   //NOPMD
+    }
 
-	/**
-	 * Get the current state of this promise.
-	 *
-	 * @return the state
-	 */
-	public State getState() {
-		return state.get();
-	}
+    /**
+     * Get the current state of this promise.
+     *
+     * @return the state
+     */
+    public State getState() {
+        return state.get();
+    }
 
 }

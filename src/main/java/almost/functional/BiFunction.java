@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, nwillc@gmail.com
+ * Copyright (c) 2016, nwillc@gmail.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -26,12 +26,12 @@ package almost.functional;
  * @since 1.5
  */
 public interface BiFunction<F, S, R> {
-	/**
-	 * Apply the function to the first and second argument and return a result.
-	 *
-	 * @param first  argument.
-	 * @param second argument.
-	 * @return the result of applying the function.
-	 */
-	R apply(F first, S second);
+    /**
+     * Apply the function to the first and second argument and return a result.
+     *
+     * @param first  argument.
+     * @param second argument.
+     * @return the result of applying the function.
+     */
+    R apply(F first, S second);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, nwillc@gmail.com
+ * Copyright (c) 2016, nwillc@gmail.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -24,25 +24,25 @@ import java.util.logging.Logger;
  */
 public final class LogFactory {
 
-	private LogFactory() {
-	}
+    private LogFactory() {
+    }
 
-	/**
-	 * Returns a Logger named after the callers class.
-	 *
-	 * @return a Logger
-	 */
-	public static Logger getLogger() {
-		return getLogger(Thread.currentThread().getStackTrace()[2].getClassName());
-	}
+    /**
+     * Returns a Logger named after the callers class.
+     *
+     * @return a Logger
+     */
+    public static Logger getLogger() {
+        return getLogger(Thread.currentThread().getStackTrace()[2].getClassName());
+    }
 
-	/**
-	 * Return a instance of Logger with a given name.
-	 *
-	 * @param name of the resultant instance.
-	 * @return a Logger
-	 */
-	public static Logger getLogger(final String name) {
-		return Logger.getLogger(name);
-	}
+    /**
+     * Return a instance of Logger with a given name.
+     *
+     * @param name of the resultant instance.
+     * @return a Logger
+     */
+    public static Logger getLogger(final String name) {
+        return Logger.getLogger(name);
+    }
 }

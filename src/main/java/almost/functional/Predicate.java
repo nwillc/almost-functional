@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, nwillc@gmail.com
+ * Copyright (c) 2016, nwillc@gmail.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -24,11 +24,11 @@ package almost.functional;
  * @param <T> the input type of the predicate
  */
 public interface Predicate<T> {
-	/**
-	 * Evaluates this predicate on the given argument.
-	 *
-	 * @param testValue the input argument
-	 * @return true if the input argument matches the predicate, otherwise false
-	 */
-	boolean test(final T testValue); //NOPMD
+    /**
+     * Evaluates this predicate on the given argument.
+     *
+     * @param testValue the input argument
+     * @return true if the input argument matches the predicate, otherwise false
+     */
+    boolean test(final T testValue); //NOPMD
 }

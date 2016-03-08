@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, nwillc@gmail.com
+ * Copyright (c) 2016, nwillc@gmail.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -18,6 +18,7 @@
 package almost.functional.utils;
 
 import almost.functional.Predicate;
+import almost.functional.Predicates;
 
 import java.lang.reflect.Constructor;
 
@@ -31,15 +32,17 @@ public final class Preconditions {
 
     /**
      * Test a Predicate against a reference value, and if it fails throw a runtime exception with a message.
-     * @param reference  the value to test
-     * @param predicate  the predicate test to invoke
-     * @param ex  The RuntimeException to use
-     * @param msg The message to add to the exception
-     * @param <T> The type of the reference value
+     *
+     * @param reference the value to test
+     * @param predicate the predicate test to invoke
+     * @param ex        The RuntimeException to use
+     * @param msg       The message to add to the exception
+     * @param <T>       The type of the reference value
      * @return The reference value
-     * @throws RuntimeException  An instance of ex if the predicate fails
+     * @throws RuntimeException An instance of ex if the predicate fails
      */
-    public static <T> T precondition(T reference, Predicate<T> predicate, Class<? extends RuntimeException> ex, String msg)
+    public static <T> T precondition(T reference, Predicate<T> predicate,
+                                     Class<? extends RuntimeException> ex, String msg)
             throws RuntimeException {
         if (predicate.test(reference)) {
             return reference;
@@ -65,12 +68,8 @@ public final class Preconditions {
      * @throws java.lang.IllegalArgumentException if the reference is null
      */
     public static <T> T checkNotNull(final T reference, final String errorMessage) {
-        return precondition(reference, new Predicate<T>() {
-            @Override
-            public boolean test(T testValue) {
-                return testValue != null;
-            }
-        }, IllegalArgumentException.class, errorMessage);
+        return precondition(reference, Predicates.<T>notNull(),
+                IllegalArgumentException.class, errorMessage);
     }
 
     /**
@@ -82,17 +81,8 @@ public final class Preconditions {
      * @throws java.lang.IllegalArgumentException if the string is non-null but zero length
      */
     public static String checkNonEmptyString(final String reference, final String errorMessage) {
-        return precondition(reference, new Predicate<String>() {
-            @Override
-            public boolean test(String testValue) {
-                for (Character c : checkNotNull(testValue, errorMessage).toCharArray()) {
-                    if (!Character.isWhitespace(c)) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }, IllegalArgumentException.class, errorMessage);
+        return precondition(reference, Predicates.notEmptyString(),
+                IllegalArgumentException.class, errorMessage);
     }
 
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, nwillc@gmail.com
+ * Copyright (c) 2016, nwillc@gmail.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -27,33 +27,33 @@ import java.util.Iterator;
  */
 public abstract class ImmutableIterator<E> implements Iterator<E> {
 
-	/**
-	 * Make an iterator immutable.
-	 *
-	 * @param iterator the iterator
-	 * @param <E>      the type the iterator returns
-	 * @return an immutable iterator
-	 */
-	public static <E> ImmutableIterator<E> makeImmutable(final Iterator<E> iterator) {
-		return new ImmutableIterator<E>() {
-			@Override
-			public boolean hasNext() {
-				return iterator.hasNext();
-			}
+    /**
+     * Make an iterator immutable.
+     *
+     * @param iterator the iterator
+     * @param <E>      the type the iterator returns
+     * @return an immutable iterator
+     */
+    public static <E> ImmutableIterator<E> makeImmutable(final Iterator<E> iterator) {
+        return new ImmutableIterator<E>() {
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext();
+            }
 
-			@Override
-			public E next() {
-				return iterator.next();
-			}
-		};
-	}
+            @Override
+            public E next() {
+                return iterator.next();
+            }
+        };
+    }
 
-	/**
-	 * @throws java.lang.UnsupportedOperationException
-	 */
-	@Override
-	public void remove() {
-		throw new UnsupportedOperationException("Iterator is immutable");
-	}
+    /**
+     * @throws java.lang.UnsupportedOperationException
+     */
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException("Iterator is immutable");
+    }
 
 }

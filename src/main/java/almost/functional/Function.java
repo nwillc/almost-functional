@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, nwillc@gmail.com
+ * Copyright (c) 2016, nwillc@gmail.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -24,11 +24,11 @@ package almost.functional;
  * @param <R> the type of the result of the function
  */
 public interface Function<A, R> {
-	/**
-	 * Applies this function to the given argument.
-	 *
-	 * @param argument the function argument
-	 * @return the result
-	 */
-	R apply(A argument);
+    /**
+     * Applies this function to the given argument.
+     *
+     * @param argument the function argument
+     * @return the result
+     */
+    R apply(A argument);
 }

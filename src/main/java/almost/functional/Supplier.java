@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, nwillc@gmail.com
+ * Copyright (c) 2016, nwillc@gmail.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -23,10 +23,10 @@ package almost.functional;
  * @param <T> the type of the results supplied.
  */
 public interface Supplier<T> {
-	/**
-	 * Get the result.
-	 *
-	 * @return the result.
-	 */
-	T get();
+    /**
+     * Get the result.
+     *
+     * @return the result.
+     */
+    T get();
 }
