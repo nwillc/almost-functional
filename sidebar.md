@@ -1,6 +1,5 @@
 ## AF
 - [Home]()
-- [Usage](#docs/usage)
 - [Dependencies](#docs/dependencies)
 - [Example](#docs/example)
 - [Licence](#docs/LICENSE)
