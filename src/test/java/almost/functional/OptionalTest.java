@@ -221,7 +221,7 @@ public class OptionalTest {
     }
 
     @Test
-    public void testOrElseRun() throws Exception {
+    public void testOrElseRunRun() throws Exception {
         final Integer increment = 5;
         final AtomicInteger value = new AtomicInteger(increment);
         Optional<AtomicInteger> integerOptional = Optional.empty();
@@ -236,16 +236,21 @@ public class OptionalTest {
         });
         assertThat(ret).isEqualTo(integerOptional);
         assertThat(value.get()).isEqualTo(2 * increment);
+    }
 
-        integerOptional = Optional.of(value);
-        ret = integerOptional.orElseRun(new Runnable() {
+    @Test
+    public void testOrElseRunNoRun() throws Exception {
+        final Integer increment = 5;
+        final AtomicInteger value = new AtomicInteger(increment);
+        Optional<AtomicInteger> integerOptional = Optional.of(value);
+        Optional<AtomicInteger> ret = integerOptional.orElseRun(new Runnable() {
             @Override
             public void run() {
                 value.getAndAdd(increment);
             }
         });
         assertThat(ret).isEqualTo(integerOptional);
-        assertThat(value.get()).isEqualTo(2 * increment);
+        assertThat(value.get()).isEqualTo(increment);
     }
 
     @Test
