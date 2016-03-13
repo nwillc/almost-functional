@@ -55,7 +55,16 @@ public class IteratorsTest extends ImmutableIteratorContract {
 
 	@Test
 	public void shouldConcat() throws Exception {
+	  List<Integer> one = Arrays.asList(1,2,3);
+		List<Integer> two = Arrays.asList(4,5,6);
 
+		int i = 1;
+		Iterator<Integer> integerIterator = concat(one.iterator(), two.iterator());
+		while (integerIterator.hasNext()) {
+			assertThat(integerIterator.next()).isEqualTo(i);
+			i++;
+		}
+		assertThat(i).isEqualTo(7);
 	}
 
 	@Test
