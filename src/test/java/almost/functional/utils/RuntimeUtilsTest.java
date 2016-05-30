@@ -17,32 +17,20 @@
 
 package almost.functional.utils;
 
-import java.util.logging.Logger;
+import org.junit.Test;
 
-/**
- * Provide consistently named instances of Logger. Names are based on the callers class name.
- */
-public final class LogFactory {
+import static org.assertj.core.api.Assertions.assertThat;
 
-    private LogFactory() {
+
+public class RuntimeUtilsTest {
+    @Test
+    public void getCallerClassName() throws Exception {
+        assertThat(RuntimeUtils.getCallerClassName(2)).isEqualTo(getClass().getName());
     }
 
-    /**
-     * Returns a Logger named after the callers class.
-     *
-     * @return a Logger
-     */
-    public static Logger getLogger() {
-        return getLogger(RuntimeUtils.getCallerClassName(3));
-    }
+    @Test
+    public void testGetMethodName() throws Exception {
+        assertThat(RuntimeUtils.getCurrentMethodName()).isEqualTo("testGetMethodName");
 
-    /**
-     * Return a instance of Logger with a given name.
-     *
-     * @param name of the resultant instance.
-     * @return a Logger
-     */
-    public static Logger getLogger(final String name) {
-        return Logger.getLogger(name);
     }
 }

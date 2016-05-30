@@ -36,7 +36,7 @@ public class LogFactoryTest extends PrivateConstructorContract {
 	   Logger logger = getLogger();
 
 		assertThat(logger).isNotNull();
-		assertThat(logger.getName()).isEqualTo(LogFactoryTest.class.getName());
+		assertThat(logger.getName()).isEqualTo(getClass().getName());
 	}
 
 	@Test
