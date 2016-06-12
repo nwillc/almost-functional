@@ -27,6 +27,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("unchecked")
 public class BroadcastObserverTest {
+	@Test
+	public void testFluidApiReturns() throws Exception {
+		BroadcastObserver<Boolean> test = new BroadcastObserver<Boolean>();
+		assertThat(test).isNotNull();
+		assertThat(test.addNextConsumer(new BooleanConsumer())).isEqualTo(test);
+		assertThat(test.addErrorConsumer(new ErrorConsumer())).isEqualTo(test);
+		assertThat(test.addCompletedConsumer(new BooleanConsumer())).isEqualTo(test);
+	}
 
 	@Test
 	public void shouldAllowSimplifiedConstructor() throws Exception {
