@@ -23,6 +23,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class RuntimeUtilsTest {
+
+    @Test
+    public void testGetCallerClassName() throws Exception {
+        assertThat(RuntimeUtils.getCallerClassName()).isNotNull();
+    }
+
     @Test
     public void getCallerClassName() throws Exception {
         assertThat(RuntimeUtils.getCallerClassName(2)).isEqualTo(getClass().getName());

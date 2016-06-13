@@ -17,14 +17,26 @@
 package almost.functional.utils;
 
 import com.github.nwillc.contracts.ImmutableIteratorContract;
+import org.junit.Test;
 
 import java.util.Iterator;
 
 import static almost.functional.utils.ArrayIterable.newIterable;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ImmutableIteratorTest extends ImmutableIteratorContract {
     @Override
     protected Iterator getNonEmptyIterator() {
         return ImmutableIterator.makeImmutable(newIterable(new String[]{"a","b","c"}).iterator());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testNoRuntimeError() throws Exception {
+        Iterator<String> i = getNonEmptyIterator();
+
+        while (i.hasNext()) {
+            assertThat(i.next()).isNotNull();
+        }
     }
 }
