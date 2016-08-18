@@ -53,6 +53,7 @@ public class IteratorsTest extends ImmutableIteratorContract {
 		assertThat(count).isEqualTo(1);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void shouldConcat() throws Exception {
 	  List<Integer> one = Arrays.asList(1,2,3);
