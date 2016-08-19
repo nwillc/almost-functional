@@ -18,8 +18,7 @@
 package almost.functional.utils;
 
 public final class Throwables {
-    private Throwables() {
-    }
+    private Throwables() {}
 
     /**
      * Propagate a Throwable as a RuntimeException. The Runtime exception bases it's message not the message of the Throwable,
