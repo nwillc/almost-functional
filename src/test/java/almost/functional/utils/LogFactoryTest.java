@@ -16,7 +16,7 @@
 
 package almost.functional.utils;
 
-import com.github.nwillc.contracts.PrivateConstructorContract;
+import com.github.nwillc.contracts.UtilityClassContract;
 import org.junit.Test;
 
 import java.util.logging.Logger;
@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 import static almost.functional.utils.LogFactory.getLogger;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LogFactoryTest extends PrivateConstructorContract {
+public class LogFactoryTest extends UtilityClassContract {
 
     @Override
     public Class<?> getClassToTest() {

@@ -17,12 +17,18 @@
 
 package almost.functional.utils;
 
+import com.github.nwillc.contracts.UtilityClassContract;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class RuntimeUtilsTest {
+public class RuntimeUtilsTest extends UtilityClassContract {
+
+    @Override
+    public Class<?> getClassToTest() {
+        return RuntimeUtils.class;
+    }
 
     @Test
     public void testGetCallerClassName() throws Exception {

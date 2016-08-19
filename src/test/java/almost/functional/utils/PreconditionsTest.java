@@ -18,12 +18,13 @@ package almost.functional.utils;
 
 import almost.functional.Predicates;
 import com.github.nwillc.contracts.PrivateConstructorContract;
+import com.github.nwillc.contracts.UtilityClassContract;
 import org.junit.Test;
 
 import static almost.functional.utils.Preconditions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PreconditionsTest extends PrivateConstructorContract {
+public class PreconditionsTest extends UtilityClassContract {
 
     @Override
     public Class<?> getClassToTest() {

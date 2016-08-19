@@ -16,14 +16,14 @@
 
 package almost.functional.utils;
 
-import com.github.nwillc.contracts.PrivateConstructorContract;
+import com.github.nwillc.contracts.UtilityClassContract;
 import org.junit.Test;
 
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ThrowablesTest extends PrivateConstructorContract {
+public class ThrowablesTest extends UtilityClassContract {
     @Override
     public Class<?> getClassToTest() {
         return Throwables.class;
