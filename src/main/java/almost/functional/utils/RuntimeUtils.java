@@ -25,8 +25,7 @@ public final class RuntimeUtils {
 
     public static final int PARENT_OF_CALLER = 4;
 
-    private RuntimeUtils() {
-    }
+    private RuntimeUtils() {}
 
     /**
      * Get the class name of a caller in the current stack.

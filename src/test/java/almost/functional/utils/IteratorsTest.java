@@ -9,9 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static almost.functional.utils.Iterators.concat;
-import static almost.functional.utils.Iterators.next;
-import static almost.functional.utils.Iterators.parallelBatch;
+import static almost.functional.utils.Iterators.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class IteratorsTest extends ImmutableIteratorContract {

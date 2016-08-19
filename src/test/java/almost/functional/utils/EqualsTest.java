@@ -2,13 +2,14 @@ package almost.functional.utils;
 
 import almost.functional.Function;
 import com.github.nwillc.contracts.PrivateConstructorContract;
+import com.github.nwillc.contracts.UtilityClassContract;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("unchecked")
-public class EqualsTest extends PrivateConstructorContract {
+public class EqualsTest extends UtilityClassContract {
     private Bean one, two;
 
     @Before

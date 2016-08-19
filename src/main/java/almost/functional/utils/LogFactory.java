@@ -24,8 +24,7 @@ import java.util.logging.Logger;
  */
 public final class LogFactory {
 
-    private LogFactory() {
-    }
+    private LogFactory() {}
 
     /**
      * Returns a Logger named after the callers class.

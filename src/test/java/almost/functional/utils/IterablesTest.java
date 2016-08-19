@@ -16,11 +16,7 @@
 
 package almost.functional.utils;
 
-import almost.functional.BiFunction;
-import almost.functional.Consumer;
-import almost.functional.Function;
-import almost.functional.Optional;
-import almost.functional.Predicate;
+import almost.functional.*;
 import com.github.nwillc.contracts.ImmutableIteratorContract;
 import org.junit.Test;
 
