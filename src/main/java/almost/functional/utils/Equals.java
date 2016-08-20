@@ -22,13 +22,21 @@ import almost.functional.Predicate;
 
 import java.util.Objects;
 
-
 /**
- * @Since 1.6+
+ * @since  1.9.6
  */
 public final class Equals {
     private Equals() {}
 
+	/**
+     * Compare equality of two objects using a series of accessors. The accessors are used to access
+     * values from the objects, values which are then compared for equality.
+     * @param one first object to compare
+     * @param two second object to compare
+     * @param accessors functions used to access values from the objects
+     * @param <T>  type to compare as
+     * @return  true if both are null or all accessors values are equal
+     */
     public static <T> boolean equals(final T one, final T two, Function<? super T, ?>... accessors) {
         return one == two ||
                 !(one == null || two == null) &&
