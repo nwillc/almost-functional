@@ -27,8 +27,7 @@ import java.util.Objects;
  * @Since 1.6+
  */
 public final class Equals {
-    private Equals() {
-    }
+    private Equals() {}
 
     public static <T> boolean equals(final T one, final T two, Function<? super T, ?>... accessors) {
         return one == two ||
