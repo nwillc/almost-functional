@@ -27,8 +27,7 @@ import java.lang.reflect.Constructor;
  */
 public final class Preconditions {
 
-    private Preconditions() {
-    }
+    private Preconditions() {}
 
     /**
      * Test a Predicate against a reference value, and if it fails throw a runtime exception with a message.
