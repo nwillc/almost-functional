@@ -18,16 +18,21 @@
 package almost.functional.utils;
 
 public final class Throwables {
-    private Throwables() {}
+	private Throwables() {
+	}
 
-    /**
-     * Propagate a Throwable as a RuntimeException. The Runtime exception bases it's message not the message of the Throwable,
-     * and the Throwable is set as it's cause. This can be used to deal with exceptions in lambdas etc.
-     *
-     * @param throwable the throwable to repropagate.
-     * @return a RuntimeException
-     */
-    public static RuntimeException propagate(final Throwable throwable) {
-        return new RuntimeException("Repropagated " + throwable.getMessage(), throwable);  //NOPMD
-    }
+	/**
+	 * Propagate a Throwable as a RuntimeException. The Runtime exception bases it's message not the message of the Throwable,
+	 * and the Throwable is set as it's cause. This can be used to deal with exceptions in lambdas etc.
+	 *
+	 * @param exception the Exception to repropagate.
+	 * @return a RuntimeException
+	 */
+	public static RuntimeException propagate(final Exception exception) {
+		if (RuntimeException.class.isAssignableFrom(exception.getClass())) {
+			return (RuntimeException) exception;
+		}
+
+		return new RuntimeException("Repropagated " + exception.getMessage(), exception);  //NOPMD
+	}
 }

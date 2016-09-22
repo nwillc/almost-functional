@@ -30,6 +30,12 @@ public class ThrowablesTest extends UtilityClassContract {
     }
 
     @Test
+    public void testPassthrough() {
+        RuntimeException runtimeException = new RuntimeException();
+        assertThat(Throwables.propagate(runtimeException)).isEqualTo(runtimeException);
+    }
+
+    @Test
     public void testPropegate() throws Exception {
         IOException ioException = new IOException("Dummy");
 
