@@ -15,10 +15,10 @@
  *
  */
 
-package almost.functional;
+package almost.functional.utils;
 
 
-import almost.functional.utils.Iterables;
+import almost.functional.Predicate;
 
 /**
  * Utility operations on predicates.

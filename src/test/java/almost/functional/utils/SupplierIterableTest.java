@@ -18,6 +18,7 @@ package almost.functional.utils;
 
 import almost.functional.Optional;
 import almost.functional.Supplier;
+import almost.functional.SupplierIterable;
 import com.github.nwillc.contracts.ImmutableIteratorContract;
 
 import java.util.Iterator;

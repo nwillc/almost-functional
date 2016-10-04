@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Logger;
 
-import static almost.functional.utils.ArrayIterable.newIterable;
+import static almost.functional.ArrayIterable.newIterable;
 import static almost.functional.utils.Iterables.forEach;
 import static almost.functional.utils.LogFactory.getLogger;
 

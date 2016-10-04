@@ -18,7 +18,6 @@
 package almost.functional.utils;
 
 import almost.functional.Predicate;
-import almost.functional.Predicates;
 
 import java.lang.reflect.Constructor;
 

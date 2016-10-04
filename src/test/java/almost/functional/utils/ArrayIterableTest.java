@@ -16,13 +16,14 @@
 
 package almost.functional.utils;
 
+import almost.functional.ArrayIterable;
 import com.github.nwillc.contracts.ImmutableIteratorContract;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Iterator;
 
-import static almost.functional.utils.ArrayIterable.newIterable;
+import static almost.functional.ArrayIterable.newIterable;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 

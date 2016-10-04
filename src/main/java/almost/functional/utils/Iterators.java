@@ -19,6 +19,7 @@ package almost.functional.utils;
 
 
 import almost.functional.Consumer;
+import almost.functional.ImmutableIterator;
 
 import java.util.ArrayList;
 import java.util.Iterator;

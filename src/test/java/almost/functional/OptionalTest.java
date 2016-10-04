@@ -21,7 +21,7 @@ import org.junit.Test;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static almost.functional.Predicates.isEqual;
+import static almost.functional.utils.Predicates.isEqual;
 import static org.assertj.core.api.Assertions.assertThat;
 
 

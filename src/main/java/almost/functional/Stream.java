@@ -15,9 +15,10 @@
  *
  */
 
-package almost.functional.utils;
+package almost.functional;
 
-import almost.functional.*;
+import almost.functional.utils.Iterators;
+import almost.functional.utils.LogFactory;
 
 import java.io.Closeable;
 import java.io.IOException;

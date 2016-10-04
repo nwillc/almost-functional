@@ -2,12 +2,13 @@ package almost.functional.utils;
 
 import almost.functional.Function;
 import almost.functional.Predicate;
+import almost.functional.Stream;
 
 import java.util.Objects;
 
 
 /**
- * @Since 1.6+
+ * @since 1.6+
  */
 public final class Equals {
     private Equals() {

@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static almost.functional.utils.IterablesTest.Accumulator;
-import static almost.functional.utils.Stream.concat;
+import static almost.functional.Stream.concat;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StreamTest {

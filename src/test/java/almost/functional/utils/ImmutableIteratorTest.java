@@ -16,12 +16,13 @@
 
 package almost.functional.utils;
 
+import almost.functional.ImmutableIterator;
 import com.github.nwillc.contracts.ImmutableIteratorContract;
 import org.junit.Test;
 
 import java.util.Iterator;
 
-import static almost.functional.utils.ArrayIterable.newIterable;
+import static almost.functional.ArrayIterable.newIterable;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ImmutableIteratorTest extends ImmutableIteratorContract {

@@ -15,10 +15,7 @@
  *
  */
 
-package almost.functional.utils;
-
-import almost.functional.Optional;
-import almost.functional.Supplier;
+package almost.functional;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

@@ -16,11 +16,12 @@
 
 package almost.functional;
 
+import almost.functional.utils.Predicates;
 import com.github.nwillc.contracts.PrivateConstructorContract;
 import org.junit.Test;
 
-import static almost.functional.Predicates.*;
-import static almost.functional.utils.ArrayIterable.newIterable;
+import static almost.functional.utils.Predicates.*;
+import static almost.functional.ArrayIterable.newIterable;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PredicatesTest extends PrivateConstructorContract {

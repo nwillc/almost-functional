@@ -23,8 +23,8 @@ import org.junit.Test;
 import java.util.Iterator;
 import java.util.Vector;
 
-import static almost.functional.Predicates.isEqual;
-import static almost.functional.utils.ArrayIterable.newIterable;
+import static almost.functional.utils.Predicates.isEqual;
+import static almost.functional.ArrayIterable.newIterable;
 import static almost.functional.utils.Iterables.*;
 import static org.assertj.core.api.Assertions.assertThat;
 

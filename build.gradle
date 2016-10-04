@@ -52,19 +52,22 @@ repositories {
     jcenter {
         url 'http://jcenter.bintray.com'
     }
+    maven {
+        url "http://dl.bintray.com/nwillc/maven"
+    }
 }
 
 dependencies {
     testCompile 'junit:junit:4.12',
             'org.assertj:assertj-core:1.7.1',
-            'com.github.nwillc:contracts:1.7.1'
+            'com.github.nwillc:jdk_contract_tests:1.7.6'
 }
 
 group = "com.github.nwillc"
 archivesBaseName = "almost-functional"
 version = "1.9.5-SNAPSHOT"
-targetCompatibility = "1.7"
-sourceCompatibility = "1.7"
+targetCompatibility = "1.6"
+sourceCompatibility = "1.6"
 
 release {
     failOnSnapshotDependencies = true

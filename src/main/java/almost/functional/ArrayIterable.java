@@ -15,7 +15,7 @@
  *
  */
 
-package almost.functional.utils;
+package almost.functional;
 
 
 import java.util.Iterator;
