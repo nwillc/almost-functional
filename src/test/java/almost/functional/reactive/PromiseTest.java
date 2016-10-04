@@ -36,8 +36,8 @@ public class PromiseTest {
     }
 
     @Test
-	public void shouldObserveNext() throws Exception {
-	    Supplier<Boolean> supplier = new Supplier<Boolean>() {
+    public void shouldObserveNext() throws Exception {
+        Supplier<Boolean> supplier = new Supplier<Boolean>() {
             @Override
             public Boolean get() {
                 return true;
@@ -51,10 +51,10 @@ public class PromiseTest {
         assertThat(observer.value).isTrue();
         assertThat(observer.throwable).isNull();
         assertThat(observer.withoutError).isTrue();
-	}
+    }
 
-	@Test
-	public void shouldObserveError() throws Exception {
+    @Test
+    public void shouldObserveError() throws Exception {
         Supplier<Boolean> supplier = new Supplier<Boolean>() {
             @Override
             public Boolean get() {
@@ -69,10 +69,10 @@ public class PromiseTest {
         assertThat(observer.value).isNull();
         assertThat(observer.throwable).isNotNull();
         assertThat(observer.withoutError).isFalse();
-	}
+    }
 
-	@Test
-	public void shouldSetStateCompleted() throws Exception {
+    @Test
+    public void shouldSetStateCompleted() throws Exception {
         Supplier<Boolean> supplier = new Supplier<Boolean>() {
             @Override
             public Boolean get() {
@@ -85,10 +85,10 @@ public class PromiseTest {
         assertThat(promise.getState()).isEqualTo(Promise.State.CREATED);
         promise.run();
         assertThat(promise.getState()).isEqualTo(Promise.State.COMPLETED);
-	}
+    }
 
-	@Test
-	public void shouldSetStateError() throws Exception {
+    @Test
+    public void shouldSetStateError() throws Exception {
         Supplier<Boolean> supplier = new Supplier<Boolean>() {
             @Override
             public Boolean get() {
@@ -101,7 +101,7 @@ public class PromiseTest {
         assertThat(promise.getState()).isEqualTo(Promise.State.CREATED);
         promise.run();
         assertThat(promise.getState()).isEqualTo(Promise.State.ERROR);
-	}
+    }
 
     @Test(expected = IllegalStateException.class)
     public void shouldRefuseToRunMultipleTimes() throws Exception {
@@ -127,7 +127,7 @@ public class PromiseTest {
 
         @Override
         public void completed(Boolean withoutError) {
-          this.withoutError = withoutError;
+            this.withoutError = withoutError;
         }
 
         @Override

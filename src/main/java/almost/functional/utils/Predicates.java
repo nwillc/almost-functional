@@ -24,7 +24,8 @@ import almost.functional.Predicate;
  * Utility operations on predicates.
  */
 public final class Predicates {
-    private Predicates() {}
+    private Predicates() {
+    }
 
     /**
      * Predicate to check that a String is not empty, i.e. not null and contains other than whitespace characters.

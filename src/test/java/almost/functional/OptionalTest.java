@@ -27,32 +27,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class OptionalTest {
 
-	@Test(expected = NoSuchElementException.class)
-	public void shouldBeEmplty() throws Exception {
-		Optional<String> optional = Optional.empty();
+    @Test(expected = NoSuchElementException.class)
+    public void shouldBeEmplty() throws Exception {
+        Optional<String> optional = Optional.empty();
 
-		assertThat(optional.isPresent()).isFalse();
-		optional.get();
-	}
+        assertThat(optional.isPresent()).isFalse();
+        optional.get();
+    }
 
-	@Test
-	public void shouldOf() throws Exception {
-		Optional<Integer> optional = Optional.of(5);
+    @Test
+    public void shouldOf() throws Exception {
+        Optional<Integer> optional = Optional.of(5);
 
-		assertThat(optional.isPresent()).isTrue();
-		assertThat(optional.get()).isEqualTo(5);
-	}
+        assertThat(optional.isPresent()).isTrue();
+        assertThat(optional.get()).isEqualTo(5);
+    }
 
-	@Test
-	public void shouldIfPresent() throws Exception {
-		Optional<Integer> optional = Optional.of(5);
-		Variable<Integer> variable = new Variable<Integer>(10);
+    @Test
+    public void shouldIfPresent() throws Exception {
+        Optional<Integer> optional = Optional.of(5);
+        Variable<Integer> variable = new Variable<Integer>(10);
 
-		assertThat(variable.get()).isEqualTo(10);
-		optional.ifPresent(variable);
-		assertThat(optional.get()).isEqualTo(5);
-		assertThat(variable.get()).isEqualTo(optional.get());
-	}
+        assertThat(variable.get()).isEqualTo(10);
+        optional.ifPresent(variable);
+        assertThat(optional.get()).isEqualTo(5);
+        assertThat(variable.get()).isEqualTo(optional.get());
+    }
 
     @Test
     public void shouldIfPresentEmpty() throws Exception {
@@ -65,19 +65,19 @@ public class OptionalTest {
     }
 
     @Test
-	public void shouldOrElseEmpty() throws Exception {
-		Optional<Integer> optional = Optional.empty();
+    public void shouldOrElseEmpty() throws Exception {
+        Optional<Integer> optional = Optional.empty();
 
-		assertThat(optional.orElse(10)).isEqualTo(10);
-		assertThat(optional.orElse(null)).isNull();
-	}
+        assertThat(optional.orElse(10)).isEqualTo(10);
+        assertThat(optional.orElse(null)).isNull();
+    }
 
-	@Test
-	public void shouldOrElseOf() throws Exception {
-		Optional<Integer> optional = Optional.of(5);
+    @Test
+    public void shouldOrElseOf() throws Exception {
+        Optional<Integer> optional = Optional.of(5);
 
-		assertThat(optional.orElse(10)).isEqualTo(optional.get());
-	}
+        assertThat(optional.orElse(10)).isEqualTo(optional.get());
+    }
 
     @Test
     public void shouldFilterTrue() throws Exception {
@@ -111,20 +111,20 @@ public class OptionalTest {
     }
 
     @Test
-	public void shouldTransformEmpty() throws Exception {
-		Optional<Integer> optional = Optional.empty();
+    public void shouldTransformEmpty() throws Exception {
+        Optional<Integer> optional = Optional.empty();
 
-		assertThat(optional.map(new Increment()).isPresent()).isFalse();
-	}
+        assertThat(optional.map(new Increment()).isPresent()).isFalse();
+    }
 
-	@Test
-	public void shouldMapOf() throws Exception {
-		Optional<Integer> optional = Optional.of(0);
+    @Test
+    public void shouldMapOf() throws Exception {
+        Optional<Integer> optional = Optional.of(0);
 
-		Optional<Integer> returned = optional.map(new Increment());
-		assertThat(returned.isPresent()).isTrue();
-		assertThat(returned.get()).isEqualTo(1);
-	}
+        Optional<Integer> returned = optional.map(new Increment());
+        assertThat(returned.isPresent()).isTrue();
+        assertThat(returned.get()).isEqualTo(1);
+    }
 
     @Test
     public void shouldMapOfNullReturn() throws Exception {
@@ -141,10 +141,10 @@ public class OptionalTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-	public void shouldMapNullFunction() throws Exception {
-		Optional<Integer> optional = Optional.of(0);
-		optional.map(null);
-	}
+    public void shouldMapNullFunction() throws Exception {
+        Optional<Integer> optional = Optional.of(0);
+        optional.map(null);
+    }
 
     @Test
     public void shouldEmptyOnOfNullableNull() throws Exception {
@@ -261,10 +261,10 @@ public class OptionalTest {
         assertThat(optional.orElseThrow("Bail")).isEqualTo(msg);
     }
 
-    private static class Increment implements Function<Integer,Integer> {
-		@Override
-		public Integer apply(Integer integer) {
-			return integer + 1;
-		}
-	}
+    private static class Increment implements Function<Integer, Integer> {
+        @Override
+        public Integer apply(Integer integer) {
+            return integer + 1;
+        }
+    }
 }

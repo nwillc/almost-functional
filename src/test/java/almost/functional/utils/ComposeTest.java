@@ -6,7 +6,6 @@ import almost.functional.Function;
 import com.github.nwillc.contracts.UtilityClassContract;
 import org.junit.Test;
 
-import java.util.StringTokenizer;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static almost.functional.utils.Compose.andThen;
@@ -23,20 +22,20 @@ public class ComposeTest extends UtilityClassContract {
 
     @Test
     public void testCompose() throws Exception {
-        Function<String,Integer> first = new Function<String, Integer>() {
+        Function<String, Integer> first = new Function<String, Integer>() {
             @Override
             public Integer apply(String argument) {
                 return Integer.parseInt(argument);
             }
         };
-        Function<Integer,Double> second = new Function<Integer, Double>() {
+        Function<Integer, Double> second = new Function<Integer, Double>() {
             @Override
             public Double apply(Integer argument) {
-                return argument.floatValue()/2.0;
+                return argument.floatValue() / 2.0;
             }
         };
 
-        Function<String,Double> composed = compose(first,second);
+        Function<String, Double> composed = compose(first, second);
         assertThat(composed.apply("3")).isEqualTo(1.5);
     }
 
@@ -71,7 +70,7 @@ public class ComposeTest extends UtilityClassContract {
                 return String.valueOf(first + second);
             }
         };
-        Function<String,Double> second = new Function<String, Double>() {
+        Function<String, Double> second = new Function<String, Double>() {
             @Override
             public Double apply(String argument) {
                 return Double.valueOf(argument) / 2.0;
@@ -79,6 +78,6 @@ public class ComposeTest extends UtilityClassContract {
         };
 
         final BiFunction<Integer, Integer, Double> composed = andThen(first, second);
-        assertThat(composed.apply(10,4)).isEqualTo(7.0);
+        assertThat(composed.apply(10, 4)).isEqualTo(7.0);
     }
 }

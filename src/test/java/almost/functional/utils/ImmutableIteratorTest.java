@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ImmutableIteratorTest extends ImmutableIteratorContract {
     @Override
     protected Iterator getNonEmptyIterator() {
-        return ImmutableIterator.makeImmutable(newIterable(new String[]{"a","b","c"}).iterator());
+        return ImmutableIterator.makeImmutable(newIterable(new String[]{"a", "b", "c"}).iterator());
     }
 
     @SuppressWarnings("unchecked")

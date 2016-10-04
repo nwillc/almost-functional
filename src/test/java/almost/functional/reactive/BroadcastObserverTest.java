@@ -27,135 +27,135 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("unchecked")
 public class BroadcastObserverTest {
-	@Test
-	public void testFluidApiReturns() throws Exception {
-		BroadcastObserver<Boolean> test = new BroadcastObserver<Boolean>();
-		assertThat(test).isNotNull();
-		assertThat(test.addNextConsumer(new BooleanConsumer())).isEqualTo(test);
-		assertThat(test.addErrorConsumer(new ErrorConsumer())).isEqualTo(test);
-		assertThat(test.addCompletedConsumer(new BooleanConsumer())).isEqualTo(test);
-	}
+    @Test
+    public void testFluidApiReturns() throws Exception {
+        BroadcastObserver<Boolean> test = new BroadcastObserver<Boolean>();
+        assertThat(test).isNotNull();
+        assertThat(test.addNextConsumer(new BooleanConsumer())).isEqualTo(test);
+        assertThat(test.addErrorConsumer(new ErrorConsumer())).isEqualTo(test);
+        assertThat(test.addCompletedConsumer(new BooleanConsumer())).isEqualTo(test);
+    }
 
-	@Test
-	public void shouldAllowSimplifiedConstructor() throws Exception {
-		BooleanConsumer booleanConsumer = new BooleanConsumer();
+    @Test
+    public void shouldAllowSimplifiedConstructor() throws Exception {
+        BooleanConsumer booleanConsumer = new BooleanConsumer();
 
-		BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>(
-				Optional.<Consumer<Boolean>>of(booleanConsumer),
-				Optional.<Consumer<Throwable>>empty(),
-				Optional.<Consumer<Boolean>>empty()
-		);
+        BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>(
+                Optional.<Consumer<Boolean>>of(booleanConsumer),
+                Optional.<Consumer<Throwable>>empty(),
+                Optional.<Consumer<Boolean>>empty()
+        );
 
-		assertThat(booleanConsumer.flag.get()).isFalse();
-		broadcastObserver.next(true);
-		assertThat(booleanConsumer.flag.get()).isTrue();
-	}
+        assertThat(booleanConsumer.flag.get()).isFalse();
+        broadcastObserver.next(true);
+        assertThat(booleanConsumer.flag.get()).isTrue();
+    }
 
-	@Test
-	public void shouldBeCompleted() throws Exception {
-		BooleanConsumer consumer = new BooleanConsumer();
-		BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>();
-		broadcastObserver.addCompletedConsumer(consumer);
+    @Test
+    public void shouldBeCompleted() throws Exception {
+        BooleanConsumer consumer = new BooleanConsumer();
+        BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>();
+        broadcastObserver.addCompletedConsumer(consumer);
 
-		assertThat(consumer.flag.get()).isFalse();
-		broadcastObserver.completed(true);
-		assertThat(consumer.flag.get()).isTrue();
-	}
+        assertThat(consumer.flag.get()).isFalse();
+        broadcastObserver.completed(true);
+        assertThat(consumer.flag.get()).isTrue();
+    }
 
-	@Test
-	public void shouldNext() throws Exception {
-		BooleanConsumer consumer = new BooleanConsumer();
-		BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>();
-		broadcastObserver.addNextConsumer(consumer);
+    @Test
+    public void shouldNext() throws Exception {
+        BooleanConsumer consumer = new BooleanConsumer();
+        BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>();
+        broadcastObserver.addNextConsumer(consumer);
 
-		assertThat(consumer.flag.get()).isFalse();
-		broadcastObserver.next(true);
-		assertThat(consumer.flag.get()).isTrue();
-	}
+        assertThat(consumer.flag.get()).isFalse();
+        broadcastObserver.next(true);
+        assertThat(consumer.flag.get()).isTrue();
+    }
 
-	@Test
-	public void shouldError() throws Exception {
-		ErrorConsumer errorConsumer = new ErrorConsumer();
-		BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>();
-		broadcastObserver.addErrorConsumer(errorConsumer);
+    @Test
+    public void shouldError() throws Exception {
+        ErrorConsumer errorConsumer = new ErrorConsumer();
+        BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>();
+        broadcastObserver.addErrorConsumer(errorConsumer);
 
-		assertThat(errorConsumer.error.get()).isNull();
-		broadcastObserver.error(new NullPointerException());
-		assertThat(errorConsumer.error.get()).isInstanceOf(NullPointerException.class);
-	}
+        assertThat(errorConsumer.error.get()).isNull();
+        broadcastObserver.error(new NullPointerException());
+        assertThat(errorConsumer.error.get()).isInstanceOf(NullPointerException.class);
+    }
 
-	@Test
-	public void shouldRespectCompleted() throws Exception {
-		BooleanConsumer next = new BooleanConsumer();
-		BooleanConsumer completed = new BooleanConsumer();
-		ErrorConsumer error = new ErrorConsumer();
-		BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>(Optional.of(next),
-                                                                                Optional.of(error),
-                                                                                Optional.of(completed));
+    @Test
+    public void shouldRespectCompleted() throws Exception {
+        BooleanConsumer next = new BooleanConsumer();
+        BooleanConsumer completed = new BooleanConsumer();
+        ErrorConsumer error = new ErrorConsumer();
+        BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>(Optional.of(next),
+                Optional.of(error),
+                Optional.of(completed));
 
-		assertThat(next.flag.get()).isFalse();
-		assertThat(completed.flag.get()).isFalse();
-		assertThat(error.error.get()).isNull();
+        assertThat(next.flag.get()).isFalse();
+        assertThat(completed.flag.get()).isFalse();
+        assertThat(error.error.get()).isNull();
 
-		broadcastObserver.next(true);
-		assertThat(next.flag.get()).isTrue();
-		broadcastObserver.next(false);
-		assertThat(next.flag.get()).isFalse();
+        broadcastObserver.next(true);
+        assertThat(next.flag.get()).isTrue();
+        broadcastObserver.next(false);
+        assertThat(next.flag.get()).isFalse();
 
-		broadcastObserver.error(new NullPointerException());
-		assertThat(error.error.get()).isInstanceOf(NullPointerException.class);
-		broadcastObserver.error(null);
-		assertThat(error.error.get()).isNull();
+        broadcastObserver.error(new NullPointerException());
+        assertThat(error.error.get()).isInstanceOf(NullPointerException.class);
+        broadcastObserver.error(null);
+        assertThat(error.error.get()).isNull();
 
-		completed.flag.set(true);
-		broadcastObserver.completed(false);
-		assertThat(completed.flag.get()).isFalse();
+        completed.flag.set(true);
+        broadcastObserver.completed(false);
+        assertThat(completed.flag.get()).isFalse();
 
-		// Should ignore further messages since completed
-		broadcastObserver.completed(true);
-		assertThat(completed.flag.get()).isFalse();
-		broadcastObserver.next(true);
-		assertThat(next.flag.get()).isFalse();
-		broadcastObserver.error(new NullPointerException());
-		assertThat(error.error.get()).isNull();
-	}
+        // Should ignore further messages since completed
+        broadcastObserver.completed(true);
+        assertThat(completed.flag.get()).isFalse();
+        broadcastObserver.next(true);
+        assertThat(next.flag.get()).isFalse();
+        broadcastObserver.error(new NullPointerException());
+        assertThat(error.error.get()).isNull();
+    }
 
-	@Test
-	public void shouldDoMultiples() throws Exception {
-		BooleanConsumer one = new BooleanConsumer();
-		BooleanConsumer two = new BooleanConsumer();
-		BooleanConsumer three = new BooleanConsumer();
-		BooleanConsumer four = new BooleanConsumer();
+    @Test
+    public void shouldDoMultiples() throws Exception {
+        BooleanConsumer one = new BooleanConsumer();
+        BooleanConsumer two = new BooleanConsumer();
+        BooleanConsumer three = new BooleanConsumer();
+        BooleanConsumer four = new BooleanConsumer();
 
-		BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>();
-		broadcastObserver.addNextConsumer(one, two);
-		broadcastObserver.addCompletedConsumer(three, four);
+        BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>();
+        broadcastObserver.addNextConsumer(one, two);
+        broadcastObserver.addCompletedConsumer(three, four);
 
-		assertThat(one.flag.get()).isFalse();
-		assertThat(two.flag.get()).isFalse();
-		assertThat(three.flag.get()).isFalse();
-		assertThat(four.flag.get()).isFalse();
+        assertThat(one.flag.get()).isFalse();
+        assertThat(two.flag.get()).isFalse();
+        assertThat(three.flag.get()).isFalse();
+        assertThat(four.flag.get()).isFalse();
 
-		broadcastObserver.next(true);
+        broadcastObserver.next(true);
 
-		assertThat(one.flag.get()).isTrue();
-		assertThat(two.flag.get()).isTrue();
-		assertThat(three.flag.get()).isFalse();
-		assertThat(four.flag.get()).isFalse();
+        assertThat(one.flag.get()).isTrue();
+        assertThat(two.flag.get()).isTrue();
+        assertThat(three.flag.get()).isFalse();
+        assertThat(four.flag.get()).isFalse();
 
-		broadcastObserver.next(false);
+        broadcastObserver.next(false);
 
-		assertThat(one.flag.get()).isFalse();
-		assertThat(two.flag.get()).isFalse();
-		assertThat(three.flag.get()).isFalse();
-		assertThat(four.flag.get()).isFalse();
+        assertThat(one.flag.get()).isFalse();
+        assertThat(two.flag.get()).isFalse();
+        assertThat(three.flag.get()).isFalse();
+        assertThat(four.flag.get()).isFalse();
 
-		broadcastObserver.completed(true);
-		assertThat(one.flag.get()).isFalse();
-		assertThat(two.flag.get()).isFalse();
-		assertThat(three.flag.get()).isTrue();
-		assertThat(four.flag.get()).isTrue();
-	}
+        broadcastObserver.completed(true);
+        assertThat(one.flag.get()).isFalse();
+        assertThat(two.flag.get()).isFalse();
+        assertThat(three.flag.get()).isTrue();
+        assertThat(four.flag.get()).isTrue();
+    }
 
     @Test
     public void shouldIgnoreExceptions() throws Exception {
@@ -166,27 +166,27 @@ public class BroadcastObserverTest {
             }
         };
         BroadcastObserver<Boolean> broadcastObserver = new BroadcastObserver<Boolean>(Optional.of(exceptionThrower),
-                                                                    Optional.<Consumer<Throwable>>empty(),
-                                                                    Optional.<Consumer<Boolean>>empty());
+                Optional.<Consumer<Throwable>>empty(),
+                Optional.<Consumer<Boolean>>empty());
 
         broadcastObserver.next(true);
     }
 
     private static class BooleanConsumer implements Consumer<Boolean> {
-		final AtomicBoolean flag = new AtomicBoolean(false);
+        final AtomicBoolean flag = new AtomicBoolean(false);
 
-		@Override
-		public void accept(Boolean aBoolean) {
-			flag.set(aBoolean);
-		}
-	}
+        @Override
+        public void accept(Boolean aBoolean) {
+            flag.set(aBoolean);
+        }
+    }
 
-	private static class ErrorConsumer implements Consumer<Throwable> {
-		final AtomicReference<Throwable> error = new AtomicReference<Throwable>(null);
+    private static class ErrorConsumer implements Consumer<Throwable> {
+        final AtomicReference<Throwable> error = new AtomicReference<Throwable>(null);
 
-		@Override
-		public void accept(Throwable throwable) {
-			error.set(throwable);
-		}
-	}
+        @Override
+        public void accept(Throwable throwable) {
+            error.set(throwable);
+        }
+    }
 }

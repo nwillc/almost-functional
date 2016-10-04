@@ -20,8 +20,8 @@ import almost.functional.utils.Predicates;
 import com.github.nwillc.contracts.PrivateConstructorContract;
 import org.junit.Test;
 
-import static almost.functional.utils.Predicates.*;
 import static almost.functional.ArrayIterable.newIterable;
+import static almost.functional.utils.Predicates.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PredicatesTest extends PrivateConstructorContract {
@@ -32,30 +32,30 @@ public class PredicatesTest extends PrivateConstructorContract {
     }
 
     @Test
-	public void shouldBeEqual() throws Exception {
-		Predicate<String> equals = Predicates.isEqual("some value");
-		assertThat(equals.test("some value")).isTrue();
-	}
+    public void shouldBeEqual() throws Exception {
+        Predicate<String> equals = Predicates.isEqual("some value");
+        assertThat(equals.test("some value")).isTrue();
+    }
 
-	@Test
-	public void shouldNotBeEqual() throws Exception {
-		Predicate<Integer> equals = Predicates.isEqual(5);
-		assertThat(equals.test(4)).isFalse();
-	}
+    @Test
+    public void shouldNotBeEqual() throws Exception {
+        Predicate<Integer> equals = Predicates.isEqual(5);
+        assertThat(equals.test(4)).isFalse();
+    }
 
-	@Test
-	public void shouldContain() throws Exception {
-		Iterable<String> strings = newIterable("one", "two", "three");
-		Predicate<String> predicate = Predicates.contains(strings);
-		assertThat(predicate.test("one")).isTrue();
-	}
+    @Test
+    public void shouldContain() throws Exception {
+        Iterable<String> strings = newIterable("one", "two", "three");
+        Predicate<String> predicate = Predicates.contains(strings);
+        assertThat(predicate.test("one")).isTrue();
+    }
 
-	@Test
-	public void shouldNotContain() throws Exception {
-		Iterable<String> strings = newIterable("one", "two", "three");
-		Predicate<String> predicate = Predicates.contains(strings);
-		assertThat(predicate.test("four")).isFalse();
-	}
+    @Test
+    public void shouldNotContain() throws Exception {
+        Iterable<String> strings = newIterable("one", "two", "three");
+        Predicate<String> predicate = Predicates.contains(strings);
+        assertThat(predicate.test("four")).isFalse();
+    }
 
 
     @Test

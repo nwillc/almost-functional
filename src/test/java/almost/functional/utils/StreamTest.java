@@ -5,8 +5,8 @@ import org.junit.Test;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import static almost.functional.utils.IterablesTest.Accumulator;
 import static almost.functional.Stream.concat;
+import static almost.functional.utils.IterablesTest.Accumulator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StreamTest {
@@ -36,17 +36,17 @@ public class StreamTest {
     public void testFilter() throws Exception {
         Stream<Integer> numbers = Stream.of(1, 2, 3, 4, 5);
         Integer sum = numbers.filter(new Predicate<Integer>() {
-                                         @Override
-                                         public boolean test(Integer integer) {
-                                             return integer % 2 != 0;
-                                         }
-                                     })
-                                .reduce(0, new BiFunction<Integer, Integer, Integer>() {
-                                    @Override
-                                    public Integer apply(Integer first, Integer second) {
-                                        return first + second;
-                                    }
-                                });
+            @Override
+            public boolean test(Integer integer) {
+                return integer % 2 != 0;
+            }
+        })
+                .reduce(0, new BiFunction<Integer, Integer, Integer>() {
+                    @Override
+                    public Integer apply(Integer first, Integer second) {
+                        return first + second;
+                    }
+                });
         assertThat(sum).isEqualTo(9);
     }
 

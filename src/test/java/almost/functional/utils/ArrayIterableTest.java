@@ -35,23 +35,23 @@ public class ArrayIterableTest extends ImmutableIteratorContract {
     }
 
     @Test
-	public void shouldHandleNullArray() throws Exception {
-		Iterable<String> strings = new ArrayIterable<String>();
-     	assertNotNull(strings);
-		Iterator<String> iter = strings.iterator();
-		assertNotNull(iter);
-		assertThat(iter.hasNext()).isFalse();
-	}
+    public void shouldHandleNullArray() throws Exception {
+        Iterable<String> strings = new ArrayIterable<String>();
+        assertNotNull(strings);
+        Iterator<String> iter = strings.iterator();
+        assertNotNull(iter);
+        assertThat(iter.hasNext()).isFalse();
+    }
 
-	@Test
-	public void shouldIterateAll() throws Exception {
-		String[] stringArray = new String[]{"a", "b", "c"};
+    @Test
+    public void shouldIterateAll() throws Exception {
+        String[] stringArray = new String[]{"a", "b", "c"};
 
-		int length = 0;
-		for (String s : newIterable(stringArray)) {
-			assertThat(Arrays.binarySearch(stringArray, s)).isGreaterThan(-1);
-			length++;
-		}
-		assertThat(length).isEqualTo(stringArray.length);
-	}
+        int length = 0;
+        for (String s : newIterable(stringArray)) {
+            assertThat(Arrays.binarySearch(stringArray, s)).isGreaterThan(-1);
+            length++;
+        }
+        assertThat(length).isEqualTo(stringArray.length);
+    }
 }

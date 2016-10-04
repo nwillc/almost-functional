@@ -18,17 +18,20 @@
 package almost.functional.utils;
 
 /**
- *  Utilities for accessing Runtime info.
- *  @since 1.9.6
+ * Utilities for accessing Runtime info.
+ *
+ * @since 1.9.6
  */
 public final class RuntimeUtils {
 
     public static final int PARENT_OF_CALLER = 4;
 
-    private RuntimeUtils() {}
+    private RuntimeUtils() {
+    }
 
     /**
      * Get the class name of a caller in the current stack.
+     *
      * @param depth in the call stack
      * @return class name
      */
@@ -38,6 +41,7 @@ public final class RuntimeUtils {
 
     /**
      * Get the name of the class calling the method.
+     *
      * @return class name
      */
     public static String getCallerClassName() {
@@ -46,8 +50,9 @@ public final class RuntimeUtils {
 
     /**
      * Get the method name of callers in current stack.
-     * @param depth  in the call stack
-     * @return  method name
+     *
+     * @param depth in the call stack
+     * @return method name
      */
     public static String getCallerMethodName(int depth) {
         return Thread.currentThread().getStackTrace()[depth].getMethodName();
@@ -55,7 +60,8 @@ public final class RuntimeUtils {
 
     /**
      * Get the name of the current method.
-     * @return  method Name
+     *
+     * @return method Name
      */
     public static String getCurrentMethodName() {
         return getCallerMethodName(PARENT_OF_CALLER - 1);

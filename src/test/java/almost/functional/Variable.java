@@ -17,19 +17,19 @@
 package almost.functional;
 
 public class Variable<T> implements Consumer<T>, Supplier<T> {
-	private T t;
+    private T t;
 
-	public Variable(T t) {
-		this.t = t;
-	}
+    public Variable(T t) {
+        this.t = t;
+    }
 
-	@Override
-	public void accept(T consumable) {
-		this.t = consumable;
-	}
+    @Override
+    public void accept(T consumable) {
+        this.t = consumable;
+    }
 
-	@Override
-	public T get() {
-		return t;
-	}
+    @Override
+    public T get() {
+        return t;
+    }
 }

@@ -30,14 +30,15 @@ public class SupplierIterableTest extends ImmutableIteratorContract {
         return new SupplierIterable<Integer>(new TestingSupplier()).iterator();
     }
 
-   private static class TestingSupplier implements Supplier<Optional<Integer>> {
-       private int val = 0;
-       @Override
-       public Optional<Integer> get() {
-           if (val > 2) {
-               return Optional.empty();
-           }
-           return Optional.of(++val);
-       }
-   }
+    private static class TestingSupplier implements Supplier<Optional<Integer>> {
+        private int val = 0;
+
+        @Override
+        public Optional<Integer> get() {
+            if (val > 2) {
+                return Optional.empty();
+            }
+            return Optional.of(++val);
+        }
+    }
 }

@@ -32,18 +32,18 @@ public class LogFactoryTest extends UtilityClassContract {
     }
 
     @Test
-	public void shouldGetClassName() throws Exception {
-	   Logger logger = getLogger();
+    public void shouldGetClassName() throws Exception {
+        Logger logger = getLogger();
 
-		assertThat(logger).isNotNull();
-		assertThat(logger.getName()).isEqualTo(getClass().getName());
-	}
+        assertThat(logger).isNotNull();
+        assertThat(logger.getName()).isEqualTo(getClass().getName());
+    }
 
-	@Test
-	public void shouldGetLogger() throws Exception {
-		Logger logger1 = getLogger(getClass().getName());
-		Logger logger2 = getLogger();
+    @Test
+    public void shouldGetLogger() throws Exception {
+        Logger logger1 = getLogger(getClass().getName());
+        Logger logger2 = getLogger();
 
-		assertThat(logger2).isEqualTo(logger1);
-	}
+        assertThat(logger2).isEqualTo(logger1);
+    }
 }

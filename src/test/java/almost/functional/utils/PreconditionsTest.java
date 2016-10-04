@@ -59,18 +59,19 @@ public class PreconditionsTest extends UtilityClassContract {
         checkNonEmptyString(" ", "Should fail");
     }
 
-	@Test
-	public void shouldReturnValue() throws Exception {
-		final String str = "hello";
-		assertThat(checkNonEmptyString(checkNotNull(str, "null"), "empty")).isEqualTo(str);
-	}
+    @Test
+    public void shouldReturnValue() throws Exception {
+        final String str = "hello";
+        assertThat(checkNonEmptyString(checkNotNull(str, "null"), "empty")).isEqualTo(str);
+    }
 
     @Test(expected = RuntimeException.class)
     public void testPreconditionBadException() throws Exception {
-         precondition(null, Predicates.notNull(),
-                 BadException.class, "foo");
+        precondition(null, Predicates.notNull(),
+                BadException.class, "foo");
 
     }
 
-    private static class BadException extends RuntimeException {}
+    private static class BadException extends RuntimeException {
+    }
 }
