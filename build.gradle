@@ -30,18 +30,21 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4',
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3',
                 'org.tmatesoft.sqljet:sqljet:1.1.9',
                 'au.com.ish.gradle:release:2.2.2',
                 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9'
     }
 }
 
+plugins {
+    id 'com.github.nwillc.vplugin' version '2.0.1'
+}
+
 apply plugin: "java"
 apply plugin: 'maven'
 apply plugin: "jacoco"
 apply plugin: "pmd"
-//apply plugin: "com.github.nwillc.vplugin"
 apply plugin: 'release'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
